@@ -51,3 +51,48 @@ body{
   background-color: #FEFEFE;
   font-family: 'assistant', sans-serif;
 } */
+
+@import url(" https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap");
+
+* {
+  font-family: "Assistant";
+  color: #000641;
+  background-color: #FEFEFE;
+
+}
+
+/* קלאס כללי לכפתורי מגע מותאמים אישית למובייל ב-vh ו-vw */
+.mobile-touch-button {
+  /* 1. גובה ורוחב מינימליים מבוססי מסך (מונע כפתורים קטנים מדי) */
+  min-height: 6vh;     /* בערך 48-55 פיקסלים במסכים סטנדרטיים */
+  min-width: 25vw;     /* מבטיח רוחב מינימלי נוח לאצבע */
+  
+  /* 2. ריפוד פנימי פרופורציונלי */
+  padding: 1.5vh 5vw;
+  
+  /* 3. גודל גופן שגדל וקטן בהתאם לרוחב המסך */
+  font-size: 4vw;      /* מתאים את עצמו אוטומטית לרוחב הנייד */
+  font-weight: 600;
+  
+  /* 4. עיגול פינות פרופורציונלי (אם רוצים כפתור עגול) */
+  border-radius: 4vw;
+  
+  /* 5. ביטול הגדרות ברירת מחדל של הדפדפנים */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+  /* 6. מניעת בחירת טקסט בטעות ומניעת הבהוב כחול בנייד */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  
+  /* 7. אנימציית לחיצה */
+  transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+/* אפקט לחיצה במגע */
+.mobile-touch-button:active {
+  transform: scale(0.96);
+  filter: brightness(0.9);
+}

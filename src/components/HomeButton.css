@@ -1,0 +1,29 @@
+.home-back-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 2px solid #333333;
+  border-radius: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0px 4px 0px #333333;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  outline: none;
+}
+
+/* אפקט ריחוף קל */
+.home-back-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* אפקט לחיצה (במקום ה-onMouseDown שהיה קודם) */
+.home-back-button:active {
+  transform: translateY(4px);
+  box-shadow: 0px 0px 0px #333333;
+}
