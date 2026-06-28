@@ -1,0 +1,78 @@
+#activity-title{
+    font-family: "Karantina";
+    position: absolute;
+    font-size: 15vw;
+    top: 8vh;
+    width: 80vw;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#activity-text1{
+    position: absolute;
+    font-size: 5.5vw;
+    width: 80vw;
+    top: 19vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 600;
+}
+
+#activity-text2{
+    position: absolute;
+    font-size: 5vw;
+    width: 60vw;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
+    background-color: #EDEEF4;
+    padding: 2vh; /* מרווח פנימי בצדדים */
+    padding-bottom: 8vh; /* מרווח פנימי בתחתית */
+    border: 0.4vh solid #000641;
+    border-radius: 2.5vh;
+}
+
+#activity-text3{
+    position: absolute;
+    font-size: 4.5vw;
+    width: 80vw;
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
+}
+
+.activity-king{
+    position: absolute;
+    width: 11vw;
+    top: 62.5vh;
+    left: 70vw;
+    z-index: 10;
+}
+
+.activity-queen{
+    position: absolute;
+    width: 15vw;
+    top: 28.3vh;
+    left: 22vw;
+    z-index: 10;
+}
+
+#activity-show-image{
+    position: absolute;
+    width: 15vw;
+    top: 59vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    padding: 1vh 3vh; /* מרווח פנימי בצדדים */
+    color: #ffffff;
+    background-color: #000641;
+    border: 0.4vh solid #000641;
+    border-radius: 1vh;
+}

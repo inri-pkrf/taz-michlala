@@ -7,6 +7,12 @@ function HomePage({ onNavigate }) {
       <h1 id="homePage-title">עמוד הבית</h1>
       <p id="homePage-description">כל תג שם מהווה נושא, יש ללחוץ על התג הראשון על מנת להתחיל, תהנו :)</p>
       
+      <img
+        className={`welcomePage-logo`}
+        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
+        alt="logo"
+      />
+      
       <div className="topics-menu">
         
         {/* תג 1 - פעילות (צהוב) */}

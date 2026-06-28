@@ -1,29 +1,49 @@
 .home-back-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 10px 18px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #ffffff;
-  border: 2px solid #333333;
-  border-radius: 20px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0px 4px 0px #333333;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-  outline: none;
+    /* מיקום אבסולוטי - צד ימין למעלה */
+    position: absolute;
+    top: 2vh;
+    right: 2vh;
+    
+    /* הגדרות קופסה - כפתור לבן עם צל (תלת מימדי) */
+    background-color: #ffffff;
+    border: 0.3vh solid #333333; /* עובי מסגרת דקה */
+    border-radius: 20vh; /* עיגול מושלם של הכפתור כולו */
+    cursor: pointer;
+    
+    /* אפקט תלת-ממדי עם צל מוצק (השינוי כאן: גוון אפרפר במקום כהה) */
+    box-shadow: 0px 4px 0px rgba(51, 51, 51, 0.4); 
+    
+    /* פריסה של האייקון והטקסט בתוך הכפתור */
+    display: flex;
+    align-items: center;
+    padding: 10px 10px; /* מרווח פנימי אסתטי */
+    /* רווח קבוע בין האיור לטקסט */
+    
+    /* הגדרות טקסט - כחול כהה כמו בתמונה המקורית */
+    font-size: 4vw;
+    color: #1a2a47; /* כחול כהה-עמוק, מתאים למסך הבית */
+    font-weight: bold;
+    direction: rtl; /* מבטיח שהטקסט מימין לשמאל */
+    
+    /* אפקט מעבר חלק */
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    outline: none; /* ביטול מסגרת כחולה ברירת מחדל של דפדפנים */
 }
 
-/* אפקט ריחוף קל */
+/* אפקט ריחוף (Hover) - צבע רקע מעט אפרפר */
 .home-back-button:hover {
-  background-color: #f0f0f0;
+    background-color: #dfdfdf;
 }
 
-/* אפקט לחיצה (במקום ה-onMouseDown שהיה קודם) */
+/* אפקט לחיצה (Active) - "דחיפת" הכפתור פנימה */
 .home-back-button:active {
-  transform: translateY(4px);
-  box-shadow: 0px 0px 0px #333333;
+    transform: translateY(4px); /* דוחף למטה כמו הגובה של ה-box-shadow */
+    box-shadow: 0px 0px 0px rgba(51, 51, 51, 0.4); /* מבטל את הצל */
+}
+
+/* הגדרת גודל ופרופורציות לאייקון עצמו */
+.home-icon-img {
+    width: 24px; /* גודל אופטימלי */
+    height: 24px;
+    background: transparent !important;
 }

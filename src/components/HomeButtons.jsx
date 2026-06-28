@@ -4,8 +4,10 @@ import './HomeButton.css';
 function HomeButton({ onClick }) {
   return (
     <button onClick={onClick} className="home-back-button">
-      <span>🏠</span>
-      חזרה לעמוד הבית
+      <img
+        src={`${process.env.PUBLIC_URL}/assets/HomePage/Vector.png`}
+        alt="logo"
+      />
     </button>
   );
 }
