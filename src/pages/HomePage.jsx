@@ -1,17 +1,49 @@
 import React from 'react';
 import '../style/HomePage.css';
 
-
 function HomePage({ onNavigate }) {
   return (
     <div className="page-container">
-      <h1>עמוד הבית - בחרי נושא</h1>
+      <h1 id="homePage-title">עמוד הבית</h1>
+      <p id="homePage-description">כל תג שם מהווה נושא, יש ללחוץ על התג הראשון על מנת להתחיל, תהנו :)</p>
+      
       <div className="topics-menu">
-        <button onClick={() => onNavigate('activity')}>נושא 1: פעילות</button>
-        <button onClick={() => onNavigate('digitalAssets')}>נושא 2: נכסים דיגיטליים ורשתות חברתיות</button>
-        <button onClick={() => onNavigate('nationalLibrary')}>נושא 3: הספרייה הלאומית</button>
-        <button onClick={() => onNavigate('foreignRelations')}>נושא 4: קשרי חוץ</button>
-        <button onClick={() => onNavigate('atWar')}>נושא 5: בעת מלחמה</button>
+        
+        {/* תג 1 - פעילות (צהוב) */}
+        <div className="tag-wrapper yellow-tag" onClick={() => onNavigate('activity')}> 
+            <div className="tag-number num-yellow">1</div>
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-yellow.png`} alt="Activity" className="tag-image"/>
+            <p className="tag-text text-yellow">פעילות</p>
+        </div>
+
+        {/* תג 2 - נכסים דיגיטליים (ירוק) */}
+        <div className="tag-wrapper green-tag" onClick={() => onNavigate('digitalAssets')}> 
+            <div className="tag-number num-green">2</div>
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-green.png`} alt="Digital Assets" className="tag-image" />
+            <p className="tag-text text-green">נכסים דיגיטליים</p>
+        </div>
+
+        {/* תג 3 - הספרייה הלאומית (כחול) */}
+        <div className="tag-wrapper blue-tag" onClick={() => onNavigate('nationalLibrary')}> 
+            <div className="tag-number num-blue">3</div>
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-blue.png`} alt="National Library" className="tag-image" />
+            <p className="tag-text text-blue">הספרייה הלאומית</p>
+        </div>
+
+        {/* תג 4 - קשרי חוץ (ורוד) */}
+        <div className="tag-wrapper pink-tag" onClick={() => onNavigate('foreignRelations')}> 
+            <div className="tag-number num-pink">4</div>
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-pink.png`} alt="Foreign Relations" className="tag-image" />
+            <p className="tag-text text-pink">קשרי חוץ</p>
+        </div>
+
+        {/* תג 5 - בעת מלחמה (כתום) */}
+        <div className="tag-wrapper orange-tag" onClick={() => onNavigate('atWar')}> 
+            <div className="tag-number num-orange">5</div>
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-orange.png`} alt="At War" className="tag-image" />
+            <p className="tag-text text-orange">בעת מלחמה</p>
+        </div>
+
       </div>
     </div>
   );

@@ -1,0 +1,41 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* רקע כהה חצי שקוף */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* דואג שיהיה מעל הכל */
+}
+
+.popup-content {
+    background: #ffffff;
+    width: 85vw;
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+    direction: rtl;
+    animation: scaleUp 0.2s ease-out;
+}
+
+.popup-close-btn {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

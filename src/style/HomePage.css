@@ -1,0 +1,87 @@
+/* מיכל התג הכללי */
+.tag-wrapper {
+    position: absolute;
+    width: 27vw;
+}
+
+.tag-image {
+    width: 100%;
+    height: auto;
+    background: transparent !important;
+}
+
+/* עיצוב הטקסט המשותף */
+.tag-text {
+    position: absolute;
+    font-size: 3.5vw; 
+    top: 74%;           /* מיקום ויזואלי בתוך הריבוע הלבן */
+    left: 50%;          
+    transform: translate(-50%, -50%); 
+    width: 100%;
+    max-width: 75%;     /* מכריח שתי מילים לרדת שורה */
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    text-align: center;
+    line-height: 1.1;   
+    font-weight: bold;  
+}
+
+/* --- עיצוב עיגול המספר הכללי --- */
+.tag-number {
+    position: absolute;
+    top: 45%;           /* יושב בדיוק בחיבור שבין השרוך לריבוע התג */
+    left: 85%;           /* צד שמאל של התג לפי הסקיצה */
+    width: 6vw;
+    height: 6vw;
+    background: #ffffff;
+    border: 2px solid;  /* עובי המסגרת של העיגול */
+    border-radius: 50%; /* הופך את הדיב לעיגול מושלם */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vw;
+    font-weight: bold;
+    z-index: 5;         /* מציף את המספר מעל תמונת התג */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* --- צבעים מותאמים אישית לכל תג (טקסט ומספר) --- */
+.text-yellow, .num-yellow { color: #E4D560; border-color: #E4D560; }
+.text-green, .num-green   { color: #85BA48; border-color: #85BA48; }
+.text-blue, .num-blue     { color: #56CAD1; border-color: #56CAD1; }
+.text-pink, .num-pink     { color: #d14361; border-color: #d14361; }
+.text-orange, .num-orange { color: #E89039; border-color: #E89039; }
+
+/* --- מיקומי התגים המקוריים שלך במסך (ללא שינוי) --- */
+.yellow-tag { top: 30vh; right: 8vw; z-index: 2; }
+.green-tag  { top: 32vh; right: 36vw; z-index: 2; }
+.blue-tag   { top: 34vh; right: 64vw; z-index: 2; }
+.pink-tag   { top: 50vh; right: 20vw; z-index: 1; }
+.orange-tag { top: 52vh; right: 48vw; z-index: 1; }
+
+/* כותרת ותיאור העמוד */
+#homePage-title {
+    position: absolute;
+    font-size: 15vw;
+    width: 80vw;
+    text-align: center;
+    font-weight: bold;
+    top: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Karantina";
+    margin: 0;
+}
+
+#homePage-description {
+    position: absolute;
+    font-size: 4vw;
+    width: 80vw;
+    top: 21vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
+    margin: 0;
+}
