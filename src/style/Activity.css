@@ -65,7 +65,7 @@
 
 #activity-show-image{
     position: absolute;
-    width: 15vw;
+    width: 20vw;
     top: 59vh;
     left: 50%;
     transform: translateX(-50%);
@@ -75,4 +75,13 @@
     background-color: #000641;
     border: 0.4vh solid #000641;
     border-radius: 1vh;
+}
+
+.activity-building{
+    position: absolute;
+    width: 30vw;
+    height: 12vh;
+    top: 79vh;
+    left: 2vw;
+    z-index: -1;
 }
