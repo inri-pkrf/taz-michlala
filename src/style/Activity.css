@@ -18,6 +18,7 @@
     transform: translateX(-50%);
     text-align: center;
     font-weight: 600;
+     direction: rtl;
 }
 
 #activity-text2{
@@ -34,6 +35,7 @@
     padding-bottom: 8vh; /* מרווח פנימי בתחתית */
     border: 0.4vh solid #000641;
     border-radius: 2.5vh;
+   
 }
 
 #activity-text3{
@@ -84,4 +86,56 @@
     top: 79vh;
     left: 2vw;
     z-index: -1;
+}
+
+.activityPage1-office1{
+    position: absolute;
+    width: 40vw;
+    height: 12vh;
+    top: 30vh;
+    left: 16vw;
+    z-index: 1;
+}
+
+.activityPage1-office2{
+    position: absolute;
+    width: 37vw;
+    height: 15vh;
+    top: 33vh;
+    left: 50vw;
+    z-index: 2;
+}
+
+.activityPage1-office3{
+    position: absolute;
+    width: 50vw;
+    height: 15vh;
+    top: 41vh;
+    left: 10vw;
+    z-index: 3;
+}
+
+.activityPage1-office4{
+    position: absolute;
+    width: 45vw;
+    height: 15vh;
+    top: 49vh;
+    left: 45vw;
+    z-index: 4;
+}
+
+#activityStep2-text2{
+    position: absolute;
+    font-size: 5vw;
+    width: 75vw;
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
+    background-color: #EDEEF4;
+    padding: 1vh; /* מרווח פנימי בצדדים */
+    padding-bottom: 1vh; /* מרווח פנימי בתחתית */
+    border: 0.4vh solid #000641;
+    border-radius: 2.5vh;
 }

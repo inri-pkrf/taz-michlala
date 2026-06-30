@@ -1,41 +1,71 @@
+/* --- פופ אפ גנרי --- */
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* רקע כהה חצי שקוף */
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* דואג שיהיה מעל הכל */
+    z-index: 9999;
 }
 
 .popup-content {
-    background: #ffffff;
-    width: 85vw;
-    max-width: 400px;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    position: relative;
+    border-radius: 2vh;
+    padding: 4vh 3vh;
+    width: 70vw;
+    max-width: 80vw;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     text-align: center;
-    direction: rtl;
-    animation: scaleUp 0.2s ease-out;
+    position: relative;
+    border-style: solid;
+    border-width: 0.5vh;
+    direction: rtl; /* מבטיח שהטקסט מימין לשמאל */
 }
 
-.popup-close-btn {
+.popup-title {
+    margin: 0 0 2vh 0;
+    color: #000641;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.popup-text {
+    margin: 0 0 3vh 0;
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* כפתור הבנתי באזהרה */
+.popup-btn {
+    padding: 1vh 3vh;
+    background-color: #000641;
+    color: #fff;
+    border: none;
+    border-radius: 1vh;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* כפתור איקס בפופ-אפ רגיל */
+.popup-close-x {
     position: absolute;
-    top: 10px;
-    left: 15px;
+    top: 1.5vh;
+    right: 2vh;
+    font-size: 26px;
+    font-weight: bold;
+    color: #707070;
+    cursor: pointer;
     background: none;
     border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #888;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
 }
 
-@keyframes scaleUp {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+.popup-close-x:hover {
+    color: #000641;
 }

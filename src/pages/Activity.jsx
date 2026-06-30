@@ -1,84 +1,52 @@
 import React, { useState } from 'react';
 import '../style/Activity.css';
 import HomeButton from '../components/HomeButtons'; 
+import NextButton from '../components/NextButton';
+
+// 1. מייבאים את תתי-העמודים הספציפיים של הנושא הזה
+import ActivityStep1 from './ActivityStep1';
+import ActivityStep2 from './ActivityStep2';
+import ActivityStep3 from './ActivityStep3';
+import ActivityStep4 from './ActivityStep4';
 
 function Activity({ onGoHome }) {
-  // סטייט לפתיחה וסגירה של התמונה
-  const [isImageOpen, setIsImageOpen] = useState(false);
+  // ניהול הצעד הנוכחי בתוך הנושא (מתחיל מ-0)
+  const [currentStep, setCurrentStep] = useState(0);
+
+  // מערך שמכיל את תתי-העמודים של הפעילות לפי הסדר
+  const steps = [
+    ActivityStep1,
+    ActivityStep2,
+    ActivityStep3,
+    ActivityStep4
+  ];
+
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1); // עובר לתת-העמוד הבא
+    } else {
+      onGoHome(); // אם הגענו לסוף הנושא, מחזירים אותו אוטומטית לתפריט הראשי
+    }
+  };
+
+  // שליפת תת-העמוד הנוכחי
+  const CurrentStepComponent = steps[currentStep];
 
   return (
     <div className="page-container">
+      {/* כפתור הבית תמיד מופיע ומחזיר לתפריט הראשי ב-App */}
       <HomeButton onClick={onGoHome} />
-      
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
       />
-      
-      <img
-        className="activity-queen"
-        src={`${process.env.PUBLIC_URL}/assets/Activity/crown-queen.png`}
-        alt="queen"
-      />
 
-      <img
-        className="activity-king"
-        src={`${process.env.PUBLIC_URL}/assets/Activity/crown-king.png`}
-        alt="king"
-      />
+      {/* רנדור תת-העמוד הנוכחי */}
+      <CurrentStepComponent />
 
-      <img
-        className="activity-building"
-        src={`${process.env.PUBLIC_URL}/assets/Activity/building.png`}
-        alt="building"
-      />
-
-      <h1 id="activity-title">פעילות המכללה</h1>
-      <p id="activity-text1">ברוכים הבאים וברוכות הבאות למכללה הלאומית לאיתנות ישראלית</p>
-      <p id="activity-text2">המכללה מכשירה מנהלים ומנהלות שיש להם תפקיד בשעת חירום ממשרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות ובמפקדות צבאיות, לתפקוד מיטבי וניהול מצבי חירום כמו במצב מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה ועוד.</p>
-      <p id="activity-text3">המכללה הוקמה בכדי להוות בית להכשרות בתחום ניהול מצבי החירום. בניין אחד המרכז את כל מחלקות פקע"ר בשיתוף פעולה עם רשות החירום הלאומית (רח"ל).</p>
-      
-      {/* כפתור "צפו בתמונה" עם ה-ID שמעוצב ב-CSS שלך */}
-      <p 
-        id="activity-show-image" 
-        onClick={() => setIsImageOpen(true)} 
-        style={{ cursor: 'pointer', textAlign: 'center' }} // מוסיף פוינטר ומרכז טקסט
-      >
-        צפו בתמונה
-      </p>
-
-      {/* מודאל פופ-אפ שנפתח מעל הכל בלחיצה */}
-      {isImageOpen && (
-        <div 
-          onClick={() => setIsImageOpen(false)} // לחיצה בכל מקום ברקע תסגור את התמונה
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            backgroundColor: 'rgba(0, 0, 0, 0.8)', // רקע כהה חצי שקוף
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 9999, // מוודא שזה מעל הכל כולל הכפתור
-            cursor: 'zoom-out'
-          }}
-        >
-          <div style={{ maxWidth: '80%', maxHeight: '80%', position: 'relative' }}>
-            <img 
-              src={`${process.env.PUBLIC_URL}/assets/Activity/img1.jpg`} 
-              alt="פעילות המכללה" 
-              style={{ maxWidth: '100%', maxHeight: '85vh', borderRadius: '2vh', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }} 
-            />
-            <p style={{ color: '#fff', textAlign: 'center', marginTop: '10px', fontSize: '14px' }}>
-              לחצו מקום כלשהו במסך כדי לחזור
-            </p>
-          </div>
-        </div>
-      )}
-      
+      {/* כפתור ההמשך שמקדם את הצעד הפנימי */}
+      <NextButton onClick={handleNext} />
     </div>
   );
 }

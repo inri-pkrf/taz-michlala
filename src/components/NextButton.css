@@ -1,6 +1,8 @@
 .next-button{
     position: absolute;
-    bottom: 5vh;    
+    bottom: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);   
     background-color: #d683a3;
     border: 0.3vh solid #ff38bd; /* עובי מסגרת דקה */
     border-radius: 20vh; /* עיגול מושלם של הכפתור כולו */

@@ -1,0 +1,18 @@
+/* --- עיגול מספר גנרי --- */
+.step-number {
+    position: absolute;
+    width: 3.5vh;
+    height: 3.5vh;
+    border-radius: 20vh;
+    border-style: solid;
+    border-width: 0.3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2vh;
+    font-family: "assistant";
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    pointer-events: none; /* מונע חסימת קליקים על הבניין */
+}
