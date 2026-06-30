@@ -124,18 +124,85 @@
     z-index: 4;
 }
 
-#activityStep2-text2{
-    position: absolute;
+#activityStep2-text2 {
     font-size: 5vw;
     width: 75vw;
-    top: 70vh;
-    left: 50%;
-    transform: translateX(-50%);
     text-align: center;
     direction: rtl;
     background-color: #EDEEF4;
-    padding: 1vh; /* מרווח פנימי בצדדים */
-    padding-bottom: 1vh; /* מרווח פנימי בתחתית */
+    padding: 2vh 2vw; /* מרווח פנימי מעט מוגדל */
     border: 0.4vh solid #000641;
     border-radius: 2.5vh;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70vh;
+    z-index: 2; /* מוודא שהטקסט מעל העיגול */
+}
+
+/* קונטיינר שיחזיק את הפסקה והעיגול */
+.circle-anim-container {
+    display: inline-block;
+    padding: 4vh 4vw; /* מרחק של העיגול מהטקסט */
+    text-align: center;
+    width: auto;
+    max-width: 85vw;
+    margin: 4vh auto 0 auto; 
+    box-sizing: border-box;
+}
+
+/* מיקום ה-SVG בדיוק מאחורי הטקסט */
+.circle-svg {
+    position: absolute;
+    top: 66.2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45vw;
+    height: 45vw;
+    z-index: 1; /* מאחורי הטקסט */
+    pointer-events: none; /* שלא יפריע ללחיצות */
+}
+
+/* עיצוב ואנימציית הציור של העיגול */
+.circle-svg ellipse {
+    fill: none;
+    stroke: #000641; /* צבע הקו - שיניתי לקהה מעט שיראו טוב */
+    stroke-width: 0.4vw; /* עובי הקו בתוך ה-SVG */
+    
+    /* קסם הציור: מגדירים אורך קו מקסימלי ואז מעלימים אותו */
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    
+    /* הפעלת האנימציה */
+    animation: drawCircle 2s ease-in-out forwards;
+    animation-delay: 0.5s; /* דיליי קטן להתחלה */
+}
+
+/* הגדרת האנימציה - "משיכת" הקו פנימה כאילו הוא מצויר בלייב */
+@keyframes drawCircle {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+#activity-gif{
+    position: absolute;
+    top: 40vh;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1.5vh;
+    border: 0.4vh solid #000641;
+}
+
+#activityStep3-text1{
+    position: absolute;
+    font-size: 4.5vw;
+    width: 80vw;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: right;
+    font-weight: 500;
+    direction: rtl;
 }
