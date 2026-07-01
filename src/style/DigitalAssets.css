@@ -1,0 +1,137 @@
+#DigitalAssets-computer {
+    position: absolute;
+    width: 60vw;
+    height: 22vh;
+    bottom: 38vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+#DigitalAssets-blob {
+    position: absolute;
+    width: 95vw;
+    height: 35vh;
+    bottom: 32.5vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* --- הגדרות האנימציה הכלליות לפצפוץ (התמונות והטקסט) --- */
+.pop-element {
+    opacity: 0;
+    transform: scale(0.3); /* מתחיל קטן מאוד */
+    /* מעבר חלק עם אפקט קפיצה אלסטי (Cubic Bezier) שמדמה פצפוץ */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+/* כשהאלמנט הופך לגלוי, הוא גדל לגודלו המלא */
+.pop-element.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#DigitalAssets-pic1 {
+    position: absolute;
+    width: 25vw;
+    height: 8vh;
+    top: 37vh;
+    left: 62vw;  
+    z-index: 3;
+}
+
+#DigitalAssets-pic2 {
+    position: absolute;
+    width: 25vw;
+    height: 8vh;
+    top: 44vh;
+    left: 13vw;  
+    z-index: 3;
+}
+
+#DigitalAssets-pic3 {
+    position: absolute;
+    width: 18vw;
+    height: 12vh;
+    top: 49vh;
+    left: 72vw;  
+    z-index: 3;
+}
+
+#DigitalAssetsStep1-text1 {
+    position: absolute;
+    font-size: 4vw;
+    width: 80vw;
+    top: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 400;
+    direction: rtl;
+}
+
+#DigitalAssetsStep1-text2 {
+    position: absolute;
+    font-size: 4.5vw;
+    width: 80vw;
+    top: 63vh;
+    left: 50%;
+    /* שימי לב: מכיוון שיש פה כבר transform, שילבנו אותו בתוך האנימציה */
+    transform: translateX(-50%) scale(0.3); 
+    text-align: center;
+    font-weight: 500;
+    direction: rtl;
+    border: 0.4vh solid #FDAC00;
+    border-radius: 2.5vh;
+    background-color: #FFF5DB;
+    padding: 2vh 1vw;
+}
+
+/* כשהטקסט מקבל את ה-Class, הוא שומר על ה-translateX ומתיישר ל-scale(1) */
+#DigitalAssetsStep1-text2.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* --- הגדרות האנימציה למנורה היורדת מלמעלה --- */
+.lamp-element {
+    /* המצב המקורי שלך (המיקום הסופי) יהיה במצב הגלוי, לכן נתחיל מלמעלה מחוץ למסך */
+    transform: translateY(-100vh); 
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+/* כשהמנורה מקבלת את ה-Class, היא צונחת למטה בדיוק למיקום ה-top וה-left המקוריים שלה */
+.lamp-element.is-dropped {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#DigitalAssets-light-bomb {
+    position: absolute;
+    width: 22vw;
+    height: 50vh;
+    top: 44vh;
+    left: 17vw;  
+    z-index: 0;
+}
+
+.page-container {
+    position: relative; /* קריטי כדי שכל ה-absolute יתמקמו לפיו! */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+#DigitalAssetsStep2-text1{
+    position: absolute;
+    font-size: 5vw;
+    width: 80vw;
+    top: 19vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    
+     direction: rtl;
+}

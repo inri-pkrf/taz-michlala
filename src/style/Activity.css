@@ -175,7 +175,7 @@
     stroke-dashoffset: 400;
     
     /* הפעלת האנימציה */
-    animation: drawCircle 2s ease-in-out forwards;
+    animation: drawCircle 3s ease-in-out forwards;
     animation-delay: 0.5s; /* דיליי קטן להתחלה */
 }
 
@@ -205,4 +205,95 @@
     text-align: right;
     font-weight: 500;
     direction: rtl;
+}
+
+#activityStep4-text2{
+    position: absolute;
+    font-size: 3vw;
+    width: 60vw;
+    top: 32vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
+    border-radius: 2.5vh;
+}
+
+#activityStep4-text3{
+    position: absolute;
+    font-size: 3.8vw;
+    width: 77vw;
+    top: 60vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    text-align: right;
+    direction: rtl;
+    padding: 2vh 2.5vw; /* מרווח פנימי מעט מוגדל */
+    padding-bottom: 8vh; /* מרווח פנימי בתחתית */
+    border: 0.4vh solid #625214;    
+    border-radius: 2.5vh;
+    
+}
+
+#activity-soliders{
+    position: absolute;
+    width: 65vw;
+    height: 15vh;
+    top: 75vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#activity-play-icon{
+    position: absolute;
+    width: 40vw;
+    height: 20vh;
+    top: 38vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 85vw;
+    max-width: 800px;
+    background-color: #000;
+    border-radius: 2vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 0.3vh solid #8F908C;
+}
+
+.video-player {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 1vh;
+    right: 1.5vh;
+    font-size: 3vh;
+    font-weight: bold;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10001;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }

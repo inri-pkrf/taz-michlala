@@ -39,8 +39,8 @@ function ActivityStep2() {
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
-        bgColor: "#e7ccd0",
-        borderColor: "#410003",
+        bgColor: "#FAF8F3",
+        borderColor: "#000641",
         isWarning: true
       });
     } else {
