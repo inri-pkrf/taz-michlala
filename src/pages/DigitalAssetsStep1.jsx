@@ -74,10 +74,12 @@ function DigitalAssetsStep1() {
     }
   };
 
-  // פונקציה להשמעת סאונד הפצפוץ
+// פונקציה להשמעת סאונד הפצפוץ
   const playPopSound = () => {
     const audio = new Audio(`${process.env.PUBLIC_URL}/assets/audio/pop.mp3`);
-    audio.play().catch(err => console.log("סאונד חסום זמנית עקב הגדרות דפדפן:", err));
+    // בניידים כדאי להגדיר שהסאונד ייטען מראש
+    audio.load(); 
+    audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
   };
 
   // לוגיקת ניהול הלחיצות לפי הסדר המדויק שלך
@@ -112,39 +114,56 @@ function DigitalAssetsStep1() {
   };
 
   useEffect(() => {
+    // פונקציית פתיחת חסימה משופרת - מנגנת סאונד שקט כדי למנוע כפילות!
+    const unlockAudio = () => {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        const ctx = new AudioContext();
+        // יצירת סיגנל שקט לחלוטין רק כדי "להעיר" את הרמקול של הטלפון
+        const buffer = ctx.createBuffer(1, 1, 22050);
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.start(0);
+      }
+
+      // מסירים את המאזינים מיד לאחר הנגיעה הראשונה
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+    };
+
+    // מאזינים לנגיעה או לחיצה ראשונה של המשתמש במסך
+    window.addEventListener('click', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
+
+    // --- הטיימרים הרגילים והנקיים שלך ---
     let timer1, timer2, timer3, timer4, timer5, timer6;
 
-    // תמונה 1 מופיעה
     timer1 = setTimeout(() => {
       setAnimatePic1(true);
       playPopSound();
     }, 300);
 
-    // תמונה 2 מופיעה
     timer2 = setTimeout(() => {
       setAnimatePic2(true);
       playPopSound();
     }, 900);
 
-    // תמונה 3 מופיעה
     timer3 = setTimeout(() => {
       setAnimatePic3(true);
       playPopSound();
     }, 1500);
 
-    // הטקסט התחתון מופיע
     timer4 = setTimeout(() => {
       setAnimateText2(true);
       playPopSound();
     }, 2100);
 
-    // המנורה יורדת מלמעלה
     timer5 = setTimeout(() => {
       setAnimateLamp(true);
       playPopSound();
     }, 2700);
 
-    // חשיפת המספרים הלחיצים והפעלת אינטראקציית הסדר
     timer6 = setTimeout(() => {
       setShowInteractiveSteps(true);
       playPopSound();
@@ -157,6 +176,8 @@ function DigitalAssetsStep1() {
       clearTimeout(timer4);
       clearTimeout(timer5);
       clearTimeout(timer6);
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
     };
   }, []);
 

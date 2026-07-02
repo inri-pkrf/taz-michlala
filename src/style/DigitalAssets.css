@@ -135,3 +135,159 @@
     
      direction: rtl;
 }
+
+#DigitalAssets-closed-chest{
+    position: absolute;
+    width: 65vw;
+    height: 23vh;
+    bottom: 38vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+#DigitalAssets-open-chest{
+    position: absolute;
+    width: 70vw;
+    height: 29vh;
+    bottom: 38vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* מצב התחלתי של התיבה הפתוחה - מוסתרת ושקופה */
+.chest-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 1. התיבה הסגורה רועדת קצת לפני הפתיחה */
+.chest-rumble {
+    animation: rumble 0.2s ease-in-out infinite alternate;
+}
+
+/* 2. אנימציית דעיכה החוצה לתיבה הסגורה */
+.chest-fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+/* 3. אנימציית דעיכה פנימה + קפיצה קטנה לתיבה הפתוחה */
+.chest-fade-in-pop {
+    animation: fadeInPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* הגדרות האנימציות (Keyframes) */
+
+@keyframes rumble {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-51%) rotate(-1deg); }
+    75% { transform: translateX(-49%) rotate(1deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateX(-50%) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) scale(0.95); }
+}
+
+@keyframes fadeInPop {
+    0% { opacity: 0; transform: translateX(-50%) scale(0.9); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+#DigitalAssets-icon1{
+    position: absolute;
+    width: 11vw;
+    height: 5vh;
+    bottom: 52vh;
+    left: 25vw;  
+    z-index: 10;
+}
+
+#DigitalAssets-icon2{
+    position: absolute;
+    width: 11vw;
+    height: 5vh;
+    bottom: 54vh;
+    left: 38vw;  
+    z-index: 10;
+}
+
+#DigitalAssets-icon3{
+    position: absolute;
+    width: 11vw;
+    height: 5vh;
+    bottom: 52vh;
+    left: 49vw;  
+    z-index: 10;
+}
+
+#DigitalAssets-icon4{
+    position: absolute;
+    width: 11vw;
+    height: 5vh;
+    bottom: 53vh;
+    left: 61vw;  
+    z-index: 10;
+}
+
+/* 1. חובה: הגדרת ברירת מחדל לכל האייקונים שלא יראו אותם בשום מצב בהתחלה */
+#DigitalAssets-icon1,
+#DigitalAssets-icon2,
+#DigitalAssets-icon3,
+#DigitalAssets-icon4 {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* 2. מצב מוסתר (ליתר ביטחון) */
+.icons-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* 3. הקלאס שמופעל כשהתיבה נפתחת */
+.icons-fade-in {
+  /* האנימציה תתחיל חצי שנייה (0.5s) אחרי שהתיבה הפתוחה מופיעה */
+  animation: iconBurstOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.5s; 
+}
+
+/* 4. האנימציה עצמה */
+@keyframes iconBurstOut {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.3);
+    visibility: visible; /* הופך לגלוי רק ברגע שהאנימציה עצמה מתחילה לעבוד! */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
+}
+
+#DigitalAssetsStep2-text4{
+    position: absolute;
+    font-size: 5.5vw;
+    width: 80vw;
+    top: 65vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 500;
+    direction: rtl;
+}
+
+#DigitalAssetsStep2-text5{
+    position: absolute;
+    font-size: 4.5vw;
+    width: 80vw;
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: 500;
+    direction: rtl;
+}
