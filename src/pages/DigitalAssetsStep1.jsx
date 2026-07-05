@@ -3,7 +3,9 @@ import Popup from '../components/Popup'; // ייבוא הפופ-אפ הגנרי 
 import StepNumber from '../components/StepNumber'; // ייבוא עיגול המספר הגנרי שלך
 import '../style/DigitalAssets.css';
 
-// פונקציית עזר שממירה Hex ל-RGBA, מחשיכה את הצבע ב-40% ומחילה שקיפות (כמו ב-Activity)
+// שים לב: מחקנו מכאן את ה-import של קובץ הסאונד שהיה שגוי
+
+// פונקציית עזר שממירה Hex ל-RGBA, מחשיכה את הצבע ב-40% ומחילה שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.8) => {
   const cleanHex = hex.replace('#', '');
   let r = parseInt(cleanHex.slice(0, 2), 16);
@@ -26,31 +28,30 @@ function DigitalAssetsStep1() {
   // סטייט שמציג את המספרים הלחיצים רק בסיום כל האנימציות
   const [showInteractiveSteps, setShowInteractiveSteps] = useState(false);
 
-  // מנגנון סדר הלחיצות: שומר מהו ה-ID הבא שחובה ללחוץ עליו
+  // מנגנון סדר הלחיצות
   const [nextRequiredId, setNextRequiredId] = useState(1);
   const [activePopup, setActivePopup] = useState(null);
 
   // נתוני הפופ-אפים והמיקומים של המספרים מעל הציורים
   const assetsPopupsData = {
-1: {
+    1: {
       title: "ידע ומידע - הכל באתר המכללה",
-      // שימוש ב-JSX כדי לשלב את הקישור בצורה אינטגרטיבית בתוך התוכן
       content: (
         <span>
           באתר המכללה ניתן להירשם ולקבל מידע על כל ההכשרות שלנו לבעלי תפקידים במשרדי הממשלה, הרשויות המקומיות ובמפקדות צבאיות.
           <br /><br />
           <a 
-            href="https://inri.orc.org.il/" // תפתחי את הגרשיים ותחליפי בכתובת האמיתית של האתר שלכן
+            href="https://inri.orc.org.il/" 
             target="_blank" 
             rel="noopener noreferrer"
             style={{ 
-              color: "#52AECA",          // צבע תואם לבורדר של הכרטיסייה
+              color: "#52AECA", 
               textDecoration: "underline", 
               fontWeight: "bold",
               cursor: "pointer"
             }}
           >
-            לחצו כאן למעבר לאתר המכללה
+            למעבר לאתר המכללה
           </a>
         </span>
       ),
@@ -74,17 +75,17 @@ function DigitalAssetsStep1() {
     }
   };
 
-// פונקציה להשמעת סאונד הפצפוץ
-  const playPopSound = () => {
-    const audio = new Audio(`${process.env.PUBLIC_URL}/assets/audio/pop.mp3`);
-    // בניידים כדאי להגדיר שהסאונד ייטען מראש
-    audio.load(); 
-    audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
-  };
+const playPopSound = () => {
+  // יצירת נתיב דינמי מוחלט שמתאים גם ל-Localhost וגם ל-GitHub
+  const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
+  
+  const audio = new Audio(soundPath);
+  audio.load(); 
+  audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
+};
 
-  // לוגיקת ניהול הלחיצות לפי הסדר המדויק שלך
+  // לוגיקת ניהול הלחיצות
   const handleAssetClick = (id) => {
-    // מונע לחיצה לפני שכל האנימציות הסתיימו והמספרים הופיעו
     if (!showInteractiveSteps) return;
 
     if (id === nextRequiredId) {
@@ -103,7 +104,6 @@ function DigitalAssetsStep1() {
         isWarning: true
       });
     } else {
-      // אם כבר ביקרו בו, מאפשר לפתוח שוב לצפייה חוזרת
       setActivePopup({
         title: assetsPopupsData[id].title,
         content: assetsPopupsData[id].content,
@@ -114,29 +114,23 @@ function DigitalAssetsStep1() {
   };
 
   useEffect(() => {
-    // פונקציית פתיחת חסימה משופרת - מנגנת סאונד שקט כדי למנוע כפילות!
     const unlockAudio = () => {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       if (AudioContext) {
         const ctx = new AudioContext();
-        // יצירת סיגנל שקט לחלוטין רק כדי "להעיר" את הרמקול של הטלפון
         const buffer = ctx.createBuffer(1, 1, 22050);
         const source = ctx.createBufferSource();
         source.buffer = buffer;
         source.connect(ctx.destination);
         source.start(0);
       }
-
-      // מסירים את המאזינים מיד לאחר הנגיעה הראשונה
       window.removeEventListener('click', unlockAudio);
       window.removeEventListener('touchstart', unlockAudio);
     };
 
-    // מאזינים לנגיעה או לחיצה ראשונה של המשתמש במסך
     window.addEventListener('click', unlockAudio);
     window.addEventListener('touchstart', unlockAudio);
 
-    // --- הטיימרים הרגילים והנקיים שלך ---
     let timer1, timer2, timer3, timer4, timer5, timer6;
 
     timer1 = setTimeout(() => {
@@ -187,7 +181,6 @@ function DigitalAssetsStep1() {
       <h1 id="activity-title">נכסים דיגיטליים של המכללה</h1>
       <p id="DigitalAssetsStep1-text1">לחצו על הכרטיסיות כדי לגלות עוד</p>
       
-      {/* אלמנטים קבועים ויציבים ברקע */}
       <img 
         src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/computer.png`} 
         alt="מחשב" 
@@ -200,7 +193,6 @@ function DigitalAssetsStep1() {
         id="DigitalAssets-blob"
       />
       
-      {/* שלוש התמונות האנימטיביות - הוספנו להן פונקציית לחיצה וסמן יד */}
       <img 
         src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic1.png`} 
         alt="bg" 
@@ -228,7 +220,6 @@ function DigitalAssetsStep1() {
         style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
       />
       
-      {/* המנורה (light-bomb) שיורדת מלמעלה */}
       <img 
         src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/light-bomb.png`} 
         alt="bg" 
@@ -236,13 +227,11 @@ function DigitalAssetsStep1() {
         className={`lamp-element ${animateLamp ? 'is-dropped' : ''}`}
       />
 
-      {/* יצירה דינמית של עיגולי המספרים מעל הכרטיסיות רק לאחר סיום האנימציה */}
       {showInteractiveSteps && 
         Object.keys(assetsPopupsData).map((id) => {
           const asset = assetsPopupsData[id];
           const isVisited = nextRequiredId > id;
           
-          // עיצוב דינמי: משתנה לצבע כהה-שקוף אם כבר לחצו עליו, או נשאר לבן אם טרם ביקרו בו
           const currentBg = isVisited ? getDarkTranslucentColor(asset.borderColor, 0.6) : '#ffffff';
           const currentBorder = asset.borderColor;
           const currentText = isVisited ? '#ffffff' : asset.borderColor;
@@ -262,15 +251,13 @@ function DigitalAssetsStep1() {
         })
       }
 
-      {/* הטקסט התחתון האנימטיבי */}
       <p 
         id="DigitalAssetsStep1-text2"
         className={`pop-element ${animateText2 ? 'is-visible' : ''}`}
       >
-        המכללה עברה ב-5 שנים האחרונות טרנספורמציה דיגיטלית, עם הנגשה משמעותית של ידע בשעת חירום לצד שיפור תהליכים בשגרה, שהפכו קלים, קצרים ומהירים יותר.
+        המכללה עברה ב-5 שנים האחרונות טרנספורמציה דיגיטלית, עם הנגשה משמעותיות של ידע בשעת חירום לצד שיפור תהליכים בשגרה, שהפכו קלים, קצרים ומהירים יותר.
       </p>
 
-      {/* הפופ-אפ הגנרי שמקבל את כל הנתונים, כולל חיווי של אזהרה (isWarning) */}
       {activePopup && (
         <Popup 
           title={activePopup.title}

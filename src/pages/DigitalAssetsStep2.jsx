@@ -4,10 +4,13 @@ import '../style/DigitalAssets.css';
 function DigitalAssetsStep2() {
   const [isChestOpen, setIsChestOpen] = useState(false);
 
-  const playChestSound = () => {
-    const audio = new Audio(`${process.env.PUBLIC_URL}/assets/audio/chest-open.mp3`);
-    audio.play().catch(err => console.log("סאונד חסום זמנית:", err));
-  };
+const playChestSound = () => {
+  // יצירת נתיב דינמי מוחלט לתיבה
+  const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/chest-open.mp3`;
+  
+  const audio = new Audio(soundPath);
+  audio.play().catch(err => console.log("סאונד חסום זמנית:", err));
+};
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -1,0 +1,94 @@
+#ForeignRelations-text1{
+    position: absolute;
+    width: 60vw;    
+    top: 18vh;
+    left: 50%;  
+    transform: translateX(-50%);    
+    font-size: 5.5vw;
+    text-align: center;
+    direction: rtl;
+}
+
+#ForeignRelations-text2{
+    position: absolute;
+    width: 60vw;    
+    top: 23vh;
+    left: 50%;  
+    transform: translateX(-50%);    
+    font-size: 3.5vw;
+    text-align: center;
+    direction: rtl;
+}
+
+.page-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+
+
+/* --- מיכל עטיפת הגלובוס --- */
+.globe-wrapper {
+    position: absolute;
+    top: 24vh;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: grab; /* מראה שאפשר לגרור ולסובב */
+    z-index: 2;
+}
+
+.globe-wrapper:active {
+    cursor: grabbing;
+}
+
+
+.meeting-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 65vh;
+    font-size: 4vh;
+    margin-top: 0.5vh;
+    line-height: 1.4;
+    font-family: "karantina";
+    direction: rtl;
+    text-align: center;
+    width: 65vw;
+    
+}
+
+.remaining-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);    
+    bottom: 15vh;
+    font-size: 2vh;
+    color: #4e4e50;
+  
+}
+
+.completed-text{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);    
+    bottom: 15vh;
+    font-size: 2vh;
+    color: #4e4e50;
+}
+
+#ForeignRelations-text3{
+    position: absolute;
+    width: 70vw;    
+    top: 70vh;
+    left: 50%;  
+    transform: translateX(-50%);    
+    font-size: 4vw;
+    text-align: center;
+    direction: rtl;
+    padding: 1vh 2vh;
+    border: 0.5vh solid #000641;
+    border-radius: 2vh;
+}

@@ -1,0 +1,79 @@
+#NationalLibrary-text1{
+    position: absolute;
+    width: 60vw;    
+    top: 18vh;
+    left: 50%;  
+    transform: translateX(-50%);    
+    font-size: 5vw;
+    text-align: center;
+    direction: rtl;
+}
+
+#NationalLibrary-shelf{
+    position: absolute;
+    width: 75vw;
+    height: 1.5vh;
+    top: 55vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+#NationalLibrary-book-pink{
+    position: absolute;
+    width: 13vw;
+    height: 16vh;
+    top: 39vh;
+    left: 64vw;  
+    z-index: 2;
+}
+
+#NationalLibrary-book-purple{
+    position: absolute;
+    width: 7vw;
+    height: 18vh;
+    top: 37vh;
+    left: 56.5vw;  
+    z-index: 2;
+}
+
+#NationalLibrary-book-orange{
+    position: absolute;
+    width: 11vw;
+    height: 20vh;
+    top: 35vh;
+    left: 45.5vw;  
+    z-index: 2;
+}
+
+#NationalLibrary-book-green{
+    position: absolute;
+    width: 11vw;
+    height: 16vh;
+    top: 39vh;
+    left: 34.5vw;  
+    z-index: 2;
+}
+
+#NationalLibrary-book-yellow{
+    position: absolute;
+    width: 12vw;
+    height: 17vh;
+    top: 38vh;
+    left: 22.5vw;  
+    z-index: 2;
+}
+
+/* --- הגדרות האנימציה הכלליות לפצפוץ הספרים --- */
+.pop-element {
+    opacity: 0;
+    transform: scale(0.3); /* מתחיל קטן מאוד */
+    /* מעבר חלק עם אפקט קפיצה אלסטי (Cubic Bezier) שמדמה פצפוץ */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+/* כשהאלמנט הופך לגלוי, הוא גדל לגודלו המלא */
+.pop-element.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
