@@ -1,0 +1,105 @@
+.video-wrapper{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.war-date{
+    position: absolute;
+    font-size: 2vh;
+    top: 20vh;
+    left: 50%;  
+    transform: translateX(-50%);
+     color: #253225;
+}
+
+#AtWar-title{
+    font-family: "Karantina";
+    position: absolute;
+    font-size: 14vw;
+    top: 9vh;
+    width: 80vw;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+
+.war-name{
+    position: absolute;
+    font-size: 3vh;
+    font-weight: bold;
+    top: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 30vw;
+    font-weight: 100;
+    padding: 1.5vh 3vh;
+    border: 0.5vh solid #253225;
+    border-radius: 1.5vh;
+    color: #253225;
+    
+}
+
+.war-short-text{
+    position: absolute;
+    font-size: 2vh;
+    top: 43vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80vw;
+    font-weight: 600;
+    line-height: 1.4;
+    direction: rtl;
+    color: #253225;
+}
+
+
+.video-wrapper{
+    position: absolute;
+    bottom: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.war-title2{
+    position: absolute;
+    font-size: 2vh;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80vw;
+    font-weight: 100;
+    color: #253225;
+}
+
+.war-long-text{
+    position: absolute;
+    font-size: 1.8vh;
+    top: 25vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: right;
+    width: 72vw;
+    font-weight: 100;
+    line-height: 1.4;
+    direction: rtl;
+    color: #253225;
+    padding: 1vh 2vh;
+    border: 0.5vh solid #253225;
+    background-color: #DFE8E1;
+    border-radius: 2vh;
+}
+
+.interactive-image-container{
+    position: absolute;
+    top: 55vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    height: 40vh;
+}

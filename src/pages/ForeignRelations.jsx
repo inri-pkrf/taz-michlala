@@ -13,9 +13,6 @@ function ForeignRelations({ onGoHome }) {
   // מערך ששומר את ה-IDs של המדינות שהמשתמש כבר לחץ עליהן
   const [visitedIds, setVisitedIds] = useState([]);
 
-  // סטייט לשמירת ה-ID של הנקודה שעליה עומד העכבר כרגע
-  const [hoveredPinId, setHoveredPinId] = useState(null);
-
   // נתוני המדינות עם קואורדינטות מתוקנות ומדויקות
   const countriesData = [
     {
@@ -50,7 +47,6 @@ function ForeignRelations({ onGoHome }) {
   // חישוב המונים בזמן אמת
   const totalCountries = countriesData.length;
   const visitedCount = visitedIds.length;
-  const remainingCount = totalCountries - visitedCount;
 
   // לוגיקת הלחיצה החופשית על נקודה בגלובוס
   const handlePinClick = (pin) => {
@@ -83,16 +79,6 @@ function ForeignRelations({ onGoHome }) {
       <p id="ForeignRelations-text1">אנחנו לגמרי בינלאומיים!</p>
       <p id="ForeignRelations-text2">סובבו את הגלובוס ולחצו על המדינות</p>
 
-      {/* מד התקדמות עליון המציג כמה עברנו וכמה נשאר */}
-      {/* <div className="progress-counter-badge">
-        
-        {remainingCount > 0 ? (
-          <span className="remaining-text"> נשארו עוד <strong>{remainingCount}</strong> מדינות </span>
-        ) : (
-          <span className="completed-text"> כל הכבוד! עברת בכל המדינות </span>
-        )}
-      </div> */}
-
       {/* מיכל הגלובוס התלת ממדי */}
       <div className="globe-wrapper">
         <Globe
@@ -102,6 +88,7 @@ function ForeignRelations({ onGoHome }) {
           backgroundColor="rgba(0,0,0,0)" 
           showAtmosphere={false}
           
+          // השארנו את תמונות הכדור המקוריות שלך בדיוק כפי שביקשת
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
           bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
           
@@ -110,18 +97,22 @@ function ForeignRelations({ onGoHome }) {
           labelLng={d => d.lng}
           labelText={d => d.flag} 
           
-          // --- הגדלת המיקומים ואפקט גדילה דינמי ---
-          // גודל בסיס גדול יותר (2.5 במקום 1.6), ואם יש הובר הוא גדל ל-3.8
-          labelSize={d => d.id === hoveredPinId ? 3.8 : 2.5}
-          // גם נקודת הבסיס (הדוט) תגדל מעט בהובר
-          labelDotRadius={d => d.id === hoveredPinId ? 1.4 : 1.0}
+          // גודל קבוע וענק עבור הדגל ללא אנימציית גדילה
+          labelSize={4.2}
+          
+          // גודל קבוע, ענק ובולט עבור העיגול הצבעוני (הנקודה)
+          labelDotRadius={4.5}
+          
+          // ביטול מוחלט של האנימציה וזמן המעבר של הלייבלים
+          labelTransitionDuration={0}
+          
+          // הרחבת שטח הטאץ' ללחיצה נוחה וקלה במובייל
+          labelIncludeDot={true}
+          pointerEventsFilter={() => true}
           
           labelColor={d => visitedIds.includes(d.id) ? '#7f8c8d' : d.baseColor}
           labelResolution={2}
           onLabelClick={handlePinClick}
-          
-          // זיהוי מעבר עכבר/טאץ' לצורך אפקט הגדילה
-          onLabelHover={pin => setHoveredPinId(pin ? pin.id : null)}
         />
       </div>
 
@@ -133,6 +124,7 @@ function ForeignRelations({ onGoHome }) {
           </>
         )}
       </div>
+      
       <p id="ForeignRelations-text3">
         מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום
       </p>

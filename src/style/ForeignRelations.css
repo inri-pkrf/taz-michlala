@@ -82,13 +82,13 @@
 #ForeignRelations-text3{
     position: absolute;
     width: 70vw;    
-    top: 70vh;
+    top: 72vh;
     left: 50%;  
     transform: translateX(-50%);    
     font-size: 4vw;
     text-align: center;
     direction: rtl;
     padding: 1vh 2vh;
-    border: 0.5vh solid #000641;
+    border: 0.5vh solid #0b1463;
     border-radius: 2vh;
 }
