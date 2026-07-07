@@ -103,6 +103,13 @@
     height: 40vh;
 }
 
+.war-interactive-img{
+    position: absolute;
+    width: 80vw;
+    height: 20vh;
+    left: -5%;
+}
+
 .AtWar-sky{
     position: absolute;
     top: -4vh;
@@ -114,7 +121,7 @@
 
 .AtWar-jeep{
     position: absolute;
-    top: 13vh;
+    top: 19vh;
     left: -12vw;
     width: 23vw;
     height: 4.5vh;
@@ -125,7 +132,7 @@
 
 .AtWar-tank{
     position: absolute;
-    top: 13vh;
+    top: 18vh;
     left: 34vw;
     width: 35vw;
     height: 6vh;
@@ -135,7 +142,7 @@
 
 .AtWar-dust{
     position: absolute;
-    top: 16vh;
+    top: 21vh;
     right: -3vw;
     width: 35vw;
     height: 3vh;
@@ -164,7 +171,7 @@
 
 .AtWar-solider1{
     position: absolute;
-    top: 12vh;
+    top: 16vh;
     left: 70vw;
     width: 7vw;
     height: 5vh;
@@ -173,7 +180,7 @@
 
 .AtWar-solider2{
     position: absolute;
-    top: 11vh;
+    top: 17vh;
     left: 14vw;
     width: 5vw;
     height: 6vh;
@@ -182,15 +189,17 @@
 
 .AtWar-bg-building{
     position: absolute;
-    top: 9vh;  
+    top: 12vh;  
     right: -3vw;
     width: 12vw;
     height: 6vh;
+    z-index: -1;
 }
 
 /* אנימציה לג'יפ - מגיע משמאל הרחק מחוץ למסך ועוצר במיקום המקורי */
 @keyframes driveInJeep {
     from {
+        
         left: -40vw; /* מתחיל רחוק משמאל מחוץ למסך */
     }
     to {
@@ -201,9 +210,11 @@
 /* אנימציה למטוס - מגיע משמאל מחוץ למסך ועוצר במיקום המקורי */
 @keyframes flyInPlane {
     from {
+        top: -26vh;
         left: -50vw; /* מתחיל מחוץ למסך */
     }
     to {
+        top: -22vh;
         left: -15vw; /* עוצר בדיוק במיקום שהגדרת לו */
     }
 }

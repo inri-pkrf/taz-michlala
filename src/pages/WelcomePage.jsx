@@ -23,7 +23,7 @@ function WelcomePage({ onNavigate }) {
       />
 
       <button onClick={onNavigate} className="start-learning-btn">
-        קדימה, מתחילים! 🚀
+       יאללה לעסק
       </button>
     </div>
   );

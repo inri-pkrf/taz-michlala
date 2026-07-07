@@ -52,7 +52,7 @@
 .activity-king{
     position: absolute;
     width: 11vw;
-    top: 58.5vh;
+    top: 64.5vh;
     left: 70vw;
     z-index: 10;
 }
@@ -60,7 +60,7 @@
 .activity-queen{
     position: absolute;
     width: 15vw;
-    top: 28.7vh;
+    top: 28.5vh;
     left: 22vw;
     z-index: 10;
 }
@@ -68,7 +68,7 @@
 #activity-show-image{
     position: absolute;
     width: 20vw;
-    top: 55vh;
+    top: 60vh;
     margin: 1vh auto;
     left: 50%;
     transform: translateX(-50%);
@@ -91,7 +91,7 @@
 
 .activityPage1-office1{
     position: absolute;
-    width: 40vw;
+    width: 37vw;
     height: 12vh;
     top: 30vh;
     left: 16vw;
@@ -100,7 +100,7 @@
 
 .activityPage1-office2{
     position: absolute;
-    width: 37vw;
+    width: 34vw;
     height: 15vh;
     top: 33vh;
     left: 50vw;
@@ -109,7 +109,7 @@
 
 .activityPage1-office3{
     position: absolute;
-    width: 50vw;
+    width: 47vw;
     height: 15vh;
     top: 41vh;
     left: 10vw;
@@ -118,7 +118,7 @@
 
 .activityPage1-office4{
     position: absolute;
-    width: 45vw;
+    width: 42vw;
     height: 15vh;
     top: 49vh;
     left: 45vw;
@@ -241,7 +241,7 @@
     position: absolute;
     width: 60vw;
     height: 10vh;
-    top: 76vh;
+    top: 78vh;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -250,7 +250,7 @@
     position: absolute;
     width: 40vw;
     height: 17vh;
-    top: 39vh;
+    top: 42vh;
     left: 50%;
     transform: translateX(-50%);
 }

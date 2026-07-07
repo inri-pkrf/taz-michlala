@@ -22,21 +22,20 @@
 }
 
 .start-learning-btn {
-    padding: 15px 40px;
-    font-size: 1.5vw;
+    padding: 1vh 2vh;
+    font-size: 3vw;
     font-weight: bold;
     color: #ffffff;
     background-color: #ff4a5a;
-    border: 3px solid #333333;
-    border-radius: 30px;
+    border: 0.5vh solid #460000;
+    border-radius: 2vh;
     cursor: pointer;
-    box-shadow: 0px 5px 0px #333333;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    outline: none;
-    top: 80vh;
+    top: 85vh;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    direction: rtl;
+    font-family: "Karantina";
 }
 
 
@@ -51,7 +50,7 @@
 .welcomePage-nameTag{
   position: absolute;
   width: 60vw;
-  top: 40vh;
+  top: 41vh;
   left: 50%;
   transform: translateX(-50%);
 
