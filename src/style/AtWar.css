@@ -8,10 +8,10 @@
 .war-date{
     position: absolute;
     font-size: 2vh;
-    top: 20vh;
+    top: 22vh;
     left: 50%;  
     transform: translateX(-50%);
-     color: #253225;
+    color: #253225;
 }
 
 #AtWar-title{
@@ -97,9 +97,113 @@
 
 .interactive-image-container{
     position: absolute;
-    top: 55vh;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 53vh;
+    left: 15%;
     width: 80vw;
     height: 40vh;
+}
+
+.AtWar-sky{
+    position: absolute;
+    top: -4vh;
+    left: -12.5vw;
+    width: 95vw;
+    height: 8vh;
+   z-index: -1;
+}
+
+.AtWar-jeep{
+    position: absolute;
+    top: 13vh;
+    left: -12vw;
+    width: 23vw;
+    height: 4.5vh;
+    z-index: 1;
+
+    animation: driveInJeep 1.5s ease-out forwards;
+}
+
+.AtWar-tank{
+    position: absolute;
+    top: 13vh;
+    left: 34vw;
+    width: 35vw;
+    height: 6vh;
+    z-index: 1;
+
+}
+
+.AtWar-dust{
+    position: absolute;
+    top: 16vh;
+    right: -3vw;
+    width: 35vw;
+    height: 3vh;
+    z-index: 2;
+}
+
+.AtWar-plane1{
+    position: absolute;
+    top: -22vh;
+    left: -15vw;
+    width: 35vw;
+    height: 17vh;
+    z-index: 2;
+
+    animation: flyInPlane 1.8s ease-out 1.2s forwards;
+}
+
+.AtWar-plane2{
+    position: absolute;
+    top: -1vh;
+    left: -11vw;
+    width: 15vw;
+    height: 3vh;
+    z-index: 2;
+}
+
+.AtWar-solider1{
+    position: absolute;
+    top: 12vh;
+    left: 70vw;
+    width: 7vw;
+    height: 5vh;
+    z-index: 1;
+}
+
+.AtWar-solider2{
+    position: absolute;
+    top: 11vh;
+    left: 14vw;
+    width: 5vw;
+    height: 6vh;
+    z-index: 1;
+}
+
+.AtWar-bg-building{
+    position: absolute;
+    top: 9vh;  
+    right: -3vw;
+    width: 12vw;
+    height: 6vh;
+}
+
+/* אנימציה לג'יפ - מגיע משמאל הרחק מחוץ למסך ועוצר במיקום המקורי */
+@keyframes driveInJeep {
+    from {
+        left: -40vw; /* מתחיל רחוק משמאל מחוץ למסך */
+    }
+    to {
+        left: -12vw; /* עוצר בדיוק במיקום שהגדרת לו */
+    }
+}
+
+/* אנימציה למטוס - מגיע משמאל מחוץ למסך ועוצר במיקום המקורי */
+@keyframes flyInPlane {
+    from {
+        left: -50vw; /* מתחיל מחוץ למסך */
+    }
+    to {
+        left: -15vw; /* עוצר בדיוק במיקום שהגדרת לו */
+    }
 }

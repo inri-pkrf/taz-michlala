@@ -2,7 +2,7 @@
     font-family: "Karantina";
     position: absolute;
     font-size: 15vw;
-    top: 8vh;
+    top: 7vh;
     width: 80vw;
     text-align: center;
     left: 50%;
@@ -52,7 +52,7 @@
 .activity-king{
     position: absolute;
     width: 11vw;
-    top: 62.5vh;
+    top: 58.5vh;
     left: 70vw;
     z-index: 10;
 }
@@ -60,7 +60,7 @@
 .activity-queen{
     position: absolute;
     width: 15vw;
-    top: 28.3vh;
+    top: 28.7vh;
     left: 22vw;
     z-index: 10;
 }
@@ -68,7 +68,8 @@
 #activity-show-image{
     position: absolute;
     width: 20vw;
-    top: 59vh;
+    top: 55vh;
+    margin: 1vh auto;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
@@ -238,9 +239,9 @@
 
 #activity-soliders{
     position: absolute;
-    width: 65vw;
-    height: 15vh;
-    top: 75vh;
+    width: 60vw;
+    height: 10vh;
+    top: 76vh;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -248,8 +249,8 @@
 #activity-play-icon{
     position: absolute;
     width: 40vw;
-    height: 20vh;
-    top: 38vh;
+    height: 17vh;
+    top: 39vh;
     left: 50%;
     transform: translateX(-50%);
 }

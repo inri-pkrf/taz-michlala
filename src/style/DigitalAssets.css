@@ -1,6 +1,6 @@
 #DigitalAssets-computer {
     position: absolute;
-    width: 60vw;
+    width: 55vw;
     height: 22vh;
     bottom: 38vh;
     left: 50%;  
@@ -10,7 +10,7 @@
 
 #DigitalAssets-blob {
     position: absolute;
-    width: 95vw;
+    width: 90vw;
     height: 35vh;
     bottom: 32.5vh;
     left: 50%;  
@@ -34,7 +34,7 @@
 
 #DigitalAssets-pic1 {
     position: absolute;
-    width: 25vw;
+    width: 22vw;
     height: 8vh;
     top: 37vh;
     left: 62vw;  
@@ -43,7 +43,7 @@
 
 #DigitalAssets-pic2 {
     position: absolute;
-    width: 25vw;
+    width: 22vw;
     height: 8vh;
     top: 44vh;
     left: 13vw;  
@@ -52,7 +52,7 @@
 
 #DigitalAssets-pic3 {
     position: absolute;
-    width: 18vw;
+    width: 17vw;
     height: 12vh;
     top: 49vh;
     left: 72vw;  
@@ -75,7 +75,7 @@
     position: absolute;
     font-size: 4.5vw;
     width: 80vw;
-    top: 63vh;
+    top: 62vh;
     left: 50%;
     /* שימי לב: מכיוון שיש פה כבר transform, שילבנו אותו בתוך האנימציה */
     transform: translateX(-50%) scale(0.3); 

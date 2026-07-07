@@ -8,7 +8,7 @@ import DigitalAssetsStep1 from './DigitalAssetsStep1';
 import DigitalAssetsStep2 from './DigitalAssetsStep2';
 
 
-function DigitalAssets({ onGoHome }) {
+function DigitalAssets({ onGoHome, progress, onProgress }) {
   // ניהול הצעד הנוכחי בתוך הנושא (מתחיל מ-0)
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -19,6 +19,7 @@ function DigitalAssets({ onGoHome }) {
   ];
 
   const handleNext = () => {
+    onProgress?.(`digitalAssets-step-${currentStep + 1}`);
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1); // עובר לתת-העמוד הבא
     } else {
@@ -32,7 +33,7 @@ function DigitalAssets({ onGoHome }) {
   return (
     <div className="page-container">
       {/* כפתור הבית תמיד מופיע ומחזיר לתפריט הראשי ב-App */}
-      <HomeButton onClick={onGoHome} />
+      <HomeButton onClick={onGoHome} progress={progress} />
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}

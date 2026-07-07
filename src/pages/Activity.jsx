@@ -9,7 +9,7 @@ import ActivityStep2 from './ActivityStep2';
 import ActivityStep3 from './ActivityStep3';
 import ActivityStep4 from './ActivityStep4';
 
-function Activity({ onGoHome }) {
+function Activity({ onGoHome, progress, onProgress }) {
   // ניהול הצעד הנוכחי בתוך הנושא (מתחיל מ-0)
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -22,6 +22,7 @@ function Activity({ onGoHome }) {
   ];
 
   const handleNext = () => {
+    onProgress?.(`activity-step-${currentStep + 1}`);
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1); // עובר לתת-העמוד הבא
     } else {
@@ -35,7 +36,7 @@ function Activity({ onGoHome }) {
   return (
     <div className="page-container">
       {/* כפתור הבית תמיד מופיע ומחזיר לתפריט הראשי ב-App */}
-      <HomeButton onClick={onGoHome} />
+      <HomeButton onClick={onGoHome} progress={progress} />
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}

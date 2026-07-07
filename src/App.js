@@ -13,6 +13,22 @@ import AtWar from './pages/AtWar'; // נושא 5
 function App() {
   // המצב (State) שקובע איזה עמוד מוצג כרגע
   const [currentPage, setCurrentPage] = useState('welcome');
+  const TOTAL_PROGRESS_STEPS = 13;
+  const [completedProgressActions, setCompletedProgressActions] = useState([]);
+
+  const progress = Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
+  const incrementProgress = (actionKey) => {
+    if (!actionKey) {
+      return;
+    }
+
+    setCompletedProgressActions((prev) => {
+      if (prev.includes(actionKey)) {
+        return prev;
+      }
+      return [...prev, actionKey];
+    });
+  };
 
   // פונקציה שמחליטה איזו קומפוננטה לרנדר על המסך
   const renderPage = () => {
@@ -25,23 +41,23 @@ function App() {
         
       // נושא 1: פעילות
       case 'activity':
-        return <Activity onGoHome={() => setCurrentPage('home')} />;
+        return <Activity onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
       // נושא 2: נכסים דיגיטליים ורשתות חברתיות
       case 'digitalAssets':
-        return <DigitalAssets onGoHome={() => setCurrentPage('home')} />;
+        return <DigitalAssets onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
       // נושא 3: הספרייה הלאומית
       case 'nationalLibrary':
-        return <NationalLibrary onGoHome={() => setCurrentPage('home')} />;
+        return <NationalLibrary onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
       // נושא 4: קשרי חוץ
       case 'foreignRelations':
-        return <ForeignRelations onGoHome={() => setCurrentPage('home')} />;
+        return <ForeignRelations onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
       // נושא 5: בעת מלחמה
       case 'atWar':
-        return <AtWar onGoHome={() => setCurrentPage('home')} />;
+        return <AtWar onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
       default:
         return <WelcomePage onNavigate={() => setCurrentPage('home')} />;

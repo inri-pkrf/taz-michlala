@@ -17,7 +17,7 @@ const getDarkTranslucentColor = (hex, alpha = 0.9, darkenFactor = 0.8) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
-function NationalLibrary({ onGoHome }) {
+function NationalLibrary({ onGoHome, progress, onProgress }) {
   const [activePopup, setActivePopup] = useState(null);
   
   // מנגנון סדר הלחיצות הקשיח (מתחיל מ-1)
@@ -239,7 +239,7 @@ function NationalLibrary({ onGoHome }) {
 
   return (
     <div className="page-container" style={{ position: 'relative' }}>
-      <HomeButton onClick={onGoHome} />
+      <HomeButton onClick={onGoHome} progress={progress} />
       
       <img
         className="welcomePage-logo"
@@ -323,7 +323,7 @@ function NationalLibrary({ onGoHome }) {
         })
       }
 
-      <NextButton onClick={onGoHome} />
+      <NextButton onClick={() => { onProgress?.('nationalLibrary'); onGoHome(); }} />
 
       {activePopup && (
         <Popup 

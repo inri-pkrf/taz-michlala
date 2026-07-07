@@ -4,7 +4,7 @@ import '../style/ForeignRelations.css';
 import HomeButton from '../components/HomeButtons'; 
 import NextButton from '../components/NextButton'; 
 
-function ForeignRelations({ onGoHome }) {
+function ForeignRelations({ onGoHome, progress, onProgress }) {
   const globeEl = useRef();
   
   // ניהול המדינה שנבחרה כרגע להצגה בכרטיס התחתון
@@ -67,7 +67,7 @@ function ForeignRelations({ onGoHome }) {
 
   return (
     <div className="page-container">
-      <HomeButton onClick={onGoHome} />
+      <HomeButton onClick={onGoHome} progress={progress} />
       
       <img
         className="welcomePage-logo"
@@ -129,7 +129,7 @@ function ForeignRelations({ onGoHome }) {
         מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום
       </p>
 
-      <NextButton onClick={onGoHome} disabled={visitedCount < totalCountries} />
+      <NextButton onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} disabled={visitedCount < totalCountries} />
     </div>
   );
 }

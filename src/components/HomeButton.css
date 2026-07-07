@@ -1,33 +1,57 @@
-.home-back-button {
-    /* מיקום אבסולוטי - צד ימין למעלה */
+.home-buttons-container {
     position: absolute;
     top: 2vh;
     right: 2vh;
-    
-    /* הגדרות קופסה - כפתור לבן עם צל (תלת מימדי) */
-    background-color: #ffffff;
-    border: 0.3vh solid #333333; /* עובי מסגרת דקה */
-    border-radius: 20vh; /* עיגול מושלם של הכפתור כולו */
-    cursor: pointer;
-    
-
-    
-    /* פריסה של האייקון והטקסט בתוך הכפתור */
     display: flex;
     align-items: center;
-    padding: 10px 10px; /* מרווח פנימי אסתטי */
-    /* רווח קבוע בין האיור לטקסט */
-    
-    /* הגדרות טקסט - כחול כהה כמו בתמונה המקורית */
-    font-size: 4vw;
-    color: #1a2a47; /* כחול כהה-עמוק, מתאים למסך הבית */
+    gap: 1vh;
+    z-index: 1000;
+}
+
+.home-back-button,
+.home-progress-button {
+    background-color: #ffffff;
+    border: 0.4vh solid #000641; /* עובי מסגרת דקה */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5vw;
+    color: #000641; /* כחול כהה-עמוק, מתאים למסך הבית */
     font-weight: bold;
-    direction: rtl; /* מבטיח שהטקסט מימין לשמאל */
-    
-    /* אפקט מעבר חלק */
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
     outline: none; /* ביטול מסגרת כחולה ברירת מחדל של דפדפנים */
-    z-index: 1000; /* מבטיח שהכפתור יופיע מעל רוב האלמנטים האחרים */
+}
+
+.home-back-button {
+    width: 5vh;
+    height: 5vh;
+    padding: 0;
+    border-radius: 20vh;
+}
+
+.home-progress-button {
+    width: 5vh;
+    min-width: 5vh;
+    height: 5vh;
+    padding: 0;
+    border-radius: 50%;
+    cursor: default;
+}
+
+.home-back-button:hover,
+.home-progress-button:hover {
+    background-color: #dfdfdf;
+}
+
+.home-back-button:active {
+    transform: translateY(4px); /* דוחף למטה כמו הגובה של ה-box-shadow */
+    box-shadow: 0px 0px 0px rgba(51, 51, 51, 0.4); /* מבטל את הצל */
+}
+
+.home-progress-button:disabled {
+    opacity: 0.95;
+    cursor: default;
 }
 
 /* אפקט ריחוף (Hover) - צבע רקע מעט אפרפר */
