@@ -17,7 +17,6 @@
     padding: 3vh 2vh;
     width: 70vw;
     max-width: 80vw;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     text-align: center;
     position: relative;
     border-style: solid;
@@ -28,7 +27,7 @@
 .popup-title {
     margin: 0 0 2vh 0;
     color: #000641;
-    font-size: 22px;
+    font-size: 3vh;
     font-weight: bold;
 }
 
@@ -53,9 +52,9 @@
 /* כפתור איקס בפופ-אפ רגיל */
 .popup-close-x {
     position: absolute;
-    top: 1.5vh;
+    top: 1vh;
     right: 2vh;
-    font-size: 26px;
+    font-size: 5vh;
     font-weight: bold;
     color: #707070;
     cursor: pointer;

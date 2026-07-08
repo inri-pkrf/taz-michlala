@@ -137,6 +137,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         <span style={{ color: titleColor }}>{booksData[id].title}</span>
       ) : "";
 
+      playPopSound();
       setActivePopup({
         title: formattedTitle,
         content: booksData[id].content,
@@ -146,6 +147,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       
       setNextRequiredId(prev => prev + 1);
     } else if (id > nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
@@ -158,6 +160,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         <span style={{ color: titleColor }}>{booksData[id].title}</span>
       ) : "";
 
+      playPopSound();
       setActivePopup({
         title: formattedTitle,
         content: booksData[id].content,

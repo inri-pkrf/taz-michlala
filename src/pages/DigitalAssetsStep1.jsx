@@ -89,6 +89,7 @@ const playPopSound = () => {
     if (!showInteractiveSteps) return;
 
     if (id === nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: assetsPopupsData[id].title,
         content: assetsPopupsData[id].content,
@@ -97,6 +98,7 @@ const playPopSound = () => {
       });
       setNextRequiredId(prev => prev + 1);
     } else if (id > nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
@@ -104,6 +106,7 @@ const playPopSound = () => {
         isWarning: true
       });
     } else {
+      playPopSound();
       setActivePopup({
         title: assetsPopupsData[id].title,
         content: assetsPopupsData[id].content,

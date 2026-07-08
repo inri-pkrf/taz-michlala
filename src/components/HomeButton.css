@@ -67,7 +67,7 @@
 
 /* הגדרת גודל ופרופורציות לאייקון עצמו */
 .home-icon-img {
-    width: 24px; /* גודל אופטימלי */
-    height: 24px;
+    width: 2.5vh; /* גודל אופטימלי */
+    height: 2.5vh;
     background: transparent !important;
 }

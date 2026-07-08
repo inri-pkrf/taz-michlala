@@ -21,7 +21,7 @@ function Popup({ title, content, bgColor = '#ffffff', borderColor = '#000641', i
         )}
 
         <h3 className="popup-title">{title}</h3>
-        <p className="popup-text">{content}</p>
+        <div className="popup-text">{content}</div>
         
         {/* אם זו אזהרה, נציג את כפתור "הבנתי" למטה */}
         {isWarning && (

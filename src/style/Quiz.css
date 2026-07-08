@@ -1,0 +1,36 @@
+/* Quiz specific styles and background colors */
+.quiz-page {
+  min-height: 100vh;
+  background-color: #F3FAF8; /* רקע כחול בהיר למבחן */
+  padding: 4vh 3vw;
+}
+
+.quiz-explain {
+  font-size: 2.2vh;
+  margin-bottom: 3vh;
+}
+
+.quiz-intro-actions,
+.quiz-actions,
+.quiz-result-actions {
+  display: flex;
+  gap: 2vh;
+  margin-top: 3vh;
+}
+
+.quiz-form .quiz-question {
+  background: #ffffff;
+  padding: 2vh;
+  margin-bottom: 2vh;
+  border-radius: 1vh;
+}
+
+.quiz-choice {
+  display: block;
+  margin-top: 1vh;
+}
+
+.quiz-result h2 { margin-top: 2vh; }
+
+/* Override site background for other pages */
+body, .page-container { background-color: #FAF8F3; }

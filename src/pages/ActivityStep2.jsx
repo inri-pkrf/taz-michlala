@@ -18,6 +18,17 @@ function ActivityStep2() {
   const [nextRequiredId, setNextRequiredId] = useState(1);
   const [activePopup, setActivePopup] = useState(null);
 
+  const playPopSound = () => {
+    try {
+      const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
+      const audio = new Audio(soundPath);
+      audio.load();
+      audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
+    } catch (e) {
+      console.log('playPopSound error', e);
+    }
+  };
+
   const buildingsData = {
     1: { title: "מגמת אימוני רשויות", content: " אחראית לממש את מה שנלמד בהכשרה - באימון לפי תרחיש ועל-פי תוכנית מותאמת. ", bgColor: "#ffffff", borderColor: "#536863", topNum: "29vh", leftNum: "21%" },
     2: { title: "מגמת משרדי הממשלה", content: `מגמה בהובלת רח"ל, האחראית על הכשרת מנהלים ומנהלות במשרדים לחירום.`, bgColor: "#ffffff", borderColor: "#8F908C", topNum: "34vh", leftNum: "80%" },
@@ -27,6 +38,7 @@ function ActivityStep2() {
 
   const handleBuildingClick = (id) => {
     if (id === nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: buildingsData[id].title,
         content: buildingsData[id].content,
@@ -36,6 +48,7 @@ function ActivityStep2() {
       });
       setNextRequiredId(prev => prev + 1);
     } else if (id > nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
@@ -44,6 +57,7 @@ function ActivityStep2() {
         isWarning: true
       });
     } else {
+      playPopSound();
       setActivePopup({
         title: buildingsData[id].title,
         content: buildingsData[id].content,

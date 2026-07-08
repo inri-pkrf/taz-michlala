@@ -4,13 +4,13 @@ import '../style/DigitalAssets.css';
 function DigitalAssetsStep2() {
   const [isChestOpen, setIsChestOpen] = useState(false);
 
-const playChestSound = () => {
-  // יצירת נתיב דינמי מוחלט לתיבה
-  const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/chest-open.mp3`;
-  
-  const audio = new Audio(soundPath);
-  audio.play().catch(err => console.log("סאונד חסום זמנית:", err));
-};
+  const playChestSound = () => {
+    // יצירת נתיב דינמי מוחלט לתיבה
+    const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/chest-open.mp3`;
+    
+    const audio = new Audio(soundPath);
+    audio.play().catch(err => console.log("סאונד חסום זמנית:", err));
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,7 +53,7 @@ const playChestSound = () => {
         <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/instagram.png`} alt="Instagram" />
       </a>
 
-      {/* טוויטר */}
+      {/* לינקדאין (תוקן הטקסט החלופי מטוויטר ל-LinkedIn) */}
       <a 
         href="https://il.linkedin.com/company/ilresilience?trk=similar-pages" 
         target="_blank" 
@@ -61,10 +61,10 @@ const playChestSound = () => {
         id="DigitalAssets-icon2"
         className={isChestOpen ? 'icons-fade-in' : 'icons-hidden'}
       >
-        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/twitter.png`} alt="Twitter" />
+        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/linkedIn.png`} alt="LinkedIn" />
       </a>
 
-      {/* X (טוויטר החדש) */}
+      {/* X (טוויטר לשעבר) */}
       <a 
         href="https://x.com/ILresilience" 
         target="_blank" 
@@ -85,6 +85,7 @@ const playChestSound = () => {
       >
         <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/facebook.png`} alt="Facebook" />
       </a>
+      
       <p id="DigitalAssetsStep2-text4">
         לייק ואפשר להמשיך :) 
       </p>

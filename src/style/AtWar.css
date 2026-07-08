@@ -5,6 +5,15 @@
     transform: translateX(-50%);
 }
 
+.video-poster-img{
+    position: absolute;
+    width: 65vw;
+    height: 30vh;
+    top: -30vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .war-date{
     position: absolute;
     font-size: 2vh;
@@ -23,7 +32,7 @@
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
-   
+    color: #253225;
 }
 
 .war-name{

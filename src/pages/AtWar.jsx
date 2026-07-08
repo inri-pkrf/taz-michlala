@@ -25,7 +25,7 @@ const warsData = {
     title: "מלחמת חרבות ברזל",
     date: "7 באוקטובר 2023 - הווה",
     shortDescription: " עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום. ",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+    videoUrl: "https://inri-pkrf.github.io/know-college/assets/media/war.mp4",
     videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
     longDescription: ` במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית. `,
     bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.png`,
@@ -83,7 +83,7 @@ const warsData = {
     title: "מלחמת יום הכיפורים",
     date: "אוקטובר 1973",
     shortDescription: "כאן נכנס תקציר קצר על מלחמת יום כיפור...",
-    videoUrl: "https://www.youtube.com/embed/קישור_לסרטון_אחר?autoplay=1",
+    videoUrl: "https://inri-pkrf.github.io/know-college/assets/media/war.mp4",
     videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
     longDescription: "כאן נכנסת הפסקה המורחבת של העמוד השני עבור מלחמת יום כיפור...",
     bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.png`, 
@@ -103,6 +103,17 @@ function AtWar({ onGoHome, progress, onProgress }) {
 
   // מנגנון סדר הלחיצות המקורי מהדוגמה שלך
   const [nextRequiredId, setNextRequiredId] = useState(1);
+  
+    const playPopSound = () => {
+      try {
+        const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
+        const audio = new Audio(soundPath);
+        audio.load();
+        audio.play().catch(err => console.log("סאונד נחסם:", err));
+      } catch (e) {
+        console.log('playPopSound error', e);
+      }
+    };
 
   const currentWarKey = 'ironSwords'; 
   const data = warsData[currentWarKey];
@@ -110,6 +121,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
   // לוגיקת ניהול הלחיצות
   const handleBuildingClick = (id, popupInfo) => {
     if (id === nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: popupInfo.title,
         content: popupInfo.content,
@@ -118,6 +130,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
       });
       setNextRequiredId(prev => prev + 1);
     } else if (id > nextRequiredId) {
+      playPopSound();
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
@@ -125,6 +138,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
         isWarning: true
       });
     } else {
+      playPopSound();
       setActivePopup({
         title: popupInfo.title,
         content: popupInfo.content,
@@ -273,10 +287,6 @@ function AtWar({ onGoHome, progress, onProgress }) {
               );
             })}
           </div>      
-          
-          <button className="back-to-video-btn" onClick={() => { setCurrentPage(1); setActivePopup(null); }}>
-              לעמוד הקודם
-          </button>
         </div>
       )}
 

@@ -9,6 +9,8 @@ import DigitalAssets from './pages/DigitalAssets'; // נושא 2 (משולב ע�
 import NationalLibrary from './pages/NationalLibrary'; // נושא 3
 import ForeignRelations from './pages/ForeignRelations'; // נושא 4
 import AtWar from './pages/AtWar'; // נושא 5
+import QuizIntro from './pages/QuizIntro';
+import Quiz from './pages/Quiz';
 
 function App() {
   // המצב (State) שקובע איזה עמוד מוצג כרגע
@@ -32,12 +34,15 @@ function App() {
 
   // פונקציה שמחליטה איזו קומפוננטה לרנדר על המסך
   const renderPage = () => {
+    const requiredTopics = ['activity','digitalAssets','nationalLibrary','foreignRelations','atWar'];
+    const showQuizAvailable = requiredTopics.every(t => completedProgressActions.some(k => k.startsWith(t)));
+
     switch (currentPage) {
       case 'welcome':
         return <WelcomePage onNavigate={() => setCurrentPage('home')} />;
         
       case 'home':
-        return <HomePage onNavigate={setCurrentPage} />;
+        return <HomePage onNavigate={setCurrentPage} showQuizAvailable={showQuizAvailable} />;
         
       // נושא 1: פעילות
       case 'activity':
@@ -58,6 +63,12 @@ function App() {
       // נושא 5: בעת מלחמה
       case 'atWar':
         return <AtWar onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
+        
+      case 'quizIntro':
+        return <QuizIntro onStart={() => setCurrentPage('quiz')} onCancel={() => setCurrentPage('home')} />;
+
+      case 'quiz':
+        return <Quiz onGoHome={() => setCurrentPage('home')} />;
         
       default:
         return <WelcomePage onNavigate={() => setCurrentPage('home')} />;

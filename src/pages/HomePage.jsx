@@ -1,7 +1,7 @@
 import React from 'react';
 import '../style/HomePage.css';
 
-function HomePage({ onNavigate }) {
+function HomePage({ onNavigate, showQuizAvailable }) {
   return (
     <div className="page-container">
       <h1 id="homePage-title">עמוד הבית</h1>
@@ -51,6 +51,11 @@ function HomePage({ onNavigate }) {
         </div>
 
       </div>
+      {showQuizAvailable && (
+        <div style={{ marginTop: '3vh', textAlign: 'center' }}>
+          <button className="mobile-touch-button" onClick={() => onNavigate('quizIntro')}>לעבור למבחן</button>
+        </div>
+      )}
     </div>
   );
 }
