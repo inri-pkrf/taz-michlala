@@ -15,6 +15,7 @@ const QUESTIONS = [
 ];
 
 function Quiz({ onGoHome }) {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(Array(QUESTIONS.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
 
@@ -31,32 +32,66 @@ function Quiz({ onGoHome }) {
     setSubmitted(true);
   };
 
+  const handleNext = () => {
+    if (currentQuestion < QUESTIONS.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  const question = QUESTIONS[currentQuestion];
+
   return (
     <div className="page-container quiz-page">
       <h1 id="quiz-title">המבחן הסופי</h1>
       {!submitted ? (
-        <form className="quiz-form" onSubmit={(e)=>{e.preventDefault(); handleSubmit();}}>
-          {QUESTIONS.map((item, idx) => (
-            <div key={idx} className="quiz-question">
-              <h3>{idx+1}. {item.q}</h3>
-              {item.choices.map((c, ci) => (
-                <label key={ci} className="quiz-choice">
-                  <input type="radio" name={`q${idx}`} checked={answers[idx]===ci} onChange={()=>handleSelect(idx,ci)} /> {c}
-                </label>
-              ))}
-            </div>
-          ))}
-          <div className="quiz-actions">
-            <button className="mobile-touch-button" type="submit">סיים והצג תוצאה</button>
+        <div className="quiz-form">
+          <div className="quiz-question active-question">
+            <h3>{currentQuestion + 1}. {question.q}</h3>
+            {question.choices.map((c, ci) => (
+              <label key={ci} className="quiz-choice">
+                <input
+                  type="radio"
+                  name={`q${currentQuestion}`}
+                  checked={answers[currentQuestion] === ci}
+                  onChange={() => handleSelect(currentQuestion, ci)}
+                />
+                {c}
+              </label>
+            ))}
           </div>
-        </form>
+          <div className="quiz-actions">
+            <button className="mobile-touch-button" type="button" onClick={handleBack} disabled={currentQuestion === 0}>
+              חזור
+            </button>
+            {currentQuestion < QUESTIONS.length - 1 ? (
+              <button className="mobile-touch-button" type="button" onClick={handleNext} disabled={answers[currentQuestion] === null}>
+                הבא
+              </button>
+            ) : (
+              <button className="mobile-touch-button" type="button" onClick={handleSubmit} disabled={answers[currentQuestion] === null}>
+                הגש
+              </button>
+            )}
+          </div>
+          <div className="quiz-progress">שאלה {currentQuestion + 1} מתוך {QUESTIONS.length}</div>
+        </div>
       ) : (
         <div className="quiz-result">
           <h2>ציון שלך: {score} / 100</h2>
           <h3>{passed ? 'עבר' : 'לא עבר'}</h3>
           <div className="quiz-result-actions">
-            <button className="mobile-touch-button" onClick={() => { setSubmitted(false); setAnswers(Array(QUESTIONS.length).fill(null)); }}>נסה שוב</button>
-            <button className="mobile-touch-button" onClick={onGoHome}>חזרה לבית</button>
+            <button className="mobile-touch-button" onClick={() => { setSubmitted(false); setAnswers(Array(QUESTIONS.length).fill(null)); setCurrentQuestion(0); }}>
+              נסה שוב
+            </button>
+            <button className="mobile-touch-button" onClick={onGoHome}>
+              חזרה לבית
+            </button>
           </div>
         </div>
       )}

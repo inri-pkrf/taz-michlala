@@ -1,67 +1,103 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  padding: clamp(1vh, 3vh, 4vh) 5vw;
+  box-sizing: border-box;
+  gap: clamp(0.5vh, 2vh, 2vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.welcomePage-logo {
+  width: min(25vw, 15vh, 200px);
+  height: auto;
+  max-width: 100%;
+  flex-shrink: 0;
+}
 
 .welcome-title {
-  position: absolute;
-  font-size: 16vw;
-  width: 70vw;
+  font-size: clamp(1.5rem, min(10vmin, 7vh), 5rem);
+  width: 100%;
+  max-width: 70vw;
   text-align: center;
   font-weight: bold;
-  top: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
   font-family: "Karantina";
+  margin: 0;
+  line-height: 1.1;
 }
 
 .welcome-subtitle {
-  position: absolute;
-  font-size: 4.2vw;
-  width: 80vw;
-  top: 30vh;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: clamp(0.85rem, min(3vmin, 2.5vh), 1.8rem);
+  width: 100%;
+  max-width: 80vw;
   text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.welcomePage-nameTag {
+  width: min(60vw, 30vh, 500px);
+  height: auto;
+  max-width: 100%;
+  flex-shrink: 1;
 }
 
 .start-learning-btn {
-    padding: 1vh 2vh;
-    font-size: 3vw;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #ff4a5a;
-    border: 0.5vh solid #460000;
-    border-radius: 2vh;
-    cursor: pointer;
-    top: 85vh;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    direction: rtl;
-    font-family: "Karantina";
-}
-
-
-.welcomePage-logo {
-  position: absolute;
-  width: 25vw;
-  top: 2vh;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.welcomePage-nameTag{
-  position: absolute;
-  width: 60vw;
-  top: 41vh;
-  left: 50%;
-  transform: translateX(-50%);
-
+  padding: clamp(0.8rem, 1.5vh, 1.2rem) clamp(1.5rem, 4vw, 3rem);
+  font-size: clamp(1rem, min(2.5vmin, 4vw), 1.6rem);
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #ff4a5a;
+  border: clamp(2px, 0.4vh, 5px) solid #460000;
+  border-radius: clamp(0.8rem, 2vh, 1.5rem);
+  cursor: pointer;
+  direction: rtl;
+  font-family: "Karantina";
+  white-space: nowrap;
+  width: fit-content;
+  max-width: 90vw;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .start-learning-btn:hover {
   background-color: #ff6170;
 }
 
-/* אפקט הלחיצה */
 .start-learning-btn:active {
-  transform: translateY(5px);
+  transform: translateY(3px);
   box-shadow: 0px 0px 0px #333333;
+}
+
+/* מובייל צר מאוד */
+@media (max-width: 360px) {
+  .start-learning-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-container {
+    padding: 2vh 4vw;
+  }
+  .welcome-title,
+  .welcome-subtitle {
+    max-width: 90vw;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .welcome-container {
+    gap: clamp(0.3vh, 1vh, 1vh);
+  }
+  .welcomePage-nameTag {
+    width: min(35vw, 20vh, 300px);
+  }
 }

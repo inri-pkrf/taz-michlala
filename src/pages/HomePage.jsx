@@ -49,6 +49,7 @@ function HomePage({ onNavigate, showQuizAvailable }) {
             <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-orange.png`} alt="At War" className="tag-image" />
             <p className="tag-text text-orange">בעת מלחמה</p>
         </div>
+        <button className="mobile-touch-button" onClick={() => onNavigate('quizIntro')}>לעבור למבחן</button>
 
       </div>
       {showQuizAvailable && (
