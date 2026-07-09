@@ -22,11 +22,18 @@ function ActivityStep2() {
     try {
       const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
       const audio = new Audio(soundPath);
-      audio.load();
+      audio.preload = 'auto';
+      audio.currentTime = 0;
       audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
     } catch (e) {
       console.log('playPopSound error', e);
     }
+  };
+
+  const handleInteractionStart = (event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    playPopSound();
   };
 
   const buildingsData = {
@@ -38,7 +45,6 @@ function ActivityStep2() {
 
   const handleBuildingClick = (id) => {
     if (id === nextRequiredId) {
-      playPopSound();
       setActivePopup({
         title: buildingsData[id].title,
         content: buildingsData[id].content,
@@ -48,7 +54,6 @@ function ActivityStep2() {
       });
       setNextRequiredId(prev => prev + 1);
     } else if (id > nextRequiredId) {
-      playPopSound();
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
@@ -57,7 +62,6 @@ function ActivityStep2() {
         isWarning: true
       });
     } else {
-      playPopSound();
       setActivePopup({
         title: buildingsData[id].title,
         content: buildingsData[id].content,
@@ -95,10 +99,10 @@ function ActivityStep2() {
       })}
 
       {/* הבניינים اللחיצים */}
-      <img className="activityPage1-office1" src={`${process.env.PUBLIC_URL}/assets/Activity/building-red.png`} alt="office" onClick={() => handleBuildingClick(1)} style={{ cursor: 'pointer' }} />
-      <img className="activityPage1-office2" src={`${process.env.PUBLIC_URL}/assets/Activity/building-grey.png`} alt="office" onClick={() => handleBuildingClick(2)} style={{ cursor: 'pointer' }} />
-      <img className="activityPage1-office3" src={`${process.env.PUBLIC_URL}/assets/Activity/building-yellow.png`} alt="office" onClick={() => handleBuildingClick(3)} style={{ cursor: 'pointer' }} />
-      <img className="activityPage1-office4" src={`${process.env.PUBLIC_URL}/assets/Activity/building-orange.png`} alt="office" onClick={() => handleBuildingClick(4)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office1" src={`${process.env.PUBLIC_URL}/assets/Activity/building-red.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(1)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office2" src={`${process.env.PUBLIC_URL}/assets/Activity/building-grey.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(2)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office3" src={`${process.env.PUBLIC_URL}/assets/Activity/building-yellow.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(3)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office4" src={`${process.env.PUBLIC_URL}/assets/Activity/building-orange.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(4)} style={{ cursor: 'pointer' }} />
 
       {/* הוספת התנאי: יוצג ויצטייר רק אחרי שביקרו בכל 4 הבניינים */}
       {nextRequiredId > 4 && (

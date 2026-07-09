@@ -8,16 +8,16 @@
 .video-poster-img{
     position: absolute;
     width: 65vw;
-    height: 30vh;
-    top: -30vh;
+    height: 24vh;
+    top: -28vh;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .war-date{
     position: absolute;
-    font-size: 2vh;
-    top: 22vh;
+    font-size: 5vmin;
+    top: 20vh;
     left: 50%;  
     transform: translateX(-50%);
     color: #253225;
@@ -37,7 +37,7 @@
 
 .war-name{
     position: absolute;
-    font-size: 3vh;
+    font-size: 6vmin;
     font-weight: bold;
     top: 25vh;
     left: 50%;
@@ -54,12 +54,12 @@
 
 .war-short-text{
     position: absolute;
-    font-size: 2vh;
+    font-size: 4.5vmin;
     top: 43vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    width: 80vw;
+    width: 84vw;
     font-weight: 600;
     line-height: 1.4;
     direction: rtl;
@@ -88,12 +88,12 @@
 
 .war-long-text{
     position: absolute;
-    font-size: 1.8vh;
+    font-size: 4.2vmin;
     top: 25vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: right;
-    width: 72vw;
+    width: 70vw;
     font-weight: 100;
     line-height: 1.4;
     direction: rtl;
@@ -160,7 +160,6 @@
 
 .AtWar-plane1{
     position: absolute;
-    top: -22vh;
     left: -15vw;
     width: 35vw;
     height: 17vh;
@@ -223,7 +222,7 @@
         left: -50vw; /* מתחיל מחוץ למסך */
     }
     to {
-        top: -22vh;
+        top: -18vh;
         left: -15vw; /* עוצר בדיוק במיקום שהגדרת לו */
     }
 }

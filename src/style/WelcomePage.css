@@ -21,8 +21,8 @@
 }
 
 .welcome-title {
-  font-size: clamp(1.5rem, min(10vmin, 7vh), 5rem);
-  width: 100%;
+  font-size: clamp(1.5rem, min(16vmin), 5rem);
+  top: 10vh;
   max-width: 70vw;
   text-align: center;
   font-weight: bold;
@@ -32,12 +32,12 @@
 }
 
 .welcome-subtitle {
-  font-size: clamp(0.85rem, min(3vmin, 2.5vh), 1.8rem);
-  width: 100%;
-  max-width: 80vw;
+  /* מוגדר באחוזים מרוחב המסך (vw) כדי שיקטן ויגדל בצורה חלקה ויציבה */
+  font-size: 4vw; 
+  width: 85vw;          /* נותן עוד טיפה מרחב נשימה בצדדים */
   text-align: center;
-  margin: 0;
-  line-height: 1.4;
+  margin: 0 auto;       /* ה-auto מבטיח שהקופסה תמיד תהיה ממורכזת מושלם */
+  line-height: 1.3;     /* מרווח שורות קריר ונעים לקריאה במובייל */
 }
 
 .welcomePage-nameTag {
@@ -48,56 +48,19 @@
 }
 
 .start-learning-btn {
-  padding: clamp(0.8rem, 1.5vh, 1.2rem) clamp(1.5rem, 4vw, 3rem);
-  font-size: clamp(1rem, min(2.5vmin, 4vw), 1.6rem);
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #ff4a5a;
-  border: clamp(2px, 0.4vh, 5px) solid #460000;
-  border-radius: clamp(0.8rem, 2vh, 1.5rem);
-  cursor: pointer;
-  direction: rtl;
-  font-family: "Karantina";
-  white-space: nowrap;
-  width: fit-content;
-  max-width: 90vw;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  position: absolute;
+  padding: 2vh 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to left, #8E2020, #F43737);
+  font-size: 10vmin;
+  color: beige;
+  font-family: 'karantina';
+  top: 80vh;
+
+
 }
 
-.start-learning-btn:hover {
-  background-color: #ff6170;
-}
 
-.start-learning-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0px 0px 0px #333333;
-}
 
-/* מובייל צר מאוד */
-@media (max-width: 360px) {
-  .start-learning-btn {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.9rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .welcome-container {
-    padding: 2vh 4vw;
-  }
-  .welcome-title,
-  .welcome-subtitle {
-    max-width: 90vw;
-  }
-}
-
-@media (max-height: 500px) and (orientation: landscape) {
-  .welcome-container {
-    gap: clamp(0.3vh, 1vh, 1vh);
-  }
-  .welcomePage-nameTag {
-    width: min(35vw, 20vh, 300px);
-  }
-}

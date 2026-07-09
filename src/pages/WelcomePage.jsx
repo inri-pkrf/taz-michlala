@@ -24,9 +24,9 @@ function WelcomePage({ onNavigate }) {
         alt="img"
       />
 
-      <button onClick={onNavigate} className="start-learning-btn">
+      <p onClick={onNavigate} className="start-learning-btn">
         יאללה לעסק
-      </button>
+      </p>
     </div>
   );
 }

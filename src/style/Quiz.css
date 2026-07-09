@@ -1,4 +1,4 @@
-﻿/* Quiz specific styles and background colors */
+﻿/* --- הגדרות בסיס ועמודי המבחן --- */
 .quiz-page {
   min-height: 100vh;
   background-color: #F3FAF8; /* רקע כחול בהיר למבחן */
@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   padding: 4vh 5vw 6vh;
+  box-sizing: border-box;
 }
 
 #quiz-title {
@@ -15,18 +16,7 @@
   margin: 0;
   width: 100%;
   max-width: 900px;
-}
-
-.quiz-intro-box,
-.quiz-form,
-.quiz-result {
-  width: 100%;
-  max-width: 900px;
-  background: #ffffff;
-  padding: 3rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 0.8rem 2rem rgba(0,0,0,0.08);
-  margin-top: 2rem;
+  font-family: 'karantina';
 }
 
 .quiz-explain {
@@ -34,30 +24,18 @@
   line-height: 1.6;
   margin: 0;
   text-align: center;
+  direction: rtl;
 }
 
-.quiz-inputs {
-  display: grid;
-  gap: 1.2rem;
-  margin: 2rem auto 0;
+/* --- קופסאות התוכן המרכזיות (החזרתי וניקיתי מהערות) --- */
+.quiz-form,
+.quiz-result {
   width: 100%;
-  max-width: 540px;
-}
+  max-width: 600px; /* רוחב נוח וממורכז למובייל וטאבלט */
+  padding: 3rem 2rem;
+  margin-top: 2rem;
+  box-sizing: border-box;
 
-.quiz-inputs label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  font-size: 1.1rem;
-  color: #1e2a3a;
-}
-
-.quiz-inputs input {
-  width: 100%;
-  padding: 1rem 1.1rem;
-  border: 0.2rem solid #dfe4ee;
-  border-radius: 1rem;
-  font-size: 1rem;
 }
 
 .quiz-question {
@@ -68,21 +46,41 @@
 
 .quiz-question h3 {
   margin-top: 0;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(2rem, 4vw, 2rem);
+  font-family: 'karantina';
+  direction: rtl;
+  text-align: center;
 }
 
-.quiz-choice {
+/* --- התשובות החדשות (מבוססות div נקי) --- */
+.quiz-choice-item {
   display: block;
   margin-top: 1.2rem;
   font-size: clamp(1rem, 2.4vw, 1.4rem);
+  background-color: rgb(255, 255, 250);
+  padding: 1.5vh 2.5vh; /* קצת יותר פאדינג שיהיה נוח ללחיצה באגודל */
+  border: solid #000641 0.3vh;
+  border-radius: 1.5vh;
+  direction: rtl;
+  text-align: right;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none; /* מונע סימון כחול מעצבן של הטקסט במובייל */
+  transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
-.quiz-choice input {
-  margin-inline-end: 0.8rem;
+/* קסם: כשתשובה נבחרת, היא מקבלת צבע בולט מיד ללא input */
+.quiz-choice-item.selected {
+  background: #2A7B9B;
+background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+  color: #000641;
+  transform: scale(0.98);
 }
 
+/* --- כפתורי ניווט ופעולות (חזור, הבא, הגש, נסה שוב) --- */
 .quiz-actions,
-.quiz-result-actions {
+.quiz-result-actions,
+.quiz-intro-actions {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
@@ -90,37 +88,123 @@
   justify-content: center;
 }
 
+/* עיצוב אחיד ויציב לכפתורים מבוססי ה-div */
+.quiz-nav-item {
+  min-width: 140px;
+  padding: 12px 24px;
+  font-family: "Karantina";
+  font-size: 1.5rem;
+  border: 0.2vh solid #000641;
+  border-radius: 1.2vh;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  background-color: #ffffff;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+/* צבעים ייעודיים לכפתורים לפי סוג הפעולה שלהם */
+.quiz-nav-item.next,
+.quiz-nav-item.submit,
+.quiz-nav-item.retry {
+  background-color: #ee8f31; /* כתום בולט להתקדמות */
+  color: #460000;
+}
+
+.quiz-nav-item.back,
+.quiz-nav-item.home {
+  background-color: #ffffff;
+  color: #000641;
+}
+
+/* אפקט לחיצה קטן במובייל */
+.quiz-nav-item:active {
+  transform: scale(0.96);
+}
+
+/* מצב חסום (Disabled) כשלא נבחרה תשובה */
+.quiz-nav-item.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none; /* מונע את הלחיצה לחלוטין ברמת הדפדפן */
+}
+
+/* מונה השאלות */
 .quiz-progress {
   text-align: center;
-  margin-top: 1rem;
-  font-size: 1rem;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
   color: #4b586a;
+  font-weight: 500;
 }
 
-.quiz-result-actions button {
-  min-width: 160px;
-}
-
+/* --- התאמות רספונסיביות למובייל --- */
 @media (max-width: 768px) {
   .quiz-page {
     padding: 3vh 4vw 5vh;
   }
 
-  .quiz-intro-box,
   .quiz-form,
   .quiz-result {
     padding: 2rem 1.5rem;
+    margin-top: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .quiz-page {
-    padding: 3vh 3vw 4vh;
+    padding: 2vh 3vw 4vh;
   }
 
-  .quiz-intro-box,
   .quiz-form,
   .quiz-result {
     padding: 1.5rem 1rem;
+  }
+  
+  .quiz-nav-item {
+    min-width: 120px;
+    padding: 10px 18px;
+    font-size: 1.3rem;
+  }
+}
+
+/* --- אפקטים של סיום (גשם כוכבים וקשת) --- */
+
+/* קונטיינר כללי לאפקטים - תופס את כל המסך מאחורי התוצאה */
+.victory-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none; /* שלא יפריע ללחוץ על כפתורים */
+  z-index: 1;
+}
+
+
+/* כוכב בודד בגשם */
+.falling-star {
+  position: absolute;
+  top: -5vh;
+  color: #ffeb3b;
+  font-size: 1.8rem;
+  text-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+  user-select: none;
+  animation: fallLinear 3s linear infinite;
+}
+
+@keyframes fallLinear {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(350deg);
+    opacity: 0;
   }
 }

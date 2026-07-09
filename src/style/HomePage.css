@@ -1,135 +1,97 @@
-﻿/* Responsive home page layout */
-.page-container {
-  width: 100%;
-  padding: 4vh 5vw;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-#homePage-title {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
-  margin: 0;
-  font-family: "Karantina";
-}
-
-#homePage-description {
-  font-size: clamp(1rem, 3vw, 1.8rem);
-  width: min(90vw, 760px);
-  margin: 1.5rem auto 2rem;
-  text-align: center;
-  direction: rtl;
-  line-height: 1.4;
-}
-
-.welcomePage-logo {
-  width: min(280px, 35vw);
-  height: auto;
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-.topics-menu {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
+﻿/* --- עיצוב הכרטיסייה / התג --- */
 .tag-wrapper {
-  position: relative;
-  width: 100%;
-  cursor: pointer;
+    position: absolute;
+    width: 26vw; /* שימוש ב-vw שומר על פרופורציה מושלמת */
+    cursor: pointer;
 }
 
 .tag-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 1.5rem;
+    width: 100%;
+    height: auto;
+    background: transparent !important;
+    display: block;
 }
 
+/* --- עיצוב הטקסט בתוך התג --- */
 .tag-text {
-  position: absolute;
-  bottom: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  margin: 0;
-  text-align: center;
-  line-height: 1.2;
-  font-weight: bold;
+    position: absolute;
+    font-size: 3.2vw;    /* הפונט יקטן ויגדל בדיוק יחד עם התג */
+    top: 70%;           /* נשאר קבוע בריבוע הלבן */
+    left: 50%;          
+    transform: translateX(-50%); 
+    width: 44%;         /* נותן קצת יותר מרחב לטקסט שלא יישבר מוקדם מדי */
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    text-align: center;
+    line-height: 1.1;   
+    font-weight: bold;  
 }
 
+/* --- עיצוב עיגול המספר --- */
 .tag-number {
-  position: absolute;
-  top: 10%;
-  right: 8%;
-  width: clamp(3.2rem, 8vw, 4.5rem);
-  height: clamp(3.2rem, 8vw, 4.5rem);
-  background: #ffffff;
-  border-radius: 50%;
-  border: 0.3rem solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: clamp(1.2rem, 4vw, 1.7rem);
-  font-weight: bold;
-  z-index: 5;
+    position: absolute;
+    top: 45%;           
+    left: 85%;          
+    width: 6vw;         /* גם העיגול מחושב ב-vw כדי שלא יגדל או יקטן לבד */
+    height: 6vw;        
+    background: #ffffff;
+    border: 2px solid;  
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5vw;   /* המספר פרופורציונלי לעיגול */
+    font-weight: bold;
+    z-index: 5;         
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
+/* --- צבעים (ללא שינוי) --- */
 .text-yellow, .num-yellow { color: #E4D560; border-color: #E4D560; }
 .text-green, .num-green   { color: #85BA48; border-color: #85BA48; }
 .text-blue, .num-blue     { color: #56CAD1; border-color: #56CAD1; }
 .text-pink, .num-pink     { color: #d14361; border-color: #d14361; }
 .text-orange, .num-orange { color: #E89039; border-color: #E89039; }
 
-.quiz-cta-container,
-.quiz-cta-help {
-  width: 100%;
-  max-width: 500px;
-  margin: 2rem auto 0;
-  text-align: center;
+/* --- מיקומי התגים המקוריים שלך (עם שימוש ב-vh לגובה קבוע) --- */
+.yellow-tag { top: 30vh; right: 8vw; z-index: 2; }
+.green-tag  { top: 32vh; right: 37vw; z-index: 2; }
+.blue-tag   { top: 34vh; right: 66vw; z-index: 2; }
+.pink-tag   { top: 50vh; right: 22vw; z-index: 1; }
+.orange-tag { top: 52vh; right: 51vw; z-index: 1; }
+
+/* --- כותרת ותיאור העמוד --- */
+#homePage-title {
+    position: absolute;
+    font-size: 13vw; /* שינוי ל-vw כדי שלא יברח במסכים שונים */
+    width: 90vw;
+    text-align: center;
+    font-weight: bold;
+    top: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Karantina";
+    margin: 0;
 }
 
-.quiz-cta-help {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: #4b586a;
+#homePage-description {
+    position: absolute;
+    font-size: 4vw; /* שינוי ל-vw אחיד */
+    width: 85vw;
+    top: 19vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
+    margin: 0;
+    line-height: 1.3;
 }
 
-@media (max-width: 768px) {
-  .page-container {
-    padding: 4vh 4vw;
-  }
-
-  .tag-number {
-    right: 6%;
-    top: 8%;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-container {
-    padding: 4vh 3vw;
-  }
-
-  .topics-menu {
-    grid-template-columns: 1fr;
-  }
-
-  .tag-text {
-    bottom: 10%;
-    font-size: clamp(1rem, 4vw, 1.3rem);
-  }
-
-  .tag-number {
-    width: 4rem;
-    height: 4rem;
-    font-size: 1.3rem;
-  }
+.welcomePage-logo {
+    position: absolute;
+    width: 22vw;
+    top: 1vh;
+    left: 50%;
+    transform: translateX(-50%);
 }
