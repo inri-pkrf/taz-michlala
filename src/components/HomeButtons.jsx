@@ -16,6 +16,8 @@ function HomeButton({ onClick, progress }) {
           className="home-icon-img"
         />
       </button>
+
+      
     </div>
   );
 }

@@ -21,6 +21,7 @@
     position: relative;
     border-style: solid;
     border-width: 0.5vh;
+
     direction: rtl; /* מבטיח שהטקסט מימין לשמאל */
 }
 
@@ -36,6 +37,7 @@
     color: #333333;
     font-size: 2.2vh;
     line-height: 1.5;
+    
 }
 
 /* כפתור הבנתי באזהרה */
