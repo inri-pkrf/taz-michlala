@@ -49,12 +49,17 @@ function HomePage({ onNavigate, showQuizAvailable }) {
             <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-orange.png`} alt="At War" className="tag-image" />
             <p className="tag-text text-orange">בעת מלחמה</p>
         </div>
-        <button className="mobile-touch-button" onClick={() => onNavigate('quizIntro')}>לעבור למבחן</button>
 
       </div>
       {showQuizAvailable && (
         <div style={{ marginTop: '3vh', textAlign: 'center' }}>
-          <button className="mobile-touch-button" onClick={() => onNavigate('quizIntro')}>לעבור למבחן</button>
+          <img
+            className={`ToQuiz`}
+            src={`${process.env.PUBLIC_URL}/assets/Quiz/hat.png`}
+            alt="hat"
+          />
+
+          <button className="ToQuiz-button" onClick={() => onNavigate('quizIntro')}>לעבור למבחן</button>
         </div>
       )}
     </div>

@@ -17,6 +17,10 @@ function App() {
   const [currentPage, setCurrentPage] = useState('welcome');
   const TOTAL_PROGRESS_STEPS = 13;
   const [completedProgressActions, setCompletedProgressActions] = useState([]);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  
+  // חלקיק חדש: סטייט לשמירת השם הפרטי של המשתמש מהמבחן
+  const [userFirstName, setUserFirstName] = useState('');
 
   const progress = Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
   const incrementProgress = (actionKey) => {
@@ -64,11 +68,42 @@ function App() {
       case 'atWar':
         return <AtWar onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
+      // --- כאן השינויים המרכזיים ---
+
       case 'quizIntro':
-        return <QuizIntro onStart={() => setCurrentPage('quiz')} onCancel={() => setCurrentPage('home')} />;
+        return (
+          <QuizIntro 
+            onStart={(name) => {
+              setUserFirstName(name); // 1. שומר את השם הפרטי שנשלח מ-QuizIntro
+              setQuizCompleted(false);
+              setCurrentPage('quiz'); // 2. מעביר לעמוד הבוחן
+            }} 
+            onCancel={() => {
+              setQuizCompleted(false);
+              setCurrentPage('home');
+            }}
+            onGoHome={() => {
+              setQuizCompleted(false);
+              setCurrentPage('home');
+            }}
+            progress={progress}
+            isHomeEnabled={quizCompleted}
+          />
+        );
 
       case 'quiz':
-        return <Quiz onGoHome={() => setCurrentPage('home')} />;
+        return (
+          <Quiz 
+            userName={userFirstName} // 3. מעביר את השם השמור לתוך קומפוננטת הבוחן
+            onGoHome={() => {
+              setQuizCompleted(false);
+              setCurrentPage('home');
+            }}
+            progress={progress}
+            isHomeEnabled={quizCompleted}
+            onQuizCompleted={setQuizCompleted}
+          />
+        );
         
       default:
         return <WelcomePage onNavigate={() => setCurrentPage('home')} />;

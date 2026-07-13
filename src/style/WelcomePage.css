@@ -2,27 +2,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* ממרכז את כל הבלוק אנכית */
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
   padding: clamp(1vh, 3vh, 4vh) 5vw;
   box-sizing: border-box;
-  gap: clamp(0.5vh, 2vh, 2vh);
+  gap: clamp(0.5vh, 2vh, 2vh); /* שומר על רווחים שווים ודינמיים בין האלמנטים */
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.welcomePage-logo {
-  width: min(25vw, 15vh, 200px);
-  height: auto;
-  max-width: 100%;
-  flex-shrink: 0;
-}
-
 .welcome-title {
   font-size: clamp(1.5rem, min(16vmin), 5rem);
-  top: 10vh;
+  /* הוסר top: 8vh כדי למנוע בריחה מהמרכז */
   max-width: 70vw;
   text-align: center;
   font-weight: bold;
@@ -32,12 +25,11 @@
 }
 
 .welcome-subtitle {
-  /* מוגדר באחוזים מרוחב המסך (vw) כדי שיקטן ויגדל בצורה חלקה ויציבה */
   font-size: 4vw; 
-  width: 85vw;          /* נותן עוד טיפה מרחב נשימה בצדדים */
+  width: 85vw;          
   text-align: center;
-  margin: 0 auto;       /* ה-auto מבטיח שהקופסה תמיד תהיה ממורכזת מושלם */
-  line-height: 1.3;     /* מרווח שורות קריר ונעים לקריאה במובייל */
+  margin: 0 auto;       
+  line-height: 1.3;     
 }
 
 .welcomePage-nameTag {
@@ -48,19 +40,14 @@
 }
 
 .start-learning-btn {
-  position: absolute;
+  /* שינוי: הפיכת הכפתור לחלק מהזרימה הרגילה של ה-Flexbox ללא מיקום אבסולוטי קשיח */
+  position: relative; 
   padding: 2vh 3vh;
-  left: 50%;
-  transform: translateX(-50%);
   background: linear-gradient(to left, #8E2020, #F43737);
   font-size: 10vmin;
   color: beige;
   font-family: 'karantina';
-  top: 80vh;
-
-
+  margin-top: 2vh; /* נותן מרווח קל מהאלמנט שמעליו במקום top: 80vh */
+  border: none; /* ליתר ביטחון עבור כפתור */
+  cursor: pointer;
 }
-
-
-
-

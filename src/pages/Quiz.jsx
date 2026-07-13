@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
+import HomeButton from '../components/HomeButtons';
 import '../style/Quiz.css';
 
 const QUESTIONS = [
-  { q: 'מהי המטרה של המכללה?', choices: ['הכשרה בלבד', 'שימור ידע וחירום', 'פנאי', 'רכש'], a: 1 },
-  { q: 'מה יש באתר המכללה?', choices: ['קטלוג ספרים', 'פורטל ידע', 'חנויות', 'מפות'], a: 1 },
-  { q: 'כיצד יש ללחוץ על האלמנטים בפופ-אפים?', choices: ['לפי סדר', 'באקראי', 'לא ללחוץ', 'ללחוץ פעמיים'], a: 0 },
-  { q: 'כמה שאלות יש במבחן זה?', choices: ['5', '8', '10', '12'], a: 2 },
-  { q: 'כל שאלה שווה כמה נקודות?', choices: ['5', '10', '15', '20'], a: 1 },
-  { q: 'מהו הציון שעובר במבחן לפי ההגדרה?', choices: ['60', '70', 'מעל 70', '90'], a: 2 },
-  { q: 'היכן נמצא משלט ינאי?', choices: ['במכללה', 'בבניין A', 'בתמונה', 'לא קיים'], a: 2 },
-  { q: 'האם ניתן להוריד קבצים מהספרייה?', choices: ['כן', 'לא', 'לפעמים', 'רק למנהלים'], a: 0 },
-  { q: 'מהי הפעולה כשמסיימים תת-עמוד?', choices: ['לחזור', 'להתקדם', 'לשמור', 'לסגור'], a: 1 },
-  { q: 'האם המבחן הוא חלק מהלומדה?', choices: ['כן', 'לא', 'אולי', 'לא ידוע'], a: 0 }
+  { q: `מה אפשר לעשות באתר המכללה?`, choices: [` להירשם להכשרות `, ` ללמוד על פעילויוית המכללה `, ` לחפש תוכן מקצועי `, ` כל התשובות נכונות `], a: 3 },
+  { q: ` כמה פרטי מידע יש בספרייה הלאומית לחירום? `, choices: [` כ-1,000 פריטים `, ` כ-1,250 `, ` כ-1,500 `, `  כ-1,700 `], a: 1 },
+  { q: ` מהו 'מעגל ההכשרה השלם'?`, choices: [` מעגל שאם מסתובבים בו מספיק פעמים, גשם מתחיל לרדת `, `  מעגל ההכשרות שעוברות על מנהלי המכלולים שמגיעים למכללה `,` המעגל שעובר דרך התורה, ההכשרה ואימון במכללה והיכולת ללמוד מהשטח ולהשתפר תו"כ תנועה `, `  כל מגמה בנפרד על מעגל הכשרה אחד, כשכל אחד משפיע רק בתחומו `], a: 0 },
+  { q: ` שאלהההההה `, choices: [`  `, `  `, ` נכון `, `  `], a: 2 },
+  { q: ` מהן ראשי התיבות רח"ל?`, choices: [` רשת חירום לישראל `, ` רשת חברים לאומית `, ` רשות החירום הלאומית `, ` רשות החירום לישראל `], a: 2 },
+  { q: `   לפי פרק הקש"ח, נציגים מכמה מדינות ביקרו אצלינו? `, choices: [` 7 `, ` 6 `, ` 23 `, ` 12 `], a: 1 },
+  { q: ` כמה גנרלים ספרדים היו פה?`, choices: [` 2 `, ` 4 `, ` 6 `, ` הם לא היו ספרדיים, הם בכלל אמריקאיים `], a: 2 },
+  { q: ` מה עשתה המכללה בזמן המלחמה? `, choices: [` ביצוע 'זמן יקר' במפקדות `, ` הפצת שיעור דיגיטלי של הצח"י `, ` אירחה את שר התיירות, שר המדע ואת כל נציגי וועדת חוץ וביטחון `, ` כל התשובות נכונות `], a: 3 },
+  { q: ` כמה מלונות ניהל משל"ט ינאי בשיא במהלך מלחמת 'חרבות ברזל? `, choices: [` 465 `, ` 546 `, ` 564 `, ` 456 `], a: 0 },
+  { q: ` מה הסלוגן של נווה איתנים?`, choices: [` הכי מוכנה בארץ `, ` איתנים ונהנים `, ` הכי מוכנים לחירום `, ` הכי מוכנים במדינה `], a: 2 }
 ];
 
-function Quiz({ onGoHome }) {
+function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = false, onQuizCompleted }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(Array(QUESTIONS.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
+  const [clockRotation, setClockRotation] = useState(0); 
 
-  // רפרנס לאודיו של הללויה - תוודאי שהנתיב לקובץ שלך מדויק
   const hallelujahAudio = useRef(new Audio(`${process.env.PUBLIC_URL}/assets/audio/halleluja.mp3`));
 
   const currentAnswer = answers[currentQuestion];
@@ -28,15 +29,24 @@ function Quiz({ onGoHome }) {
   const score = answers.reduce((s, ans, i) => s + (ans === QUESTIONS[i].a ? 10 : 0), 0);
   const passed = score > 70;
 
-  // הפעלת הסאונד ברגע שמגישים ועוברים
   useEffect(() => {
-    if (submitted && passed) {
-      hallelujahAudio.current.currentTime = 0; // מנגן מהתחלה
-      hallelujahAudio.current.play().catch(err => console.log("Audio play blocked", err));
+    if (submitted) {
+      onQuizCompleted?.(true);
+    } else {
+      onQuizCompleted?.(false);
     }
-    // עצירת הסאונד אם יוצאים או עושים ריסט
+  }, [submitted, onQuizCompleted]);
+
+  useEffect(() => {
+    const audio = hallelujahAudio.current;
+
+    if (submitted && passed) {
+      audio.currentTime = 0;
+      audio.play().catch(err => console.log("Audio play blocked", err));
+    }
+
     return () => {
-      hallelujahAudio.current.pause();
+      audio.pause();
     };
   }, [submitted, passed]);
 
@@ -44,21 +54,39 @@ function Quiz({ onGoHome }) {
     const nextAnswers = [...answers];
     nextAnswers[currentQuestion] = choiceIndex;
     setAnswers(nextAnswers);
+
+    setClockRotation(prev => prev + 180);
+
+    setTimeout(() => {
+      if (currentQuestion < QUESTIONS.length - 1) {
+        setCurrentQuestion(prev => prev + 1);
+      } else {
+        setSubmitted(true);
+      }
+    }, 200);
+  };
+
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setClockRotation(prev => prev - 180); 
+      setCurrentQuestion(prev => prev - 1);
+    }
   };
 
   const handleReset = () => {
-    hallelujahAudio.current.pause(); // עוצר את הסאונד בריסט
+    hallelujahAudio.current.pause();
+    onQuizCompleted?.(false);
     setAnswers(Array(QUESTIONS.length).fill(null));
     setCurrentQuestion(0);
     setSubmitted(false);
+    setClockRotation(0);
   };
 
-  // יצירת 25 כוכבים במיקומים אקראיים ובזמני דיליי שונים בשביל אפקט גשם טבעי
   const renderStarRain = () => {
     return Array.from({ length: 55 }).map((_, i) => {
-      const randomLeft = Math.random() * 100; // מיקום אופקי אקראי
-      const randomDelay = Math.random() * 3;  // דיליי אקראי לתחילת הנפילה
-      const randomDuration = 2 + Math.random() * 2; // מהירות נפילה משתנה
+      const randomLeft = Math.random() * 100;
+      const randomDelay = Math.random() * 3;
+      const randomDuration = 2 + Math.random() * 2;
       
       return (
         <div 
@@ -78,11 +106,40 @@ function Quiz({ onGoHome }) {
 
   return (
     <div className="page-container quiz-page" style={{ position: 'relative' }}>
-      <h1 id="quiz-title">מבחן מסכם</h1>
-
+      <HomeButton onClick={onGoHome} progress={progress} disabled={!isHomeEnabled} />
       {!submitted ? (
-        <div className="quiz-form" style={{ zIndex: 2 }}>
-          <div className="quiz-question">
+        <div className="quiz-form" style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          
+          {/* 1. מספור השאלות */}
+          <div style={{ 
+            width: '100%',
+            textAlign: 'center', 
+            margin: '0 0 1rem 0', 
+            color: '#000641', 
+            fontWeight: 'normal', 
+            fontSize: '0.7rem',
+            direction: 'rtl'
+          }}>
+            שאלה {currentQuestion + 1} מתוך {QUESTIONS.length}
+          </div>
+
+          {/* 2. תמונת השעון המסתובב */}
+          <img
+            className="quiz-clock"
+            src={`${process.env.PUBLIC_URL}/assets/Quiz/clock.png`}
+            alt="clock"
+            style={{ 
+              display: 'block', 
+              margin: '0 auto 2rem auto', 
+              maxWidth: '80px', 
+              width: '12vw',
+              transform: `rotate(${clockRotation}deg)`,
+              transition: 'transform 0.4s ease-in-out'
+            }} 
+          />
+
+          {/* 3. השאלה והתשובות */}
+          <div className="quiz-question" style={{ width: '100%' }}>
             <h3>{question.q}</h3>
             {question.choices.map((choice, index) => {
               const isSelected = currentAnswer === index;
@@ -99,41 +156,20 @@ function Quiz({ onGoHome }) {
             })}
           </div>
 
-          <div className="quiz-actions">
+          {/* 4. כפתור חזור */}
+          <div className="quiz-actions" style={{ marginTop: '1rem', width: '30vw' }}>
             <div 
               role="button"
               className={`quiz-nav-item back ${currentQuestion === 0 ? 'disabled' : ''}`} 
-              onClick={() => currentQuestion > 0 && setCurrentQuestion(prev => prev - 1)}
+              onClick={handleBack}
             >
               חזור
             </div>
-
-            {currentQuestion < QUESTIONS.length - 1 ? (
-              <div 
-                role="button"
-                className={`quiz-nav-item next ${currentAnswer === null ? 'disabled' : ''}`} 
-                onClick={() => currentAnswer !== null && setCurrentQuestion(prev => prev + 1)}
-              >
-                הבא
-              </div>
-            ) : (
-              <div 
-                role="button"
-                className={`quiz-nav-item submit ${currentAnswer === null ? 'disabled' : ''}`} 
-                onClick={() => currentAnswer !== null && setSubmitted(true)}
-              >
-                הגש מבחן
-              </div>
-            )}
           </div>
 
-          <div className="quiz-progress">
-            שאלה {currentQuestion + 1} מתוך {QUESTIONS.length}
-          </div>
         </div>
       ) : (
         <>
-          {/* מציג את הגשם והקשת רק אם המשתמש עבר את המבחן */}
           {passed && (
             <div className="victory-effects">
               <div className="rainbow-effect"></div>
@@ -145,19 +181,22 @@ function Quiz({ onGoHome }) {
             <h2 className="quiz-question" style={{ textAlign: 'center' }}>
               <h3>התוצאה שלך</h3>
             </h2>
-            <div className="quiz-progress" style={{ fontSize: '2rem', margin: '2vh 0', fontWeight: 'bold', color: '#000641' }}>
+            
+            {/* עדכון קל: שינוי הצבע ללבן ליתר ביטחון למקרה שהרקע כהה */}
+            <div className="quiz-score-display" style={{ fontSize: '2rem', margin: '2vh 0', fontWeight: 'bold', color: '#000641', textAlign: 'center' }}>
               {score} / 100
             </div>
-            <p className="quiz-explain">
-              {passed ? 'כל הכבוד! עברת בהצלחה' : 'לא עברת את ציון הסף, שווה לנסות שוב 📑'}
+            
+            <p className="quiz-explain" style={{ fontSize: '0.7rem', lineHeight: '1.6' }}>
+              {passed 
+                ? `${userName}, וואלה מרשים!` 
+                : `${userName}, זה מבאס את שנינו אבל, יאללה לעסק...`
+              }
             </p>
             
             <div className="quiz-result-actions">
               <div role="button" className="quiz-nav-item retry" onClick={handleReset}>
                 נסה שוב
-              </div>
-              <div role="button" className="quiz-nav-item home" onClick={onGoHome}>
-                חזרה לראשי
               </div>
             </div>
           </div>

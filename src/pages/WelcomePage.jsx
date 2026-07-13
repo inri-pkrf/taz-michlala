@@ -4,27 +4,32 @@ import '../style/WelcomePage.css';
 function WelcomePage({ onNavigate }) {
   return (
     <div className="welcome-container">
+      {/* לוגו עליון */}
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
       />
 
+      {/* כותרת ראשית */}
       <h1 className="welcome-title">ברוכות הבאות וברוכים הבאים</h1>
 
+      {/* תת כותרת / הסבר */}
       <p className="welcome-subtitle">
         ברוכים הבאים לשיעור הדיגיטלי "ת"ז מכללה"!
         באמצעות לומדה זו תבינו קצת יותר לאן הגעתם...
         מקווים שאתם מתרגשים כמעט כמונו
       </p>
 
+      {/* תמונת תג השם */}
       <img
         className="welcomePage-nameTag"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/name-tag.png`}
         alt="img"
       />
 
-      <p onClick={onNavigate} className="start-learning-btn">
+      {/* כפתור כניסה - יתמרכז כעת מושלם בתחתית הבלוק בזכות ה-CSS המעודכן */}
+      <p onClick={onNavigate} className="start-learning-btn" role="button" style={{ cursor: 'pointer' }}>
         יאללה לעסק
       </p>
     </div>

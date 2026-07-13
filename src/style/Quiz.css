@@ -5,37 +5,40 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 4vh 5vw 6vh;
+  align-items: center;      /* ממרכז את כל הילדים אופקית בצורה מוחלטת! */
+  justify-content: center;   /* ממרכז את הכל אנכית במרכז המסך */
+  gap: 3vh;                 /* מרווח קבוע וחמוד אוטומטית בין כל האלמנטים */
+  padding: 2vh 6vw;
   box-sizing: border-box;
 }
 
 #quiz-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 6vw, 4.5rem);
   text-align: center;
   margin: 0;
-  width: 100%;
-  max-width: 900px;
+  width: 50%;
+  direction: rtl;
   font-family: 'karantina';
+  color: #000641;
 }
 
 .quiz-explain {
-  font-size: clamp(1rem, 2.3vw, 1.4rem);
-  line-height: 1.6;
-  margin: 0;
-  text-align: center;
-  direction: rtl;
+    font-weight: 500;
+    font-size: clamp(1.1rem, 2.3vw, 1.4rem);
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+    direction: rtl;
+    width: 70vw;
 }
 
-/* --- קופסאות התוכן המרכזיות (החזרתי וניקיתי מהערות) --- */
+/* --- קופסאות התוכן המרכזיות לשאלות ולתוצאה --- */
 .quiz-form,
 .quiz-result {
   width: 100%;
-  max-width: 600px; /* רוחב נוח וממורכז למובייל וטאבלט */
+  max-width: 600px; 
   padding: 3rem 2rem;
-  margin-top: 2rem;
   box-sizing: border-box;
-
 }
 
 .quiz-question {
@@ -46,7 +49,7 @@
 
 .quiz-question h3 {
   margin-top: 0;
-  font-size: clamp(2rem, 4vw, 2rem);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
   font-family: 'karantina';
   direction: rtl;
   text-align: center;
@@ -55,83 +58,78 @@
 /* --- התשובות החדשות (מבוססות div נקי) --- */
 .quiz-choice-item {
   display: block;
-  margin-top: 1.2rem;
-  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  margin-top: 1rem;
+  font-size: clamp(0.7rem, 2.4vw, 1.4rem);
   background-color: rgb(255, 255, 250);
-  padding: 1.5vh 2.5vh; /* קצת יותר פאדינג שיהיה נוח ללחיצה באגודל */
+  padding: 1.5vh 2.5vh; 
   border: solid #000641 0.3vh;
   border-radius: 1.5vh;
   direction: rtl;
   text-align: right;
   font-weight: bold;
   cursor: pointer;
-  user-select: none; /* מונע סימון כחול מעצבן של הטקסט במובייל */
+  user-select: none; 
   transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
-/* קסם: כשתשובה נבחרת, היא מקבלת צבע בולט מיד ללא input */
+/* כשתשובה נבחרת */
 .quiz-choice-item.selected {
-  background: #2A7B9B;
-background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+  background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
   color: #000641;
   transform: scale(0.98);
 }
 
-/* --- כפתורי ניווט ופעולות (חזור, הבא, הגש, נסה שוב) --- */
+/* --- כפתורי ניווט ופעולות --- */
 .quiz-actions,
 .quiz-result-actions,
 .quiz-intro-actions {
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 1vh;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
-/* עיצוב אחיד ויציב לכפתורים מבוססי ה-div */
 .quiz-nav-item {
-  min-width: 140px;
-  padding: 12px 24px;
-  font-family: "Karantina";
-  font-size: 1.5rem;
-  border: 0.2vh solid #000641;
-  border-radius: 1.2vh;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-  user-select: none;
-  background-color: #ffffff;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+    position: relative;
+    top: 5vh;
+    width: 25vw;
+    padding: 0.7vh 7vw;
+    font-family: "Karantina";
+    font-size: 0.7rem;
+    border: 0.3vh solid #000641;
+    border-radius: 1.2vh;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+    background-color: #ffffff;
+    transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
-/* צבעים ייעודיים לכפתורים לפי סוג הפעולה שלהם */
+/* כפתור "התחל מבחן" והתקדמות */
 .quiz-nav-item.next,
 .quiz-nav-item.submit,
 .quiz-nav-item.retry {
-  background-color: #ee8f31; /* כתום בולט להתקדמות */
-  color: #460000;
-}
-
-.quiz-nav-item.back,
-.quiz-nav-item.home {
-  background-color: #ffffff;
+  background: linear-gradient(45deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
   color: #000641;
+  
 }
 
-/* אפקט לחיצה קטן במובייל */
 .quiz-nav-item:active {
   transform: scale(0.96);
 }
 
-/* מצב חסום (Disabled) כשלא נבחרה תשובה */
 .quiz-nav-item.disabled {
   opacity: 0.35;
   cursor: not-allowed;
-  pointer-events: none; /* מונע את הלחיצה לחלוטין ברמת הדפדפן */
+  pointer-events: none; 
 }
 
-/* מונה השאלות */
 .quiz-progress {
+    position: relative;
+    top: -57vh;
   text-align: center;
   margin-top: 1.5rem;
   font-size: 1.1rem;
@@ -139,39 +137,73 @@ background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 
   font-weight: 500;
 }
 
-/* --- התאמות רספונסיביות למובייל --- */
+/* --- אזור הקלטים החמודים - מיושר וממורכז אוטומטית --- */
+.quiz-inputs-title {
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  font-weight: lighter;
+  color: #000641;
+  text-align: center;
+  margin: 1vh 0 0 0;
+  direction: rtl;
+  width: 100%;
+}
+
+.quiz-input-group {
+  display: flex;
+  flex-direction: column;   /* אחד מתחת לשני במובייל */
+  gap: 1.5vh;
+  width: 100%;
+  max-width: 340px;         /* רוחב מושלם ונוח לאגודלים במובייל */
+  box-sizing: border-box;
+}
+
+.quiz-cute-input {
+  width: 70%; 
+  padding: 1.6vh 2vh;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  border: 0.3vh solid #000641; 
+  border-radius: 1.5vh;
+  background-color: #ffffff;
+  text-align: right;
+  direction: rtl;
+  box-sizing: border-box;
+  color: #000641;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.quiz-cute-input:focus {
+  border-color: #56CAD1;
+  background-color: #f7fdfd;
+}
+
+.quiz-cute-input::placeholder {
+  color: #7f8c8d;
+  opacity: 0.7;
+}
+
+/* סידור אחד ליד השני במסכים קצת יותר רחבים */
+@media (min-width: 480px) {
+  .quiz-input-group {
+    flex-direction: row-reverse; 
+    max-width: 450px;
+    gap: 15px;
+  }
+}
+
+/* --- התאמות רספונסיביות כלליות --- */
 @media (max-width: 768px) {
   .quiz-page {
     padding: 3vh 4vw 5vh;
+    gap: 2.5vh;
   }
-
-  .quiz-form,
-  .quiz-result {
+  .quiz-form, .quiz-result {
     padding: 2rem 1.5rem;
-    margin-top: 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
-  .quiz-page {
-    padding: 2vh 3vw 4vh;
-  }
-
-  .quiz-form,
-  .quiz-result {
-    padding: 1.5rem 1rem;
-  }
-  
-  .quiz-nav-item {
-    min-width: 120px;
-    padding: 10px 18px;
-    font-size: 1.3rem;
-  }
-}
-
-/* --- אפקטים של סיום (גשם כוכבים וקשת) --- */
-
-/* קונטיינר כללי לאפקטים - תופס את כל המסך מאחורי התוצאה */
+/* --- אפקטים של סיום --- */
 .victory-effects {
   position: absolute;
   top: 0;
@@ -179,12 +211,10 @@ background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  pointer-events: none; /* שלא יפריע ללחוץ על כפתורים */
+  pointer-events: none;
   z-index: 1;
 }
 
-
-/* כוכב בודד בגשם */
 .falling-star {
   position: absolute;
   top: -5vh;
@@ -196,15 +226,7 @@ background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 
 }
 
 @keyframes fallLinear {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(105vh) rotate(350deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(350deg); opacity: 0; }
 }
+
