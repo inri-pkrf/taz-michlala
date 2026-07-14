@@ -37,7 +37,7 @@
     color: #333333;
     font-size: 2.2vh;
     line-height: 1.5;
-    
+
 }
 
 /* כפתור הבנתי באזהרה */
@@ -54,9 +54,9 @@
 /* כפתור איקס בפופ-אפ רגיל */
 .popup-close-x {
     position: absolute;
-    top: 1vh;
-    right: 2vh;
-    font-size: 5vh;
+    top: 0.1vh;
+    right: 1vh;
+    font-size: 4.5vh;
     font-weight: bold;
     color: #707070;
     cursor: pointer;

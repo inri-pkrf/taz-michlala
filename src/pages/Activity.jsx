@@ -47,7 +47,7 @@ function Activity({ onGoHome, progress, onProgress }) {
       <CurrentStepComponent />
 
       {/* כפתור ההמשך שמקדם את הצעד הפנימי */}
-      <NextButton onClick={handleNext} />
+      <NextButton onClick={handleNext} top="85vh"/>
     </div>
   );
 }

@@ -154,20 +154,21 @@
 }
 
 #activityStep2-text2 {
-    font-size: 5vw;
+    box-sizing: border-box;
+     font-size: 4.5vmin;  
     width: 75vw;
     text-align: center;
     direction: rtl;
     background-color: #EDEEF4;
-    padding: 2vh 2vw; /* מרווח פנימי מעט מוגדל */
-    border: 0.4vh solid #000641;
+    padding: 2vh 2vw;
+    border: 0.4vw solid #000641;
     border-radius: 2.5vh;
     margin: 0;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 70.5vh;
-    z-index: 2; /* מוודא שהטקסט מעל העיגול */
+    top: 67.8vh;
+    z-index: 2;
 }
 
 /* קונטיינר שיחזיק את הפסקה והעיגול */
@@ -254,7 +255,7 @@
     position: absolute;
     font-size: 3.8vw;
     width: 77vw;
-    top: 60vh;
+    top: 56vh;
     left: 50%;
     transform: translateX(-50%);
     font-weight: 600;
@@ -270,7 +271,7 @@
     position: absolute;
     width: 49vw;
     height: 11vh;
-    top: 78vh;
+    top: 74vh;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -279,7 +280,7 @@
     position: absolute;
     width: 32vw;
     height: 17vh;
-    top: 42vh;
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
 }

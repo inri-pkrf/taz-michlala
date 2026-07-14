@@ -49,7 +49,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 65vh;
+    top: 63vh;
     font-size: 4vh;
     margin-top: 0.5vh;
     line-height: 1.4;
@@ -82,7 +82,7 @@
 #ForeignRelations-text3{
     position: absolute;
     width: 70vw;    
-    top: 72vh;
+    top: 68vh;
     left: 50%;  
     transform: translateX(-50%);    
     font-size: 4vw;

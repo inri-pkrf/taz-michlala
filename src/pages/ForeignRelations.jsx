@@ -129,7 +129,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
         מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום
       </p>
 
-      <NextButton onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} disabled={visitedCount < totalCountries} />
+      <NextButton onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} disabled={visitedCount < totalCountries} top="84vh"/>
     </div>
   );
 }

@@ -1,11 +1,15 @@
 import React from 'react';
 import './NextButton.css';
 
-function NextButton({ onClick }) {
+function NextButton({ onClick, top }) {
   return (
-    <button className="next-button" onClick={onClick}>
+    <p
+      className="next-button"
+      onClick={onClick}
+      style={top ? { top: `${top}` } : undefined}
+    >
       המשך
-    </button>
+    </p>
   );
 }
 

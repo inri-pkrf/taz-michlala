@@ -21,13 +21,14 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   const [submitted, setSubmitted] = useState(false);
   const [clockRotation, setClockRotation] = useState(0); 
 
-  const hallelujahAudio = useRef(new Audio(`${process.env.PUBLIC_URL}/assets/audio/halleluja.mp3`));
+  const hallelujahAudio = useRef(new Audio(`${process.env.PUBLIC_URL}/assets/Audio/halleluja.mp3`));
+  const loserAudio = useRef(new Audio(`${process.env.PUBLIC_URL}/assets/Audio/loser.mp3`));
 
   const currentAnswer = answers[currentQuestion];
   const question = QUESTIONS[currentQuestion];
 
   const score = answers.reduce((s, ans, i) => s + (ans === QUESTIONS[i].a ? 10 : 0), 0);
-  const passed = score > 70;
+  const passed = score >= 70;
 
   useEffect(() => {
     if (submitted) {
@@ -38,9 +39,9 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   }, [submitted, onQuizCompleted]);
 
   useEffect(() => {
-    const audio = hallelujahAudio.current;
+    const audio = passed ? hallelujahAudio.current : loserAudio.current;
 
-    if (submitted && passed) {
+    if (submitted) {
       audio.currentTime = 0;
       audio.play().catch(err => console.log("Audio play blocked", err));
     }
@@ -75,6 +76,7 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
 
   const handleReset = () => {
     hallelujahAudio.current.pause();
+    loserAudio.current.pause();
     onQuizCompleted?.(false);
     setAnswers(Array(QUESTIONS.length).fill(null));
     setCurrentQuestion(0);

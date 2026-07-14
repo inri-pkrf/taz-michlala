@@ -1,10 +1,17 @@
 .next-button{
     position: absolute;
-    bottom: 5vh; 
+    top: 82vh; 
+    padding: 1vh 5vw;
     left: 50%;
     transform: translateX(-50%);   
-    background-color: #d683a3;
-    border: 0.3vh solid #ff38bd; /* עובי מסגרת דקה */
-    border-radius: 20vh; /* עיגול מושלם של הכפתור כולו */
+    background: linear-gradient(45deg, #5289ff 0%, #c88dff 100%);
+    border: 0.3vh solid #000641; /* עובי מסגרת דקה */
+    border-radius: 2vh; /* עיגול מושלם של הכפתור כולו */
     cursor: pointer;
+    font-size: 5vmin;
+    text-align: center;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

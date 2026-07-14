@@ -18,11 +18,12 @@ function App() {
   const TOTAL_PROGRESS_STEPS = 13;
   const [completedProgressActions, setCompletedProgressActions] = useState([]);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [quizStarted, setQuizStarted] = useState(false);
   
   // חלקיק חדש: סטייט לשמירת השם הפרטי של המשתמש מהמבחן
   const [userFirstName, setUserFirstName] = useState('');
 
-  const progress = Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
+  const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
   const incrementProgress = (actionKey) => {
     if (!actionKey) {
       return;
@@ -76,14 +77,18 @@ function App() {
             onStart={(name) => {
               setUserFirstName(name); // 1. שומר את השם הפרטי שנשלח מ-QuizIntro
               setQuizCompleted(false);
+              setQuizStarted(true);
+              setCompletedProgressActions((prev) => prev.includes('quiz') ? prev : [...prev, 'quiz']);
               setCurrentPage('quiz'); // 2. מעביר לעמוד הבוחן
             }} 
             onCancel={() => {
               setQuizCompleted(false);
+              setQuizStarted(false);
               setCurrentPage('home');
             }}
             onGoHome={() => {
               setQuizCompleted(false);
+              setQuizStarted(false);
               setCurrentPage('home');
             }}
             progress={progress}

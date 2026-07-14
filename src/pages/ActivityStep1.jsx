@@ -11,11 +11,11 @@ function ActivityStep1() {
         alt="queen"
       />
 
-      <img
+      {/* <img
         className="activity-king"
         src={`${process.env.PUBLIC_URL}/assets/Activity/crown-king.png`}
         alt="king"
-      />
+      /> */}
 
       <img
         className="activity-building"
