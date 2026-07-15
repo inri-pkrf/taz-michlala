@@ -42,8 +42,18 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   const playResultSound = (fileName) => {
     const audioRef = fileName === 'halleluja.mp3' ? hallelujahAudio : loserAudio;
     if (!audioRef.current) {
-      audioRef.current = new Audio(`${process.env.PUBLIC_URL}/assets/Audio/${fileName}`);
+      const baseUrl = process.env.PUBLIC_URL || '';
+      const soundUrl = `${baseUrl}/assets/Audio/${fileName}`;
+      const fallbackUrl = `${baseUrl}/assets/audio/${fileName}`;
+      audioRef.current = new Audio(soundUrl);
       audioRef.current.preload = 'auto';
+      audioRef.current.addEventListener('error', () => {
+        if (audioRef.current.currentSrc !== fallbackUrl) {
+          audioRef.current.src = fallbackUrl;
+          audioRef.current.load();
+          audioRef.current.play().catch(() => {});
+        }
+      }, { once: true });
     }
 
     audioRef.current.currentTime = 0;

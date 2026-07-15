@@ -1,8 +1,13 @@
 const SOUND_CACHE = {};
 
 const getSoundUrl = (fileName) => {
-  // שימוש ב-PUBLIC_URL המובנה כדי להבטיח נתיב אבסולוטי תקין מתיקיית ה-public
-  return `${process.env.PUBLIC_URL}/assets/Audio/${fileName}`;
+  const baseUrl = process.env.PUBLIC_URL || '';
+  const candidates = [
+    `${baseUrl}/assets/Audio/${fileName}`,
+    `${baseUrl}/assets/audio/${fileName}`
+  ];
+
+  return candidates[0];
 };
 
 export const preloadSound = (fileName) => {

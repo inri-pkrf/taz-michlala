@@ -146,8 +146,17 @@ function AtWar({ onGoHome, progress, onProgress }) {
   };
 
   const playAudioFile = (fileName, volume = 0.85) => {
-    const soundUrl = `${process.env.PUBLIC_URL}/assets/Audio/${fileName}`;
+    const baseUrl = process.env.PUBLIC_URL || '';
+    const soundUrl = `${baseUrl}/assets/Audio/${fileName}`;
+    const fallbackUrl = `${baseUrl}/assets/audio/${fileName}`;
     const audio = new Audio(soundUrl);
+    audio.addEventListener('error', () => {
+      if (audio.currentSrc !== fallbackUrl) {
+        audio.src = fallbackUrl;
+        audio.load();
+        audio.play().catch(() => {});
+      }
+    }, { once: true });
     audio.volume = volume;
     audio.preload = 'auto';
     const playPromise = audio.play();
