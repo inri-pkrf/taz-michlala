@@ -1,28 +1,30 @@
 /* --- פופ אפ גנרי --- */
 .popup-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.82);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 2147483647;
+    padding: 3vh;
+    box-sizing: border-box;
 }
 
 .popup-content {
     border-radius: 2vh;
     padding: 3vh 2vh;
-    width: 70vw;
-    max-width: 80vw;
+    width: min(78vw, 42rem);
+    max-width: 90vw;
     text-align: center;
     position: relative;
     border-style: solid;
     border-width: 0.5vh;
-
-    direction: rtl; /* מבטיח שהטקסט מימין לשמאל */
+    box-shadow: 0 1.5vh 3vh rgba(0, 0, 0, 0.3);
+    direction: rtl;
+    z-index: 2147483647;
 }
 
 .popup-title {

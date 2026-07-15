@@ -4,6 +4,7 @@ import HomeButton from '../components/HomeButtons';
 import NextButton from '../components/NextButton'; 
 import Popup from '../components/Popup'; 
 import StepNumber from '../components/StepNumber'; 
+import { playSound } from '../utils/sound';
 
 // פונקציית עזר להחשכת צבע והחלת שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.9, darkenFactor = 0.8) => {
@@ -121,10 +122,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
 
   // פונקציה להפעלת סאונד הפצפוץ
   const playPopSound = () => {
-    const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
-    const audio = new Audio(soundPath);
-    audio.load();
-    audio.play().catch(err => console.log("סאונד נחסם:", err));
+    playSound('pop.mp3', { volume: 0.9 });
   };
 
   // לוגיקת הלחיצות שמוודאת שהולכים בדיוק לפי הסדר

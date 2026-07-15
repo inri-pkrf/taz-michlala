@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../style/DigitalAssets.css';
+import { playSound } from '../utils/sound';
 
 function DigitalAssetsStep2() {
   const [isChestOpen, setIsChestOpen] = useState(false);
 
   const playChestSound = () => {
-    // יצירת נתיב דינמי מוחלט לתיבה
-    const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/chest-open.mp3`;
-    
-    const audio = new Audio(soundPath);
-    audio.play().catch(err => console.log("סאונד חסום זמנית:", err));
+    playSound('chest-open.mp3', { volume: 0.9 });
   };
 
   useEffect(() => {

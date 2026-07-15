@@ -1,7 +1,37 @@
 /* ==========================================
-   1. אלמנטים של שלב 1 (Step 1)
+   מכולות ופריסה כללית של הדף
    ========================================== */
+.page-container {
+    position: relative;
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
+/* #activity-title {
+    text-align: center;
+    margin-top: 2vh;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+} */
+
+/* ==========================================
+   הסצינה האינטראקטיבית - נועלת את ה-viewport המקורי
+   ========================================== */
+.interactive-scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   1. אלמנטים של שלב 1 (Step 1) - גדלים ומיקומים מקוריים לחלוטין!
+   ========================================== */
 #DigitalAssets-computer {
     position: absolute;
     width: 53vw;
@@ -63,7 +93,7 @@
 
 #DigitalAssetsStep1-text2 {
     position: absolute;
-    font-size: 4.5vw;
+    font-size: 4vw;
     width: 80vw;
     top: 62vh;
     left: 50%;
@@ -79,10 +109,10 @@
 
 #DigitalAssets-light-bomb {
     position: absolute;
-    width: 22vw;
+    width: 18vw;
     height: 47vh;
     top: 47vh;
-    left: 10vw;  
+    left: 12vw;  
     z-index: 0;
 }
 
@@ -114,11 +144,9 @@
     transform: translateY(0);
 }
 
-
 /* ==========================================
    2. אלמנטים של שלב 2 (Step 2)
    ========================================== */
-
 #DigitalAssetsStep2-text1 {
     position: absolute;
     font-size: 5vw;
@@ -210,12 +238,9 @@
     100% { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
-
 /* ==========================================
    3. תיקון סופי לאייקונים (Icons & Animation)
    ========================================== */
-
-/* מיקום ומימדים של הקישורים */
 #DigitalAssets-icon1,
 #DigitalAssets-icon2,
 #DigitalAssets-icon3,
@@ -224,7 +249,7 @@
     position: absolute;
     width: 11vw;
     height: 5vh;
-    opacity: 0; /* מתחילים שקופים */
+    opacity: 0; 
     z-index: 10;
 }
 
@@ -234,7 +259,7 @@
 #DigitalAssets-icon3 { bottom: 52vh; left: 49vw; }
 #DigitalAssets-icon4 { bottom: 53vh; left: 61vw; }
 
-/* הכרחי! התמונות בפנים יתאימו בדיוק למימדי הקישור */
+/* התמונות בפנים */
 #DigitalAssets-icon1 img,
 #DigitalAssets-icon2 img,
 #DigitalAssets-icon3 img,
@@ -244,18 +269,16 @@
     object-fit: contain;
 }
 
-/* מחלקות מצב (מנוהלות על ידי React) */
 .icons-hidden {
     display: none !important;
 }
 
 .icons-fade-in {
-    display: inline-block !important; /* דוחף לתצוגה ברגע שהתיבה נפתחת */
+    display: inline-block !important; 
     animation: iconBurstOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 0.5s; /* השהייה של חצי שנייה לפתיחת התיבה */
+    animation-delay: 0.5s; 
 }
 
-/* האנימציה שעושה את אפקט הקפיצה החלק */
 @keyframes iconBurstOut {
     0% {
         opacity: 0;

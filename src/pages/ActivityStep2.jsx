@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Popup from '../components/Popup'; // ייבוא הפופ-אפ הגנרי
 import StepNumber from '../components/StepNumber'; // ייבוא עיגול המספר הגנרי
+import { playSound } from '../utils/sound';
 
 // פונקציית עזר שממירה Hex ל-RGBA, מחשיכה את הצבע ב-40% ומחילה שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.6) => {
@@ -20,11 +21,7 @@ function ActivityStep2() {
 
   const playPopSound = () => {
     try {
-      const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
-      const audio = new Audio(soundPath);
-      audio.preload = 'auto';
-      audio.currentTime = 0;
-      audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
+      playSound('pop.mp3', { volume: 0.9 });
     } catch (e) {
       console.log('playPopSound error', e);
     }

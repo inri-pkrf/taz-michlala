@@ -1,12 +1,19 @@
-#activity-title{
+#activity-title {
     font-family: "Karantina";
     position: absolute;
-    font-size: 15vmin;
-    top: 7vh;
-    width: 80vw;
+    
+    /* הגבלת גודל הגופן: מינימום 2.2rem, גודל מועדף 14vmin, מקסימום 4.5rem */
+    font-size: 12vmin;
+    
+    /* מוריד מעט את הלחץ על האלמנטים שמתחת במסכים ארוכים */
+    top: 10vh; 
+    
+    width: 60vw; /* הגדלת הרוחב המותר כדי למנוע שבירת שורות מיותרת בטלפונים צרים */
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
+    margin: 0;
+    line-height: 1.1;
 }
 
 #activity-text1{

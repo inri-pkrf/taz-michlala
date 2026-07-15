@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Popup from '../components/Popup'; // ייבוא הפופ-אפ הגנרי שלך
 import StepNumber from '../components/StepNumber'; // ייבוא עיגול המספר הגנרי שלך
 import '../style/DigitalAssets.css';
-
-// שים לב: מחקנו מכאן את ה-import של קובץ הסאונד שהיה שגוי
+import { playSound } from '../utils/sound';
 
 // פונקציית עזר שממירה Hex ל-RGBA, מחשיכה את הצבע ב-40% ומחילה שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.8) => {
@@ -32,7 +31,7 @@ function DigitalAssetsStep1() {
   const [nextRequiredId, setNextRequiredId] = useState(1);
   const [activePopup, setActivePopup] = useState(null);
 
-  // נתוני הפופ-אפים והמיקומים של המספרים מעל הציורים
+  // נתוני הפופ-אפים והמיקומים של המספרים - מותאמים לאחוזים מדויקים בתוך המיכל החדש
   const assetsPopupsData = {
     1: {
       title: "ידע ומידע - הכל באתר המכללה",
@@ -56,33 +55,28 @@ function DigitalAssetsStep1() {
         </span>
       ),
       borderColor: "#52AECA", 
-      topNum: "35vh",
-      leftNum: "82vw"
+      topNum: "35%",
+      leftNum: "82%"
     },
     2: {
-      title: "מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי  ",
+      title: "מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי",
       content: "המידע הצבאי במרחב המכללה מכיל את ׳אתר שיתוף הידע׳ המסייע לשימור ידע של קורסים, מופעים ומצגות. האתר נגיש לכל מי שברשותו גישה למחשב צבאי, דרך צהלנ״ט כותבים בחיפוש: ׳אתר שיתוף הידע׳. ",
       borderColor: "#52AECA", 
-      topNum: "42vh",
-      leftNum: "15vw"
+      topNum: "42%",
+      leftNum: "15%"
     },
     3: {
       title: "פורטל הידע המשותף",
       content: "מאגר מידע מנגיש ומהיר לשיתוף ידע קריטי בזמן אמת בין משרדי הממשלה והרשויות המקומיות.",
       borderColor: "#52AECA", 
-      topNum: "53vh",
-      leftNum: "68vw"
+      topNum: "53%",
+      leftNum: "68%"
     }
   };
 
-const playPopSound = () => {
-  // יצירת נתיב דינמי מוחלט שמתאים גם ל-Localhost וגם ל-GitHub
-  const soundPath = `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}/assets/Audio/pop.mp3`;
-  
-  const audio = new Audio(soundPath);
-  audio.load(); 
-  audio.play().catch(err => console.log("סאונד נחסם בנייד:", err));
-};
+  const playPopSound = () => {
+    playSound('pop.mp3', { volume: 0.9 });
+  };
 
   // לוגיקת ניהול הלחיצות
   const handleAssetClick = (id) => {
@@ -179,80 +173,84 @@ const playPopSound = () => {
   }, []);
 
   return (
-    <div className="page-container" style={{ position: 'relative' }}>
+    <div className="page-container">
       
       <h1 id="activity-title">נכסים דיגיטליים של המכללה</h1>
       <p id="DigitalAssetsStep1-text1">לחצו על הכרטיסיות כדי לגלות עוד</p>
       
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/computer.png`} 
-        alt="מחשב" 
-        id="DigitalAssets-computer"
-      />
-      
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/blob.png`} 
-        alt="bg" 
-        id="DigitalAssets-blob"
-      />
-      
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic1.png`} 
-        alt="bg" 
-        id="DigitalAssets-pic1"
-        className={`pop-element ${animatePic1 ? 'is-visible' : ''}`}
-        onClick={() => handleAssetClick(1)}
-        style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
-      />
-      
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic2.png`} 
-        alt="bg" 
-        id="DigitalAssets-pic2"
-        className={`pop-element ${animatePic2 ? 'is-visible' : ''}`}
-        onClick={() => handleAssetClick(2)}
-        style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
-      />
-      
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic3.png`} 
-        alt="bg" 
-        id="DigitalAssets-pic3"
-        className={`pop-element ${animatePic3 ? 'is-visible' : ''}`}
-        onClick={() => handleAssetClick(3)}
-        style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
-      />
-      
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/light-bomb.png`} 
-        alt="bg" 
-        id="DigitalAssets-light-bomb"
-        className={`lamp-element ${animateLamp ? 'is-dropped' : ''}`}
-      />
+      {/* אזור הפאזל שומר על המיקומים והגדלים המקוריים, אך כעת הם יציבים */}
+      <div className="interactive-scene">
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/computer.png`} 
+          alt="מחשב" 
+          id="DigitalAssets-computer"
+        />
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/blob.png`} 
+          alt="bg" 
+          id="DigitalAssets-blob"
+        />
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic1.png`} 
+          alt="bg" 
+          id="DigitalAssets-pic1"
+          className={`pop-element ${animatePic1 ? 'is-visible' : ''}`}
+          onClick={() => handleAssetClick(1)}
+          style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
+        />
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic2.png`} 
+          alt="bg" 
+          id="DigitalAssets-pic2"
+          className={`pop-element ${animatePic2 ? 'is-visible' : ''}`}
+          onClick={() => handleAssetClick(2)}
+          style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
+        />
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic3.png`} 
+          alt="bg" 
+          id="DigitalAssets-pic3"
+          className={`pop-element ${animatePic3 ? 'is-visible' : ''}`}
+          onClick={() => handleAssetClick(3)}
+          style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
+        />
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/light-bomb.png`} 
+          alt="bg" 
+          id="DigitalAssets-light-bomb"
+          className={`lamp-element ${animateLamp ? 'is-dropped' : ''}`}
+        />
 
-      {showInteractiveSteps && 
-        Object.keys(assetsPopupsData).map((id) => {
-          const asset = assetsPopupsData[id];
-          const isVisited = nextRequiredId > id;
-          
-          const currentBg = isVisited ? getDarkTranslucentColor(asset.borderColor, 0.6) : '#ffffff';
-          const currentBorder = asset.borderColor;
-          const currentText = isVisited ? '#ffffff' : asset.borderColor;
+        {showInteractiveSteps && 
+          Object.keys(assetsPopupsData).map((id) => {
+            const asset = assetsPopupsData[id];
+            const isVisited = nextRequiredId > id;
+            
+            const currentBg = isVisited ? getDarkTranslucentColor(asset.borderColor, 0.6) : '#ffffff';
+            const currentBorder = asset.borderColor;
+            const currentText = isVisited ? '#ffffff' : asset.borderColor;
 
-          return (
-            <div key={id} onClick={() => handleAssetClick(Number(id))} style={{ cursor: 'pointer' }}>
-              <StepNumber 
-                number={id} 
-                top={asset.topNum} 
-                left={asset.leftNum} 
-                bgColor={currentBg}
-                borderColor={currentBorder}
-                textColor={currentText}
-              />
-            </div>
-          );
-        })
-      }
+            return (
+              <div key={id} onClick={() => handleAssetClick(Number(id))} style={{ cursor: 'pointer' }}>
+                <StepNumber 
+                  number={id} 
+                  top={asset.topNum} 
+                  left={asset.leftNum} 
+                  bgColor={currentBg}
+                  borderColor={currentBorder}
+                  textColor={currentText}
+                />
+              </div>
+            );
+          })
+        }
+      </div>
 
       <p 
         id="DigitalAssetsStep1-text2"
