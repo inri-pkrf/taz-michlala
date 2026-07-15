@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../style/NationalLibrary.css';
 import HomeButton from '../components/HomeButtons'; 
 import NextButton from '../components/NextButton'; 
 import Popup from '../components/Popup'; 
 import StepNumber from '../components/StepNumber'; 
-import { playSound } from '../utils/sound';
 
 // פונקציית עזר להחשכת צבע והחלת שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.9, darkenFactor = 0.8) => {
@@ -20,6 +19,7 @@ const getDarkTranslucentColor = (hex, alpha = 0.9, darkenFactor = 0.8) => {
 
 function NationalLibrary({ onGoHome, progress, onProgress }) {
   const [activePopup, setActivePopup] = useState(null);
+  const pendingSoundRef = useRef(null);
   
   // מנגנון סדר הלחיצות הקשיח (מתחיל מ-1)
   const [nextRequiredId, setNextRequiredId] = useState(1);
@@ -120,10 +120,24 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
     }
   };
 
+  const playAudioFile = useCallback((fileName, volume = 0.85) => {
+    const soundUrl = `${process.env.PUBLIC_URL}/assets/audio/${fileName}`;
+    const audio = new Audio(soundUrl);
+    audio.volume = volume;
+    audio.preload = 'auto';
+    const playPromise = audio.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        pendingSoundRef.current = { fileName, volume };
+      });
+    }
+  }, []);
+
   // פונקציה להפעלת סאונד הפצפוץ
-  const playPopSound = () => {
-    playSound('pop.mp3', { volume: 0.9 });
-  };
+  const playPopSound = useCallback(() => {
+    playAudioFile('pop.mp3');
+  }, [playAudioFile]);
 
   // לוגיקת הלחיצות שמוודאת שהולכים בדיוק לפי הסדר
   const handleBookClick = (id) => {
@@ -172,6 +186,10 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
   useEffect(() => {
     // פתיחת חסימת האודיו בדפדפנים ניידים
     const unlockAudio = () => {
+      if (pendingSoundRef.current) {
+        playAudioFile(pendingSoundRef.current.fileName, pendingSoundRef.current.volume);
+        pendingSoundRef.current = null;
+      }
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       if (AudioContext) {
         const ctx = new AudioContext();
@@ -236,7 +254,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       window.removeEventListener('click', unlockAudio);
       window.removeEventListener('touchstart', unlockAudio);
     };
-  }, []);
+  }, [playAudioFile, playPopSound]);
 
   return (
     <div className="page-container" style={{ position: 'relative' }}>

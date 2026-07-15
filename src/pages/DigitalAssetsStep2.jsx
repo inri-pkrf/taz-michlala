@@ -1,22 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../style/DigitalAssets.css';
-import { playSound } from '../utils/sound';
 
 function DigitalAssetsStep2() {
   const [isChestOpen, setIsChestOpen] = useState(false);
+  const pendingSoundRef = useRef(null);
 
-  const playChestSound = () => {
-    playSound('chest-open.mp3', { volume: 0.9 });
-  };
+  const playAudioFile = useCallback((fileName, volume = 0.85) => {
+    const soundUrl = `${process.env.PUBLIC_URL}/assets/audio/${fileName}`;
+    const audio = new Audio(soundUrl);
+    audio.volume = volume;
+    audio.preload = 'auto';
+    const playPromise = audio.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        pendingSoundRef.current = { fileName, volume };
+      });
+    }
+  }, []);
+
+  const playChestSound = useCallback(() => {
+    playAudioFile('chest-open.mp3');
+  }, [playAudioFile]);
 
   useEffect(() => {
+    const unlockAudio = () => {
+      if (pendingSoundRef.current) {
+        playAudioFile(pendingSoundRef.current.fileName, pendingSoundRef.current.volume);
+        pendingSoundRef.current = null;
+      }
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+
+    window.addEventListener('pointerdown', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
+    window.addEventListener('click', unlockAudio);
+
     const timer = setTimeout(() => {
       setIsChestOpen(true);
       playChestSound();
     }, 1500);
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+  }, [playAudioFile, playChestSound]);
 
   return (
     <div className="page-container">

@@ -23,16 +23,13 @@ function App() {
   // חלקיק חדש: סטייט לשמירת השם הפרטי של המשתמש מהמבחן
   const [userFirstName, setUserFirstName] = useState('');
 
-  const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
-  const incrementProgress = (actionKey) => {
-    if (!actionKey) {
-      return;
-    }
 
+  const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
+  
+  const incrementProgress = (actionKey) => {
+    if (!actionKey) return;
     setCompletedProgressActions((prev) => {
-      if (prev.includes(actionKey)) {
-        return prev;
-      }
+      if (prev.includes(actionKey)) return prev;
       return [...prev, actionKey];
     });
   };
@@ -49,37 +46,30 @@ function App() {
       case 'home':
         return <HomePage onNavigate={setCurrentPage} showQuizAvailable={showQuizAvailable} />;
         
-      // נושא 1: פעילות
       case 'activity':
         return <Activity onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
-      // נושא 2: נכסים דיגיטליים ורשתות חברתיות
       case 'digitalAssets':
         return <DigitalAssets onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
-      // נושא 3: הספרייה הלאומית
       case 'nationalLibrary':
         return <NationalLibrary onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
-      // נושא 4: קשרי חוץ
       case 'foreignRelations':
         return <ForeignRelations onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
-      // נושא 5: בעת מלחמה
       case 'atWar':
         return <AtWar onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;
         
-      // --- כאן השינויים המרכזיים ---
-
       case 'quizIntro':
         return (
           <QuizIntro 
             onStart={(name) => {
-              setUserFirstName(name); // 1. שומר את השם הפרטי שנשלח מ-QuizIntro
+              setUserFirstName(name); 
               setQuizCompleted(false);
               setQuizStarted(true);
               setCompletedProgressActions((prev) => prev.includes('quiz') ? prev : [...prev, 'quiz']);
-              setCurrentPage('quiz'); // 2. מעביר לעמוד הבוחן
+              setCurrentPage('quiz'); 
             }} 
             onCancel={() => {
               setQuizCompleted(false);
@@ -99,7 +89,7 @@ function App() {
       case 'quiz':
         return (
           <Quiz 
-            userName={userFirstName} // 3. מעביר את השם השמור לתוך קומפוננטת הבוחן
+            userName={userFirstName} 
             onGoHome={() => {
               setQuizCompleted(false);
               setCurrentPage('home');

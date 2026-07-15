@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Popup from '../components/Popup'; // ייבוא הפופ-אפ הגנרי
 import StepNumber from '../components/StepNumber'; // ייבוא עיגול המספר הגנרי
-import { playSound } from '../utils/sound';
 
 // פונקציית עזר שממירה Hex ל-RGBA, מחשיכה את הצבע ב-40% ומחילה שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.6) => {
@@ -18,14 +17,47 @@ const getDarkTranslucentColor = (hex, alpha = 0.6) => {
 function ActivityStep2() {
   const [nextRequiredId, setNextRequiredId] = useState(1);
   const [activePopup, setActivePopup] = useState(null);
+  const pendingSoundRef = useRef(null);
 
-  const playPopSound = () => {
-    try {
-      playSound('pop.mp3', { volume: 0.9 });
-    } catch (e) {
-      console.log('playPopSound error', e);
+  const playAudioFile = (fileName, volume = 0.85) => {
+    const soundUrl = `${process.env.PUBLIC_URL}/assets/audio/${fileName}`;
+    const audio = new Audio(soundUrl);
+    audio.volume = volume;
+    audio.preload = 'auto';
+    const playPromise = audio.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        pendingSoundRef.current = { fileName, volume };
+      });
     }
   };
+
+  const playPopSound = () => {
+    playAudioFile('pop.mp3');
+  };
+
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (pendingSoundRef.current) {
+        playAudioFile(pendingSoundRef.current.fileName, pendingSoundRef.current.volume);
+        pendingSoundRef.current = null;
+      }
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+
+    window.addEventListener('pointerdown', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
+    window.addEventListener('click', unlockAudio);
+
+    return () => {
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+  }, []);
 
   const handleInteractionStart = (event) => {
     event?.preventDefault();

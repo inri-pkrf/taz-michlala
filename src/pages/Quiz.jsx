@@ -21,8 +21,9 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   const [submitted, setSubmitted] = useState(false);
   const [clockRotation, setClockRotation] = useState(0); 
 
-  const hallelujahAudio = useRef(new Audio(`${process.env.PUBLIC_URL}/assets/Audio/halleluja.mp3`));
-  const loserAudio = useRef(new Audio(`${process.env.PUBLIC_URL}/assets/Audio/loser.mp3`));
+  const hallelujahAudio = useRef(null);
+  const loserAudio = useRef(null);
+  const pendingSoundRef = useRef(null);
 
   const currentAnswer = answers[currentQuestion];
   const question = QUESTIONS[currentQuestion];
@@ -38,18 +39,44 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
     }
   }, [submitted, onQuizCompleted]);
 
-  useEffect(() => {
-    const audio = passed ? hallelujahAudio.current : loserAudio.current;
-
-    if (submitted) {
-      audio.currentTime = 0;
-      audio.play().catch(err => console.log("Audio play blocked", err));
+  const playResultSound = (fileName) => {
+    const audioRef = fileName === 'halleluja.mp3' ? hallelujahAudio : loserAudio;
+    if (!audioRef.current) {
+      audioRef.current = new Audio(`${process.env.PUBLIC_URL}/assets/audio/${fileName}`);
+      audioRef.current.preload = 'auto';
     }
 
-    return () => {
-      audio.pause();
+    audioRef.current.currentTime = 0;
+    const playPromise = audioRef.current.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        pendingSoundRef.current = fileName;
+      });
+    }
+  };
+
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (pendingSoundRef.current) {
+        playResultSound(pendingSoundRef.current);
+        pendingSoundRef.current = null;
+      }
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
     };
-  }, [submitted, passed]);
+
+    window.addEventListener('pointerdown', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
+    window.addEventListener('click', unlockAudio);
+
+    return () => {
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+  }, []);
 
   const handleSelect = (choiceIndex) => {
     const nextAnswers = [...answers];
@@ -63,6 +90,7 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
         setCurrentQuestion(prev => prev + 1);
       } else {
         setSubmitted(true);
+        playResultSound(passed ? 'halleluja.mp3' : 'loser.mp3');
       }
     }, 200);
   };
@@ -75,8 +103,9 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   };
 
   const handleReset = () => {
-    hallelujahAudio.current.pause();
-    loserAudio.current.pause();
+    if (hallelujahAudio.current) hallelujahAudio.current.pause();
+    if (loserAudio.current) loserAudio.current.pause();
+    pendingSoundRef.current = null;
     onQuizCompleted?.(false);
     setAnswers(Array(QUESTIONS.length).fill(null));
     setCurrentQuestion(0);

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../style/AtWar.css';
 import HomeButton from '../components/HomeButtons'; 
 import NextButton from '../components/NextButton'; 
 import Popup from '../components/Popup'; 
 import StepNumber from '../components/StepNumber'; 
-import { playSound } from '../utils/sound';
 
 // פונקציית העזר המקורית שלך
 const getDarkTranslucentColor = (hex, alpha = 0.8) => {
@@ -122,6 +121,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
   const [activePopup, setActivePopup] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [nextRequiredId, setNextRequiredId] = useState(1);
+  const pendingSoundRef = useRef(null);
 
   // הוספת סטייט לניהול המלחמה הנוכחית
   const [currentWarKey, setCurrentWarKey] = useState('ironSwords'); 
@@ -145,12 +145,22 @@ function AtWar({ onGoHome, progress, onProgress }) {
     );
   };
 
-  const playPopSound = () => {
-    try {
-      playSound('pop.mp3', { volume: 0.9 });
-    } catch (e) {
-      console.log('playPopSound error', e);
+  const playAudioFile = (fileName, volume = 0.85) => {
+    const soundUrl = `${process.env.PUBLIC_URL}/assets/audio/${fileName}`;
+    const audio = new Audio(soundUrl);
+    audio.volume = volume;
+    audio.preload = 'auto';
+    const playPromise = audio.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        pendingSoundRef.current = { fileName, volume };
+      });
     }
+  };
+
+  const playPopSound = () => {
+    playAudioFile('pop.mp3');
   };
 
   // לוגיקת ניהול הלחיצות
@@ -182,6 +192,28 @@ function AtWar({ onGoHome, progress, onProgress }) {
       });
     }
   };
+
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (pendingSoundRef.current) {
+        playAudioFile(pendingSoundRef.current.fileName, pendingSoundRef.current.volume);
+        pendingSoundRef.current = null;
+      }
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+
+    window.addEventListener('pointerdown', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
+    window.addEventListener('click', unlockAudio);
+
+    return () => {
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
+    };
+  }, []);
 
   // עדכון פונקציית המעבר דפים והחלפת המלחמה
   useEffect(() => {

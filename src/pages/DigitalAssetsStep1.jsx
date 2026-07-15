@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Popup from '../components/Popup'; // ייבוא הפופ-אפ הגנרי שלך
 import StepNumber from '../components/StepNumber'; // ייבוא עיגול המספר הגנרי שלך
 import '../style/DigitalAssets.css';
-import { playSound } from '../utils/sound';
 
 // פונקציית עזר שממירה Hex ל-RGBA, מחשיכה את הצבע ב-40% ומחילה שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.8) => {
@@ -30,6 +29,7 @@ function DigitalAssetsStep1() {
   // מנגנון סדר הלחיצות
   const [nextRequiredId, setNextRequiredId] = useState(1);
   const [activePopup, setActivePopup] = useState(null);
+  const pendingSoundRef = useRef(null);
 
   // נתוני הפופ-אפים והמיקומים של המספרים - מותאמים לאחוזים מדויקים בתוך המיכל החדש
   const assetsPopupsData = {
@@ -74,9 +74,23 @@ function DigitalAssetsStep1() {
     }
   };
 
-  const playPopSound = () => {
-    playSound('pop.mp3', { volume: 0.9 });
-  };
+  const playAudioFile = useCallback((fileName, volume = 0.85) => {
+    const soundUrl = `${process.env.PUBLIC_URL}/assets/audio/${fileName}`;
+    const audio = new Audio(soundUrl);
+    audio.volume = volume;
+    audio.preload = 'auto';
+    const playPromise = audio.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        pendingSoundRef.current = { fileName, volume };
+      });
+    }
+  }, []);
+
+  const playPopSound = useCallback(() => {
+    playAudioFile('pop.mp3');
+  }, [playAudioFile]);
 
   // לוגיקת ניהול הלחיצות
   const handleAssetClick = (id) => {
@@ -112,6 +126,10 @@ function DigitalAssetsStep1() {
 
   useEffect(() => {
     const unlockAudio = () => {
+      if (pendingSoundRef.current) {
+        playAudioFile(pendingSoundRef.current.fileName, pendingSoundRef.current.volume);
+        pendingSoundRef.current = null;
+      }
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       if (AudioContext) {
         const ctx = new AudioContext();
@@ -170,7 +188,7 @@ function DigitalAssetsStep1() {
       window.removeEventListener('click', unlockAudio);
       window.removeEventListener('touchstart', unlockAudio);
     };
-  }, []);
+  }, [playAudioFile, playPopSound]);
 
   return (
     <div className="page-container">
