@@ -19,6 +19,8 @@ function DigitalAssetsStep2() {
     }
   }, []);
 
+  
+
   const playChestSound = useCallback(() => {
     playAudioFile('chest-open.mp3');
   }, [playAudioFile]);

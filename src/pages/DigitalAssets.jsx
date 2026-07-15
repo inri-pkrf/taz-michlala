@@ -28,6 +28,8 @@ function DigitalAssets({ onGoHome, progress, onProgress }) {
   };
 
   // שליפת תת-העמוד הנוכחי
+
+  
   const CurrentStepComponent = steps[currentStep];
 
   return (
