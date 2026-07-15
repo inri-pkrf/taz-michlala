@@ -42,7 +42,7 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   const playResultSound = (fileName) => {
     const audioRef = fileName === 'halleluja.mp3' ? hallelujahAudio : loserAudio;
     if (!audioRef.current) {
-      audioRef.current = new Audio(`${process.env.PUBLIC_URL}/assets/audio/${fileName}`);
+      audioRef.current = new Audio(`${process.env.PUBLIC_URL}/assets/Audio/${fileName}`);
       audioRef.current.preload = 'auto';
     }
 

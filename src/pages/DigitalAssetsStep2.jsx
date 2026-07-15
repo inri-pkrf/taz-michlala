@@ -6,7 +6,7 @@ function DigitalAssetsStep2() {
   const pendingSoundRef = useRef(null);
 
   const playAudioFile = useCallback((fileName, volume = 0.85) => {
-    const soundUrl = `${process.env.PUBLIC_URL}/assets/audio/${fileName}`;
+    const soundUrl = `${process.env.PUBLIC_URL}/assets/Audio/${fileName}`;
     const audio = new Audio(soundUrl);
     audio.volume = volume;
     audio.preload = 'auto';
