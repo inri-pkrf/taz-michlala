@@ -78,7 +78,7 @@
 #homePage-description {
     position: absolute;
     font-size: 4vw; /* שינוי ל-vw אחיד */
-    width: 85vw;
+    width: 65vw;
     top: 22vh;
     left: 50%;
     transform: translateX(-50%);
@@ -118,4 +118,14 @@
     top: 78vh;
     z-index: 2;
     margin: auto;
+}
+
+.tag-wrapper.disabled {
+    opacity: 0.95; /* מעמעם את כל התג (התמונה, המספר והטקסט) ב-55% */
+    filter: grayscale(15%) contrast(90%); /* הופך את הצבעים לכמעט אפורים לחלוטין ומוריד קונטרסט */
+    cursor: not-allowed; /* משנה את סמן העכבר לאייקון של "אין כניסה" (עיגול עם קו אלכסוני) */
+    pointer-events: none; /* מנטרל לחלוטין את הלחיצות של הדפדפן (רשת ביטחון) */
+    
+    /* מבטל את צל המקור במידה ויש */
+    box-shadow: none !important; 
 }

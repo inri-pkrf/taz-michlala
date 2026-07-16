@@ -38,11 +38,11 @@ function DigitalAssets({ onGoHome, progress, onProgress }) {
       {/* כפתור הבית תמיד מופיע ומחזיר לתפריט הראשי ב-App */}
       <HomeButton onClick={onGoHome} progress={progress} />
       <AboutMe/>
-      <img
+      {/* <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
-      />
+      /> */}
 
       {/* רנדור תת-העמוד הנוכחי */}
       <CurrentStepComponent />

@@ -22,9 +22,10 @@ function ActivityStep4() {
       
       {/* תמונת החיילים ברקע */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/Activity/soliders.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/Activity/soliders.webp`} 
         alt="חיילים" 
         id="activity-soliders"
+        loading="lazy"
       />
       
       {/* אייקון הנגן - לחיצה עליו משנה את הסטייט ל-true ופותחת את הוידאו */}
@@ -34,6 +35,7 @@ function ActivityStep4() {
         id="activity-play-icon"
         onClick={() => setIsVideoOpen(true)}
         style={{ cursor: 'pointer' }}
+        loading="lazy"
       />            
 
       {/* מודאל הוידאו הדינמי (מתלבש על ה-CSS הגלובלי שיצרנו בשלב הקודם) */}

@@ -23,6 +23,8 @@ function App() {
   // חלקיק חדש: סטייט לשמירת השם הפרטי של המשתמש מהמבחן
   const [userFirstName, setUserFirstName] = useState('');
 
+  // סטייט חדש: שומר כמה נושאים פתוחים כרגע למשתמש (מתחיל ב-1)
+  const [unlockedTopicCount, setUnlockedTopicCount] = useState(1);
 
   const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
   
@@ -32,6 +34,28 @@ function App() {
       if (prev.includes(actionKey)) return prev;
       return [...prev, actionKey];
     });
+  };
+
+  // פונקציית ניווט חכמה שמנהלת את פתיחת הנושאים לפי סדר הכניסה
+  const handleNavigate = (route) => {
+    // מיפוי של ה-Route למספר הנושא
+    const routeToNumber = {
+      'activity': 1,
+      'digitalAssets': 2,
+      'nationalLibrary': 3,
+      'foreignRelations': 4,
+      'atWar': 5
+    };
+
+    const clickedTopicNum = routeToNumber[route];
+
+    // אם המשתמש נכנס לנושא שהוא הכי מתקדם שלו כרגע, נפתח לו את הנושא הבא בתור
+    if (clickedTopicNum && clickedTopicNum === unlockedTopicCount) {
+      setUnlockedTopicCount((prev) => Math.min(prev + 1, 5)); // מעלה את מספר הנושאים הפתוחים (מקסימום 5)
+    }
+
+    // מעבר לעמוד המבוקש
+    setCurrentPage(route);
   };
 
   // פונקציה שמחליטה איזו קומפוננטה לרנדר על המסך
@@ -44,7 +68,13 @@ function App() {
         return <WelcomePage onNavigate={() => setCurrentPage('home')} />;
         
       case 'home':
-        return <HomePage onNavigate={setCurrentPage} showQuizAvailable={showQuizAvailable} />;
+        return (
+          <HomePage 
+            onNavigate={handleNavigate} // שימוש בפונקציית הניווט החכמה שלנו
+            showQuizAvailable={showQuizAvailable} 
+            progress={unlockedTopicCount} // העברת הנושאים הפתוחים כ-Prop
+          />
+        );
         
       case 'activity':
         return <Activity onGoHome={() => setCurrentPage('home')} progress={progress} onProgress={incrementProgress} />;

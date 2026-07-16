@@ -1,7 +1,7 @@
 .next-button{
     position: fixed;
-    bottom: 3svh; 
-    padding: 1vh 5vw;
+    bottom: 1svh; 
+    padding: 1vh 8vw;
     left: 50%;
     transform: translateX(-50%);   
     background: linear-gradient(45deg, #5289ff 0%, #c88dff 100%);

@@ -70,11 +70,11 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
     <div className="page-container">
       <HomeButton onClick={onGoHome} progress={progress} />
       <AboutMe/>
-      <img
+      {/* <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
-      />
+      /> */}
 
       <h1 id="activity-title">קשרי חוץ</h1>
       <p id="ForeignRelations-text1">אנחנו לגמרי בינלאומיים!</p>
@@ -130,7 +130,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
         מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום
       </p>
 
-      <NextButton onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} disabled={visitedCount < totalCountries} top="84vh"/>
+      <NextButton onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} disabled={visitedCount < totalCountries} />
     </div>
   );
 }

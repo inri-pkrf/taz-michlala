@@ -270,11 +270,11 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
     <div className="page-container" style={{ position: 'relative' }}>
       <HomeButton onClick={onGoHome} progress={progress} />
       <AboutMe/>
-      <img
+      {/* <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
-      />
+      /> */}
       
       <h1 id="activity-title">הספרייה הלאומית</h1>
       <p id="NationalLibrary-text1">מאגר ידע לאומי לחירום לחיזוק האיתנות של מדינת ישראל</p>

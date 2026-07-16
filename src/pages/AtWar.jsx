@@ -28,7 +28,7 @@ const warsData = {
     videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
     customImages: [
       {
-        src: `${process.env.PUBLIC_URL}/assets/AtWar/IronSwords/sords.png`,
+        src: `${process.env.PUBLIC_URL}/assets/AtWar/IronSwords/sords.webp`,
         className: "IronSwords-sords", // תוכלי למקם ב-CSS באמצעות Class זה
         showOnPage: 1 // יוצג רק בעמוד הראשון
       },
@@ -39,7 +39,7 @@ const warsData = {
       }
     ],
     longDescription: ` במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית. `,
-    bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.png`,
+    bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.webp`,
     popups: [
       { 
         id: 1, 
@@ -96,7 +96,7 @@ const warsData = {
     videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
     customImages: [
       {
-        src: `${process.env.PUBLIC_URL}/assets/AtWar/LionRoar/lion.png`,
+        src: `${process.env.PUBLIC_URL}/assets/AtWar/LionRoar/lion.webp`,
         className: "LionRoar-lion", // תוכלי למקם ב-CSS באמצעות Class זה
         showOnPage: 1 // יוצג רק בעמוד הראשון
       },
@@ -107,7 +107,7 @@ const warsData = {
       }
     ],
     longDescription: "כאן נכנסת הפסקה המורחבת של העמוד ...",
-    bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.png`, 
+    bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.webp`, 
     popups: [
       { id: 1, title: "כותרת פופאפ 1", content: "תוכן שונה למלחמה זו...", borderColor: "#52AECA", x: "70%", y: "5%", width: "20%", height: "35%", topNum: "7vh", leftNum: "69vw" },
       { id: 2, title: "כותרת פופאפ 2", content: "תוכן שונה למלחמה זו...", borderColor: "#52AECA", x: "48%", y: "20%", width: "18%", height: "20%", topNum: "14vh", leftNum: "35vw" },
@@ -228,11 +228,11 @@ function AtWar({ onGoHome, progress, onProgress }) {
   // עדכון פונקציית המעבר דפים והחלפת המלחמה
   useEffect(() => {
     const imagesToPreload = [
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/sky.png`,
+      `${process.env.PUBLIC_URL}/assets/AtWar/all/sky.webp`,
       `${process.env.PUBLIC_URL}/assets/AtWar/all/jeep.png`,
       `${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.png`,
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/bg-building.png`,
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.png`
+      `${process.env.PUBLIC_URL}/assets/AtWar/all/bg-building.webp`,
+      `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.webp`
     ];
 
     imagesToPreload.forEach((src) => {
@@ -264,11 +264,11 @@ function AtWar({ onGoHome, progress, onProgress }) {
     <div className="page-container at-war-page" style={{ position: 'relative' }}>
       <HomeButton onClick={onGoHome} progress={progress} />
       <AboutMe/>
-      <img
+      {/* <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
-      />
+      /> */}
       
       {/* 🔹 כותרת הדף חזרה להיות שורה אחת רציפה כפי שהייתה במקור */}
       <h1 id="AtWar-title">המכללה בעת מלחמה</h1>
@@ -318,71 +318,71 @@ function AtWar({ onGoHome, progress, onProgress }) {
               src={data.bgImage} 
               alt="img " 
               className="war-interactive-img"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-sky"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/sky.png`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/sky.webp`}
               alt="sky"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-jeep"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/jeep.png`}
               alt="jeep"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-tank"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/tank.png`}
               alt="tank"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-dust"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/dust.png`}
               alt="dust"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-solider1"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider1.png`}
               alt="soldier1"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-solider2"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider2.png`}
               alt="soldier2"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-plane1"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.png`}
               alt="plane1"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-plane2"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane2.png`}
               alt="plane2"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
 
             <img
               className="AtWar-bg-building"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/bg-building.png`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/bg-building.webp`}
               alt="bg-building"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
 
