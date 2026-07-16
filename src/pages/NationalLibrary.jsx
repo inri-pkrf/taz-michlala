@@ -4,6 +4,7 @@ import HomeButton from '../components/HomeButtons';
 import NextButton from '../components/NextButton'; 
 import Popup from '../components/Popup'; 
 import StepNumber from '../components/StepNumber'; 
+import AboutMe from '../components/AboutMe';
 
 // פונקציית עזר להחשכת צבע והחלת שקיפות
 const getDarkTranslucentColor = (hex, alpha = 0.9, darkenFactor = 0.8) => {
@@ -268,7 +269,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
   return (
     <div className="page-container" style={{ position: 'relative' }}>
       <HomeButton onClick={onGoHome} progress={progress} />
-      
+      <AboutMe/>
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}

@@ -20,7 +20,7 @@
   text-align: center;
   font-weight: bold;
   font-family: "Karantina";
-  margin: 2vh 0 0 0;
+  margin: 5vh 0 0 0;
   line-height: 1.1;
 }
 
@@ -47,9 +47,10 @@
   padding: 2vh 3vh;
   background: linear-gradient(to left, #8E2020, #F43737);
   font-size: 10vmin;
-  color: beige;
+  color: rgb(255, 251, 251);
   font-family: 'karantina';
   margin-top: 2vh; /* נותן מרווח קל מהאלמנט שמעליו במקום top: 80vh */
   border: none; /* ליתר ביטחון עבור כפתור */
   cursor: pointer;
+  border-radius: 1vh;
 }

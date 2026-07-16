@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../style/Activity.css';
 import HomeButton from '../components/HomeButtons'; 
 import NextButton from '../components/NextButton';
+import AboutMe from '../components/AboutMe';
 
 // 1. מייבאים את תתי-העמודים הספציפיים של הנושא הזה
 import ActivityStep1 from './ActivityStep1';
@@ -37,6 +38,7 @@ function Activity({ onGoHome, progress, onProgress }) {
     <div className="page-container">
       {/* כפתור הבית תמיד מופיע ומחזיר לתפריט הראשי ב-App */}
       <HomeButton onClick={onGoHome} progress={progress} />
+      <AboutMe/>
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}

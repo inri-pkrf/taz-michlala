@@ -1,0 +1,95 @@
+/* =========================================
+   מצב סגור
+   ========================================= */
+.AboutMe-button {
+    width: 4.5vh;
+    height: 4.5vh;
+    padding: 0;
+    border-radius: 20vh;
+    position: absolute;
+    left: 3vw;
+    top: 2vh;
+    background-color: #FAF8F3;
+    border: 0.4vh solid #000641;
+    cursor: pointer;
+    direction: rtl; /* מבטיח שהאייקון תמיד יהיה מימין לטקסט */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* ממרכז את ה-i כשהכפתור עגול וסגור */
+    overflow: hidden;
+    
+    transition: 
+        width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.2s ease,
+        transform 0.1s ease,
+        padding 0.4s ease;
+    outline: none;
+    z-index: 1000;
+}
+
+/* אפקט Hover במצב סגור */
+.AboutMe-button:hover:not(.open):not(:disabled) {
+    transform: scale(1.05);
+}
+
+.AboutMe-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* האייקון */
+.AboutMe-img {
+    width: 2.2vh; /* גודל מעט יותר מדויק */
+    height: 2.2vh;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: none; /* צבע מקורי במצב סגור */
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+}
+
+/* הטקסט */
+.AboutMe-text {
+    font-family: 'assistant';
+    font-size: 1.8vh;
+    font-weight: bold;
+    color: #FAF8F3;
+    white-space: nowrap;
+    opacity: 0;
+    max-width: 0; /* משתמשים ב-max-width במקום transform כדי שלא יתפוס מקום כשהוא סגור */
+    transition: 
+        opacity 0.25s ease,
+        max-width 0.35s ease;
+}
+
+/* =========================================
+   מצב פתוח (ורוד, רחב ויציב)
+   ========================================= */
+
+.AboutMe-button.open {
+    width: 28vh; /* מספיק מקום לכל הטקסט */
+    background-color: #ffa2d0;
+    border-color: #ec82b7;
+    
+    /* במקום row-reverse, פשוט נצמד לימין באופן טבעי בגלל ה-RTL */
+    justify-content: flex-start; 
+    padding-right: 1.8vh; /* רווח קבוע ומדויק של ה-i מהקצה הימני */
+    padding-left: 1.5vh;
+    
+    box-shadow: 0 0.5vh 1.5vh rgba(255, 107, 139, 0.4);
+}
+
+/* סיבוב ה-i והפיכתו ללבן */
+.AboutMe-button.open .AboutMe-img {
+    transform: rotate(360deg);
+    filter: brightness(0) invert(1); /* הופך את ה-i הכחול שלכם ללבן נקי */
+}
+
+/* פתיחת הטקסט הצידה */
+.AboutMe-button.open .AboutMe-text {
+    opacity: 1;
+    max-width: 25vh; /* מאפשר לטקסט להיפתח הצידה */
+    margin-right: 1.2vh; /* רווח נקי בין ה-i לטקסט */
+    transition-delay: 0.1s; /* מחכה חלקיק שנייה שהכפתור יתחיל להתרחב */
+}

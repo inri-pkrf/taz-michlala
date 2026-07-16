@@ -21,6 +21,8 @@ function HomeButton({ onClick, progress, disabled = false }) {
           className="home-icon-img"
         />
       </button>
+
+
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Globe from 'react-globe.gl';
 import '../style/ForeignRelations.css';
 import HomeButton from '../components/HomeButtons'; 
 import NextButton from '../components/NextButton'; 
+import AboutMe from '../components/AboutMe';
 
 function ForeignRelations({ onGoHome, progress, onProgress }) {
   const globeEl = useRef();
@@ -68,7 +69,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   return (
     <div className="page-container">
       <HomeButton onClick={onGoHome} progress={progress} />
-      
+      <AboutMe/>
       <img
         className="welcomePage-logo"
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}

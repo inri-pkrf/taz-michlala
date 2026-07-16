@@ -1,12 +1,13 @@
 import React from 'react';
 import '../style/HomePage.css';
 
+
 function HomePage({ onNavigate, showQuizAvailable }) {
   return (
     <div className="page-container">
       <h1 id="homePage-title">עמוד הבית</h1>
       <p id="homePage-description">כל תג שם מהווה נושא, יש ללחוץ על התג הראשון על מנת להתחיל, תהנו :)</p>
-      
+  
       <img
         className={`welcomePage-logo`}
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}

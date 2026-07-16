@@ -1,6 +1,6 @@
 .next-button{
-    position: absolute;
-    bottom: 5svh; 
+    position: fixed;
+    bottom: 3svh; 
     padding: 1vh 5vw;
     left: 50%;
     transform: translateX(-50%);   

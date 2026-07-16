@@ -68,7 +68,7 @@
     width: 90vw;
     text-align: center;
     font-weight: bold;
-    top: 10vh;
+    top: 12vh;
     left: 50%;
     transform: translateX(-50%);
     font-family: "Karantina";
@@ -79,7 +79,7 @@
     position: absolute;
     font-size: 4vw; /* שינוי ל-vw אחיד */
     width: 85vw;
-    top: 19vh;
+    top: 22vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
