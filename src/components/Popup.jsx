@@ -11,6 +11,7 @@ function Popup({ title, content, bgColor = '#ffffff', borderColor = '#000641', i
       >
         {/* אם זה פופ-אפ רגיל (לא אזהרה), נציג כפתור איקס בצבע של הבורדר */}
         {!isWarning && (
+          
           <button 
             className="popup-close-x" 
             onClick={onClose}

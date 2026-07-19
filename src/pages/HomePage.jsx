@@ -21,11 +21,14 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
       <h1 id="homePage-title">עמוד הבית</h1>
       <p id="homePage-description">כל תג שם מהווה נושא, יש ללחוץ על התגים לפי הסדר, תהנו :)</p>
   
+
       <img
         className={`welcomePage-logo`}
         src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
         alt="logo"
       />
+
+
       
       <div className="topics-menu">
         
@@ -59,6 +62,8 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
             <p className="tag-text text-blue">הספרייה הלאומית</p>
         </div>
 
+
+
         {/* תג 4 - קשרי חוץ (ורוד) */}
         <div 
           className={`tag-wrapper pink-tag ${isTagDisabled(4) ? 'disabled' : ''}`} 
@@ -80,6 +85,8 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
         </div>
 
       </div>
+      
+
       
       {showQuizAvailable && (
         <div style={{ marginTop: '3vh', textAlign: 'center' }}>

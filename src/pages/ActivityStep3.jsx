@@ -13,7 +13,7 @@ function ActivityStep3() {
               src={`${process.env.PUBLIC_URL}/assets/Activity/gif.gif`} 
               alt="פעילות המכללה" 
               id="activity-gif"
-              style={{ maxWidth: '80vw', maxHeight: '50vh', borderRadius: '1.5vh', boxShadow: '0 8px 24px rgba(0,0,0,0.5) left: 5vw;  ' }} 
+              style={{ maxWidth: '80vw', maxHeight: '50vh', borderRadius: '1.5vh' }} 
             />
 
 
