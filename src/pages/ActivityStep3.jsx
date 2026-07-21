@@ -15,6 +15,9 @@ function ActivityStep3() {
               id="activity-gif"
               style={{ maxWidth: '80vw', maxHeight: '50vh', borderRadius: '1.5vh' }} 
             />
+      <p id="activityStep3-text2"> 
+        כאן כולם נפגשים
+      </p>
 
 
 

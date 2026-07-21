@@ -53,7 +53,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
       id: 4,
       name: "אוסטרליה",
       flag: "🇦🇺",
-      content: "סתם מישהו",
+      content: " נציגי הקהילה היהודית ",
       lat: -33.8688,   
       lng: 151.2093,   
       baseColor: "#00BCD4", 

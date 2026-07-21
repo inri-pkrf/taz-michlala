@@ -66,9 +66,9 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 63vh;
-    font-size: 4vh;
-    margin-top: 0.5vh;
+    top: 64vh;
+    font-size: 3.5vh;
+    margin-top: 0.6vh;
     line-height: 1.4;
     font-family: "karantina";
     direction: rtl;
@@ -92,7 +92,7 @@
     top: 68vh;
     left: 50%;  
     transform: translateX(-50%);    
-    font-size: 4vw;
+    font-size: 4.5vw;
     text-align: center;
     direction: rtl;
     padding: 1vh 2vh;

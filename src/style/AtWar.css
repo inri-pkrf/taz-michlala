@@ -90,12 +90,12 @@
 
 .war-long-text{
     position: absolute;
-    font-size: 4.2vmin;
+    font-size: 4.4vmin;
     top: 25vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: right;
-    width: 75vw;
+    width: 80vw;
     font-weight: 100;
     line-height: 1.4;
     direction: rtl;

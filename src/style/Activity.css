@@ -260,8 +260,8 @@
 
 #activityStep4-text3{
     position: absolute;
-    font-size: 3.8vw;
-    width: 77vw;
+    font-size: 4vw;
+    width: 83vw;
     top: 56vh;
     left: 50%;
     transform: translateX(-50%);
@@ -334,4 +334,15 @@
     cursor: pointer;
     z-index: 10001;
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+#activityStep3-text2{
+    position: absolute;
+    font-size: 5vw;
+    width: 80vw;
+    top: 70vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    direction: rtl;
 }
