@@ -1,12 +1,10 @@
 .next-button{
-    position: fixed;
-    bottom: 1svh; 
-    padding: 1vh 8vw;
-    left: 50%;
-    transform: translateX(-50%);   
+    position: absolute;   /* לא fixed יותר */
+    bottom: -2svh;      /* אם הוא בתוך flex column, זה דוחף אותו לתחתית הקונטיינר */
+    padding: 1vh 10vw;
     background: linear-gradient(45deg, #5289ff 0%, #c88dff 100%);
-    border: 0.3vh solid #000641; /* עובי מסגרת דקה */
-    border-radius: 2vh; /* עיגול מושלם של הכפתור כולו */
+    border: 0.3vh solid #000641;
+    border-radius: 2vh;
     cursor: pointer;
     font-size: 5vmin;
     text-align: center;

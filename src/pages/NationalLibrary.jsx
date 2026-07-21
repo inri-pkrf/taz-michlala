@@ -268,7 +268,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
 
   return (
     <div className="page-container" style={{ position: 'relative' }}>
-      <HomeButton onClick={onGoHome} progress={progress} />
+     
       <AboutMe/>
       {/* <img
         className="welcomePage-logo"
@@ -352,7 +352,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         })
       }
 
-      <NextButton onClick={() => { onProgress?.('nationalLibrary'); onGoHome(); }} />
+      
 
       {activePopup && (
         <Popup 
@@ -363,7 +363,8 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
           onClose={() => setActivePopup(null)}
         />
       )}
-
+       <HomeButton onClick={onGoHome} progress={progress} />
+       <NextButton onClick={() => { onProgress?.('nationalLibrary'); onGoHome(); }} />
     </div>
   );
 }

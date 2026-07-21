@@ -14,6 +14,12 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   // מערך ששומר את ה-IDs של המדינות שהמשתמש כבר לחץ עליהן
   const [visitedIds, setVisitedIds] = useState([]);
 
+  // ניהול דינמי של גודל הגלובוס בהתאמה לשינויי מסך
+  const [globeDimensions, setGlobeDimensions] = useState({
+    width: window.innerWidth * 0.75,
+    height: window.innerHeight * 0.45
+  });
+
   // נתוני המדינות עם קואורדינטות מתוקנות ומדויקות
   const countriesData = [
     {
@@ -42,6 +48,15 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
       lat: 40.4637,   
       lng: -3.7492,   
       baseColor: "#FF9800", 
+    },
+    {
+      id: 4,
+      name: "אוסטרליה",
+      flag: "🇦🇺",
+      content: "סתם מישהו",
+      lat: -33.8688,   
+      lng: 151.2093,   
+      baseColor: "#00BCD4", 
     }
   ];
 
@@ -52,29 +67,45 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   // לוגיקת הלחיצה החופשית על נקודה בגלובוס
   const handlePinClick = (pin) => {
     setSelectedCountry(pin);
-    globeEl.current.pointOfView({ lat: pin.lat, lng: pin.lng, altitude: 2 }, 1000);
+    if (globeEl.current) {
+      globeEl.current.pointOfView({ lat: pin.lat, lng: pin.lng, altitude: 2 }, 1000);
+    }
 
     if (!visitedIds.includes(pin.id)) {
       setVisitedIds(prev => [...prev, pin.id]);
     }
   };
 
+  // האזנה לשינויי גודל מסך
   useEffect(() => {
+    const handleResize = () => {
+      setGlobeDimensions({
+        width: window.innerWidth * 0.75,
+        height: window.innerHeight * 0.45
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // הגדרת נקודת מבט ראשונית וביטול סיבוב אוטומטי
     if (globeEl.current) {
-      globeEl.current.pointOfView({ lat: 35, lng: 15, altitude: 2.3 });
-      globeEl.current.controls().autoRotate = false;
+      globeEl.current.pointOfView({ lat: 20, lng: 30, altitude: 2.5 });
+      
+      const controls = globeEl.current.controls?.();
+      if (controls) {
+        controls.autoRotate = false;
+      }
     }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
     <div className="page-container">
       <HomeButton onClick={onGoHome} progress={progress} />
-      <AboutMe/>
-      {/* <img
-        className="welcomePage-logo"
-        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
-        alt="logo"
-      /> */}
+      <AboutMe />
 
       <h1 id="activity-title">קשרי חוץ</h1>
       <p id="ForeignRelations-text1">אנחנו לגמרי בינלאומיים!</p>
@@ -82,14 +113,18 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
 
       {/* מיכל הגלובוס התלת ממדי */}
       <div className="globe-wrapper">
+        {/* תגית המספור הקטנה בפינה הימנית העליונה */}
+        <div className="countries-counter-badge">
+          {visitedCount} / {totalCountries}
+        </div>
+
         <Globe
           ref={globeEl}
-          width={window.innerWidth * 0.75}
-          height={window.innerHeight * 0.45}
+          width={globeDimensions.width}
+          height={globeDimensions.height}
           backgroundColor="rgba(0,0,0,0)" 
           showAtmosphere={false}
           
-          // השארנו את תמונות הכדור המקוריות שלך בדיוק כפי שביקשת
           globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
           bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
           
@@ -98,16 +133,9 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
           labelLng={d => d.lng}
           labelText={d => d.flag} 
           
-          // גודל קבוע וענק עבור הדגל ללא אנימציית גדילה
           labelSize={4.2}
-          
-          // גודל קבוע, ענק ובולט עבור העיגול הצבעוני (הנקודה)
           labelDotRadius={4.5}
-          
-          // ביטול מוחלט של האנימציה וזמן המעבר של הלייבלים
           labelTransitionDuration={0}
-          
-          // הרחבת שטח הטאץ' ללחיצה נוחה וקלה במובייל
           labelIncludeDot={true}
           pointerEventsFilter={() => true}
           
@@ -120,9 +148,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
       {/* כרטיס המידע התחתון המעוצב */}
       <div className={`info-card-container ${selectedCountry ? 'card-show' : ''}`}>
         {selectedCountry && (
-          <>
-            <p className="meeting-content">{selectedCountry.content}</p>
-          </>
+          <p className="meeting-content">{selectedCountry.content}</p>
         )}
       </div>
       
@@ -130,7 +156,10 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
         מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום
       </p>
 
-      <NextButton onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} disabled={visitedCount < totalCountries} />
+      <NextButton 
+        onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} 
+        disabled={visitedCount < totalCountries} 
+      />
     </div>
   );
 }

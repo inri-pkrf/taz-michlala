@@ -35,14 +35,16 @@ function AboutMe({ disabled = false }) {
       aria-label="אודות"
       disabled={disabled}
     >
-      {/* האייקון ראשון - ב-RTL הוא יהיה בצד ימין באופן טבעי */}
       <img
         src={`${process.env.PUBLIC_URL}/assets/HomePage/info.png`}
         alt="אודות"
         className="AboutMe-img"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.style.display = 'none';
+        }}
       />
       
-      {/* הטקסט שני - ייפתח שמאלה מהאייקון */}
       <span className="AboutMe-text">
         מפתחת לומדה: שלי יצחק
       </span>

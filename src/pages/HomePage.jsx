@@ -87,7 +87,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
       </div>
       
 
-      
+
       {showQuizAvailable && (
         <div style={{ marginTop: '3vh', textAlign: 'center' }}>
           <img

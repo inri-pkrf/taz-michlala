@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 
+
+
 function ActivityStep1() {
   const [isImageOpen, setIsImageOpen] = useState(false);
+
 
   return (
     <div className="page-container">   
@@ -68,6 +71,7 @@ function ActivityStep1() {
               לחצו מקום כלשהו במסך כדי לחזור
             </p>
           </div>
+
         </div>
       )}
       

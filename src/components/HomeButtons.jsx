@@ -19,10 +19,13 @@ function HomeButton({ onClick, progress, disabled = false }) {
           src={`${process.env.PUBLIC_URL}/assets/HomePage/Vector.png`}
           alt="בית"
           className="home-icon-img"
+          onError={(e) => {
+            // מונע ניסיון טעינה חוטא בלולאה במידה והתמונה חסרה
+            e.target.onerror = null; 
+            e.target.style.display = 'none';
+          }}
         />
       </button>
-
-
     </div>
   );
 }
