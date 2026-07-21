@@ -48,7 +48,7 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
       audioRef.current = new Audio(soundUrl);
       audioRef.current.preload = 'auto';
       audioRef.current.addEventListener('error', () => {
-        if (audioRef.current.currentSrc !== fallbackUrl) {
+        if (audioRef.current && audioRef.current.currentSrc !== fallbackUrl) {
           audioRef.current.src = fallbackUrl;
           audioRef.current.load();
           audioRef.current.play().catch(() => {});
@@ -85,6 +85,16 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
       window.removeEventListener('pointerdown', unlockAudio);
       window.removeEventListener('touchstart', unlockAudio);
       window.removeEventListener('click', unlockAudio);
+
+      // ניקוי אודיו בעת יציאה מרכיב החידון
+      if (hallelujahAudio.current) {
+        hallelujahAudio.current.pause();
+        hallelujahAudio.current = null;
+      }
+      if (loserAudio.current) {
+        loserAudio.current.pause();
+        loserAudio.current = null;
+      }
     };
   }, []);
 
@@ -123,8 +133,9 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
     setClockRotation(0);
   };
 
+  // מופחת ל-18 כוכבים במקום 55 למניעת עומס זיכרון בניידים
   const renderStarRain = () => {
-    return Array.from({ length: 55 }).map((_, i) => {
+    return Array.from({ length: 18 }).map((_, i) => {
       const randomLeft = Math.random() * 100;
       const randomDelay = Math.random() * 3;
       const randomDuration = 2 + Math.random() * 2;
@@ -151,7 +162,6 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
       {!submitted ? (
         <div className="quiz-form" style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           
-          {/* 1. מספור השאלות */}
           <div style={{ 
             width: '100%',
             textAlign: 'center', 
@@ -164,7 +174,6 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
             שאלה {currentQuestion + 1} מתוך {QUESTIONS.length}
           </div>
 
-          {/* 2. תמונת השעון המסתובב */}
           <img
             className="quiz-clock"
             src={`${process.env.PUBLIC_URL}/assets/Quiz/clock.png`}
@@ -179,7 +188,6 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
             }} 
           />
 
-          {/* 3. השאלה והתשובות */}
           <div className="quiz-question" style={{ width: '100%' }}>
             <h3>{question.q}</h3>
             {question.choices.map((choice, index) => {
@@ -197,7 +205,6 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
             })}
           </div>
 
-          {/* 4. כפתור חזור */}
           <div className="quiz-actions" style={{ marginTop: '1rem', width: '30vw' }}>
             <div 
               role="button"

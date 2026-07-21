@@ -1,6 +1,6 @@
 .next-button{
     position: absolute;   /* לא fixed יותר */
-    bottom: 0.3svh;      /* אם הוא בתוך flex column, זה דוחף אותו לתחתית הקונטיינר */
+    bottom: 0.5svh;      /* אם הוא בתוך flex column, זה דוחף אותו לתחתית הקונטיינר */
     padding: 1vh 10vw;
     background: linear-gradient(45deg, #5289ff 0%, #c88dff 100%);
     border: 0.3vh solid #000641;

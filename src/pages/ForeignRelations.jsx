@@ -8,19 +8,14 @@ import AboutMe from '../components/AboutMe';
 function ForeignRelations({ onGoHome, progress, onProgress }) {
   const globeEl = useRef();
   
-  // ניהול המדינה שנבחרה כרגע להצגה בכרטיס התחתון
   const [selectedCountry, setSelectedCountry] = useState(null);
-
-  // מערך ששומר את ה-IDs של המדינות שהמשתמש כבר לחץ עליהן
   const [visitedIds, setVisitedIds] = useState([]);
 
-  // ניהול דינמי של גודל הגלובוס בהתאמה לשינויי מסך
   const [globeDimensions, setGlobeDimensions] = useState({
-    width: window.innerWidth * 0.75,
-    height: window.innerHeight * 0.45
+    width: Math.min(window.innerWidth * 0.8, 350),
+    height: Math.min(window.innerHeight * 0.4, 320)
   });
 
-  // נתוני המדינות עם קואורדינטות מתוקנות ומדויקות
   const countriesData = [
     {
       id: 1,
@@ -60,15 +55,13 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
     }
   ];
 
-  // חישוב המונים בזמן אמת
   const totalCountries = countriesData.length;
   const visitedCount = visitedIds.length;
 
-  // לוגיקת הלחיצה החופשית על נקודה בגלובוס
   const handlePinClick = (pin) => {
     setSelectedCountry(pin);
     if (globeEl.current) {
-      globeEl.current.pointOfView({ lat: pin.lat, lng: pin.lng, altitude: 2 }, 1000);
+      globeEl.current.pointOfView({ lat: pin.lat, lng: pin.lng, altitude: 2 }, 800);
     }
 
     if (!visitedIds.includes(pin.id)) {
@@ -76,29 +69,32 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
     }
   };
 
-  // האזנה לשינויי גודל מסך
   useEffect(() => {
     const handleResize = () => {
       setGlobeDimensions({
-        width: window.innerWidth * 0.75,
-        height: window.innerHeight * 0.45
+        width: Math.min(window.innerWidth * 0.8, 350),
+        height: Math.min(window.innerHeight * 0.4, 320)
       });
     };
 
     window.addEventListener('resize', handleResize);
 
-    // הגדרת נקודת מבט ראשונית וביטול סיבוב אוטומטי
     if (globeEl.current) {
       globeEl.current.pointOfView({ lat: 20, lng: 30, altitude: 2.5 });
       
       const controls = globeEl.current.controls?.();
       if (controls) {
         controls.autoRotate = false;
+        controls.enableZoom = false; // מונע קריסות מגע בנייד
       }
     }
 
+    // ניקוי מוחלט של זיכרון ה-WebGL בעת יציאה מהמסך
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (globeEl.current && typeof globeEl.current._destructor === 'function') {
+        globeEl.current._destructor();
+      }
     };
   }, []);
 
@@ -111,9 +107,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
       <p id="ForeignRelations-text1">אנחנו לגמרי בינלאומיים!</p>
       <p id="ForeignRelations-text2">סובבו את הגלובוס ולחצו על המדינות</p>
 
-      {/* מיכל הגלובוס התלת ממדי */}
       <div className="globe-wrapper">
-        {/* תגית המספור הקטנה בפינה הימנית העליונה */}
         <div className="countries-counter-badge">
           {visitedCount} / {totalCountries}
         </div>
@@ -125,27 +119,26 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
           backgroundColor="rgba(0,0,0,0)" 
           showAtmosphere={false}
           
-          globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-          bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+          // תמונה מותאמת ביצועים במקום הקבצים הכבדים של unpkg
+          globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg"
           
           labelsData={countriesData} 
           labelLat={d => d.lat}
           labelLng={d => d.lng}
           labelText={d => d.flag} 
           
-          labelSize={4.2}
-          labelDotRadius={4.5}
+          labelSize={3.5}
+          labelDotRadius={4}
           labelTransitionDuration={0}
           labelIncludeDot={true}
           pointerEventsFilter={() => true}
           
           labelColor={d => visitedIds.includes(d.id) ? '#7f8c8d' : d.baseColor}
-          labelResolution={2}
+          labelResolution={1}
           onLabelClick={handlePinClick}
         />
       </div>
 
-      {/* כרטיס המידע התחתון המעוצב */}
       <div className={`info-card-container ${selectedCountry ? 'card-show' : ''}`}>
         {selectedCountry && (
           <p className="meeting-content">{selectedCountry.content}</p>
