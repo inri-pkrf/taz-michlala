@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/taz-michlala/static/css/main.cacfb301.css",
-    "main.js": "/taz-michlala/static/js/main.efd0c328.js",
+    "main.css": "/taz-michlala/static/css/main.acab79e3.css",
+    "main.js": "/taz-michlala/static/js/main.07862436.js",
     "static/js/453.458b62f2.chunk.js": "/taz-michlala/static/js/453.458b62f2.chunk.js",
     "index.html": "/taz-michlala/index.html",
-    "main.cacfb301.css.map": "/taz-michlala/static/css/main.cacfb301.css.map",
-    "main.efd0c328.js.map": "/taz-michlala/static/js/main.efd0c328.js.map",
+    "main.acab79e3.css.map": "/taz-michlala/static/css/main.acab79e3.css.map",
+    "main.07862436.js.map": "/taz-michlala/static/js/main.07862436.js.map",
     "453.458b62f2.chunk.js.map": "/taz-michlala/static/js/453.458b62f2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cacfb301.css",
-    "static/js/main.efd0c328.js"
+    "static/css/main.acab79e3.css",
+    "static/js/main.07862436.js"
   ]
 }
