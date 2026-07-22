@@ -110,7 +110,7 @@ const warsData = {
   yomKippur: {
     title: "מבצע שאגת הארי",
     date: "18.2.2026",
-    shortDescription: "כאן נכנס תקציר קצר ...",
+    shortDescription: " עם פרוץ המבצע, המכללה המשיכה בפעילויותיה בתנאים מיוחדים. ",
     videoUrl: "https://inri-pkrf.github.io/know-college/assets/media/war.mp4",
     videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
     customImages: [
@@ -125,13 +125,41 @@ const warsData = {
         showOnPage: 2
       }
     ],
-    longDescription: "כאן נכנסת הפסקה המורחבת של העמוד ...",
+    longDescription: "המכללה המשיכה בפעילויותיה ובתוכנית ההכשרות גם בתקופה זו, תוך התאמה לתנאים המשתנים ומצב הביטחון הנוכחי.",
     bgImage: `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.webp`, 
     popups: [
-      { id: 1, title: "כותרת פופאפ 1", content: "תוכן שונה למלחמה זו...", borderColor: "#8D242D" , x: "70%", y: "5%", width: "20%", height: "35%", topNum: "7vh", leftNum: "69vw" },
-      { id: 2, title: "כותרת פופאפ 2", content: "תוכן שונה למלחמה זו...", borderColor: "#B74548", x: "48%", y: "20%", width: "18%", height: "20%", topNum: "14vh", leftNum: "35vw" },
-      { id: 3, title: "כותרת פופאפ 3", content: "תוכן שונה למלחמה זו...", borderColor: "#924768", x: "25%", y: "2%", width: "18%", height: "38%", topNum: "2vh", leftNum: "16vw" },
-      { id: 4, title: "כותרת פופאפ 4", content: "תוכן שונה למלחמה זו...", borderColor: "#585480", x: "1%", y: "5%", width: "19%", height: "35%", topNum: "7vh", leftNum: "-3vw" }
+      { 
+        id: 1, 
+        title: "כותרת פופאפ 1", 
+        content: "תוכן שונה למלחמה זו...", 
+        borderColor: "#8D242D" , 
+        x: "70%", y: "5%", width: "20%", height: "35%", 
+        topNum: "7vh", leftNum: "69vw" 
+      },
+      { 
+        id: 2, 
+        title: "כותרת פופאפ 2", 
+        content: "תוכן שונה למלחמה זו...", 
+        borderColor: "#B74548", 
+        x: "48%", y: "20%", width: "18%", height: "20%", 
+        topNum: "14vh", leftNum: "35vw" 
+      },
+      { 
+        id: 3, 
+        title: "כותרת פופאפ 3", 
+        content: "תוכן שונה למלחמה זו...", 
+        borderColor: "#924768", 
+        x: "25%", y: "2%", width: "18%", height: "38%", 
+        topNum: "2vh", leftNum: "16vw" 
+      },
+      { 
+        id: 4, 
+        title: "כותרת פופאפ 4", 
+        content: "תוכן שונה למלחמה זו...", 
+        borderColor: "#585480", 
+        x: "1%", y: "5%", width: "19%", height: "35%", 
+        topNum: "7vh", leftNum: "-3vw" 
+      }
     ]
   }
 };

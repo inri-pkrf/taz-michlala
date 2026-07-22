@@ -30,11 +30,8 @@ function App() {
   const [userFirstName, setUserFirstName] = useState('');
 
   // סטייט חדש: שומר כמה נושאים פתוחים כרגע למשתמש (מתחיל ב-1)
-  // אתחול גם מהמאגר המקומי
-  const [unlockedTopicCount, setUnlockedTopicCount] = useState(() => {
-    const saved = localStorage.getItem('unlockedTopicCount');
-    return saved ? parseInt(saved, 10) : 1;
-  });
+  // **אל תשמור ב-localStorage** - זה עדכן בכל סשן
+  const [unlockedTopicCount, setUnlockedTopicCount] = useState(1);
 
   // סטייט חדש: מעקב אחרי הנושאים שסיימו בסשן הנוכחי (לא מhashStorage)
   const [currentSessionCompletedTopics, setCurrentSessionCompletedTopics] = useState(new Set());
@@ -58,11 +55,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('completedProgressActions', JSON.stringify(completedProgressActions));
   }, [completedProgressActions]);
-
-  // שמירה של unlockedTopicCount ל-localStorage כשהוא משתנה
-  useEffect(() => {
-    localStorage.setItem('unlockedTopicCount', unlockedTopicCount.toString());
-  }, [unlockedTopicCount]);
 
   const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
   
@@ -92,6 +84,12 @@ function App() {
     };
 
     const clickedTopicNum = routeToNumber[route];
+
+    // בדיקה: רק תן לגשת לנושא אם הוא בתוך המגבלה
+    if (clickedTopicNum && clickedTopicNum > unlockedTopicCount) {
+      // נושא זה לא זמין עדיין
+      return;
+    }
 
     // אם המשתמש נכנס לנושא שהוא הכי מתקדם שלו כרגע, נפתח לו את הנושא הבא בתור
     if (clickedTopicNum && clickedTopicNum === unlockedTopicCount) {
