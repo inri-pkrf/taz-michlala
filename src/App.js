@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 // ייבוא כל העמודים והקומפוננטות
@@ -16,7 +16,13 @@ function App() {
   // המצב (State) שקובע איזה עמוד מוצג כרגע
   const [currentPage, setCurrentPage] = useState('welcome');
   const TOTAL_PROGRESS_STEPS = 13;
-  const [completedProgressActions, setCompletedProgressActions] = useState([]);
+  
+  // אתחול מהמאגר המקומי (localStorage)
+  const [completedProgressActions, setCompletedProgressActions] = useState(() => {
+    const saved = localStorage.getItem('completedProgressActions');
+    return saved ? JSON.parse(saved) : [];
+  });
+  
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
   
@@ -24,7 +30,39 @@ function App() {
   const [userFirstName, setUserFirstName] = useState('');
 
   // סטייט חדש: שומר כמה נושאים פתוחים כרגע למשתמש (מתחיל ב-1)
-  const [unlockedTopicCount, setUnlockedTopicCount] = useState(1);
+  // אתחול גם מהמאגר המקומי
+  const [unlockedTopicCount, setUnlockedTopicCount] = useState(() => {
+    const saved = localStorage.getItem('unlockedTopicCount');
+    return saved ? parseInt(saved, 10) : 1;
+  });
+
+  // סטייט חדש: מעקב אחרי הנושאים שסיימו בסשן הנוכחי (לא מhashStorage)
+  const [currentSessionCompletedTopics, setCurrentSessionCompletedTopics] = useState(new Set());
+
+  // עקוב אחרי העמוד הקודם כדי לדעת אם משתמשת עזבה נושא
+  const [previousPage, setPreviousPage] = useState('welcome');
+
+  // בדוק אם משתמשת חוזרת לעמוד הבית מנושא - אם כן, סמן את הנושא כמסיים
+  useEffect(() => {
+    const topicPages = ['activity', 'digitalAssets', 'nationalLibrary', 'foreignRelations', 'atWar'];
+    
+    // אם משתמשת הייתה בנושא וכרגע היא בעמוד הבית, סמן את הנושא כמסיים
+    if (topicPages.includes(previousPage) && currentPage === 'home') {
+      setCurrentSessionCompletedTopics((prev) => new Set([...prev, previousPage]));
+    }
+    
+    setPreviousPage(currentPage);
+  }, [currentPage, previousPage]);
+
+  // שמירה של completedProgressActions ל-localStorage כשהוא משתנה
+  useEffect(() => {
+    localStorage.setItem('completedProgressActions', JSON.stringify(completedProgressActions));
+  }, [completedProgressActions]);
+
+  // שמירה של unlockedTopicCount ל-localStorage כשהוא משתנה
+  useEffect(() => {
+    localStorage.setItem('unlockedTopicCount', unlockedTopicCount.toString());
+  }, [unlockedTopicCount]);
 
   const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
   
@@ -38,6 +76,12 @@ function App() {
 
   // פונקציית ניווט חכמה שמנהלת את פתיחת הנושאים לפי סדר הכניסה
   const handleNavigate = (route) => {
+    // אם הנתיב הוא לבוחן, פשוט עבור לשם
+    if (route === 'quizIntro') {
+      setCurrentPage('quizIntro');
+      return;
+    }
+
     // מיפוי של ה-Route למספר הנושא
     const routeToNumber = {
       'activity': 1,
@@ -61,7 +105,8 @@ function App() {
   // פונקציה שמחליטה איזו קומפוננטה לרנדר על המסך
   const renderPage = () => {
     const requiredTopics = ['activity','digitalAssets','nationalLibrary','foreignRelations','atWar'];
-    const showQuizAvailable = requiredTopics.every(t => completedProgressActions.some(k => k.startsWith(t)));
+    // בדיקה אם כל הנושאים הושלמו בסשן הנוכחי (לא רק מ-localStorage)
+    const showQuizAvailable = requiredTopics.every(t => currentSessionCompletedTopics.has(t));
 
     switch (currentPage) {
       case 'welcome':
