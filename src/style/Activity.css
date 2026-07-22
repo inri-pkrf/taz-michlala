@@ -20,7 +20,7 @@
     position: absolute;
     font-size: 5.5vmin;
     width: 80vw;
-    top: 19vh;
+    top: 15vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -30,12 +30,12 @@
 
 
 #activity-text3{
-    position: absolute;
+    position: relative;
     font-size: 4.5vw;
     width: 80vw;
-    top: 70vh;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 64vh;
+    /* left: 50%;
+    transform: translateX(-50%); */
     text-align: center;
     direction: rtl;
 }
@@ -52,7 +52,7 @@
 /* הקונטיינר החדש שעוטף את הכל - מחליף את המיקום המוחלט שהיה על הטקסט */
 .activity-text-container {
     position: absolute;
-    top: 35vh;
+    top: 30vh;
     left: 50%;
     transform: translateX(-50%);
     width: 75vw;
@@ -107,7 +107,7 @@
     position: absolute;
     width: 15vw;
     height: 4.5vh;
-    top: 30.5vh;
+    top: 25.5vh;
     left: 22vw;
     z-index: 10;
 
@@ -250,19 +250,20 @@
     position: absolute;
     font-size: 3vw;
     width: 60vw;
-    top: 32vh;
+    top: 30vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     direction: rtl;
     border-radius: 2.5vh;
+    
 }
 
 #activityStep4-text3{
     position: absolute;
     font-size: 4vw;
     width: 83vw;
-    top: 56vh;
+    top: 54vh;
     left: 50%;
     transform: translateX(-50%);
     font-weight: 600;
@@ -278,7 +279,7 @@
     position: absolute;
     width: 49vw;
     height: 11vh;
-    top: 74vh;
+    top: 72vh;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -287,7 +288,7 @@
     position: absolute;
     width: 32vw;
     height: 17vh;
-    top: 38vh;
+    top: 36vh;
     left: 50%;
     transform: translateX(-50%);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../style/AtWar.css';
 import HomeButton from '../components/HomeButtons'; 
 import NextButton from '../components/NextButton'; 
@@ -6,7 +6,7 @@ import Popup from '../components/Popup';
 import StepNumber from '../components/StepNumber'; 
 import AboutMe from '../components/AboutMe';
 
-// פונקציית העזר המקורית שלך
+// פונקציית עזר לחישוב צבע כהה חצי-שקוף
 const getDarkTranslucentColor = (hex, alpha = 0.8) => {
   const cleanHex = hex.replace('#', '');
   let r = parseInt(cleanHex.slice(0, 2), 16);
@@ -18,7 +18,25 @@ const getDarkTranslucentColor = (hex, alpha = 0.8) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
-// נתוני המלחמות
+// פיצול כותרת המלחמה/מבצע לשתי שורות
+const renderSplitWarTitle = (title) => {
+  if (!title) return '';
+  const firstSpaceIndex = title.indexOf(' ');
+  if (firstSpaceIndex === -1) return title;
+
+  const firstWord = title.substring(0, firstSpaceIndex);
+  const restOfTitle = title.substring(firstSpaceIndex + 1);
+
+  return (
+    <>
+      {firstWord}
+      <br />
+      {restOfTitle}
+    </>
+  );
+};
+
+// נתוני המלחמות (מוגדרים מחוץ לרכיב למניעת יצירה מחדש בכל רנדור)
 const warsData = {
   ironSwords: {
     title: "מלחמת חרבות ברזל",
@@ -29,13 +47,13 @@ const warsData = {
     customImages: [
       {
         src: `${process.env.PUBLIC_URL}/assets/AtWar/IronSwords/sords.webp`,
-        className: "IronSwords-sords", // תוכלי למקם ב-CSS באמצעות Class זה
-        showOnPage: 1 // יוצג רק בעמוד הראשון
+        className: "IronSwords-sords",
+        showOnPage: 1
       },
       {
         src: `${process.env.PUBLIC_URL}/assets/AtWar/ironSwords/custom2.png`,
         className: "AtWar-custom-pic-two", 
-        showOnPage: 2 // יוצג רק בעמוד השני
+        showOnPage: 2
       }
     ],
     longDescription: ` במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית. `,
@@ -70,10 +88,11 @@ const warsData = {
         title: `ביקור נשיא המדינה ורעייתו במרס"ל`, 
         content: (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <span></span>
             <img 
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/marsel.jpg`} 
-              alt="img"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/marsel.webp`} 
+              alt="ביקור נשיא המדינה"
+              loading="lazy"
+              decoding="async"
               style={{ 
                 width: '100%', 
                 borderRadius: '1vh', 
@@ -97,13 +116,13 @@ const warsData = {
     customImages: [
       {
         src: `${process.env.PUBLIC_URL}/assets/AtWar/LionRoar/lion.webp`,
-        className: "LionRoar-lion", // תוכלי למקם ב-CSS באמצעות Class זה
-        showOnPage: 1 // יוצג רק בעמוד הראשון
+        className: "LionRoar-lion",
+        showOnPage: 1
       },
       {
         src: `${process.env.PUBLIC_URL}/assets/AtWar/ironSwords/custom2.png`,
         className: "AtWar-custom-pic-two", 
-        showOnPage: 2 // יוצג רק בעמוד השני
+        showOnPage: 2
       }
     ],
     longDescription: "כאן נכנסת הפסקה המורחבת של העמוד ...",
@@ -122,61 +141,44 @@ function AtWar({ onGoHome, progress, onProgress }) {
   const [activePopup, setActivePopup] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [nextRequiredId, setNextRequiredId] = useState(1);
-  const pendingSoundRef = useRef(null);
-
-  // הוספת סטייט לניהול המלחמה הנוכחית
   const [currentWarKey, setCurrentWarKey] = useState('ironSwords'); 
+
+  const pendingSoundRef = useRef(null);
   const data = warsData[currentWarKey];
 
-  // פונקציית עזר המפצלת את כותרת המלחמה/מבצע לשתי שורות (מילה ראשונה בנפרד, והשאר מתחת)
-  const renderSplitWarTitle = (title) => {
-    if (!title) return '';
-    const firstSpaceIndex = title.indexOf(' ');
-    if (firstSpaceIndex === -1) return title; // אם אין רווח, נחזיר את הכותרת בשלמותה
-
-    const firstWord = title.substring(0, firstSpaceIndex); // "מלחמת" או "מבצע"
-    const restOfTitle = title.substring(firstSpaceIndex + 1); // "חרבות ברזל" או "שאגת הארי"
-
-    return (
-      <>
-        {firstWord}
-        <br />
-        {restOfTitle}
-      </>
-    );
-  };
-
-  const playAudioFile = (fileName, volume = 0.85) => {
+  // פונקציה להשמעת סאונד מיועלת
+  const playAudioFile = useCallback((fileName, volume = 0.85) => {
     const baseUrl = process.env.PUBLIC_URL || '';
     const soundUrl = `${baseUrl}/assets/Audio/${fileName}`;
     const fallbackUrl = `${baseUrl}/assets/audio/${fileName}`;
+    
     const audio = new Audio(soundUrl);
+    audio.volume = volume;
+    audio.preload = 'none';
+
     audio.addEventListener('error', () => {
-      if (audio.currentSrc !== fallbackUrl) {
+      if (audio.src !== fallbackUrl) {
         audio.src = fallbackUrl;
-        audio.load();
         audio.play().catch(() => {});
       }
     }, { once: true });
-    audio.volume = volume;
-    audio.preload = 'auto';
-    const playPromise = audio.play();
 
+    const playPromise = audio.play();
     if (playPromise && typeof playPromise.catch === 'function') {
       playPromise.catch(() => {
         pendingSoundRef.current = { fileName, volume };
       });
     }
-  };
+  }, []);
 
-  const playPopSound = () => {
+  const playPopSound = useCallback(() => {
     playAudioFile('pop.mp3');
-  };
+  }, [playAudioFile]);
 
-  // לוגיקת ניהול הלחיצות
+  // לוגיקת ניהול הלחיצות על הבניינים
   const handleBuildingClick = (id, popupInfo) => {
+    playPopSound();
     if (id === nextRequiredId) {
-      playPopSound();
       setActivePopup({
         title: popupInfo.title,
         content: popupInfo.content,
@@ -185,7 +187,6 @@ function AtWar({ onGoHome, progress, onProgress }) {
       });
       setNextRequiredId(prev => prev + 1);
     } else if (id > nextRequiredId) {
-      playPopSound();
       setActivePopup({
         title: "אופס, הלכת רחוק מדי",
         content: "יש ללחוץ לפי הסדר",
@@ -193,7 +194,6 @@ function AtWar({ onGoHome, progress, onProgress }) {
         isWarning: true
       });
     } else {
-      playPopSound();
       setActivePopup({
         title: popupInfo.title,
         content: popupInfo.content,
@@ -203,6 +203,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
     }
   };
 
+  // שחרור הגבלת אודיו בלחיצה ראשונה של המשתמש
   useEffect(() => {
     const unlockAudio = () => {
       if (pendingSoundRef.current) {
@@ -223,39 +224,21 @@ function AtWar({ onGoHome, progress, onProgress }) {
       window.removeEventListener('touchstart', unlockAudio);
       window.removeEventListener('click', unlockAudio);
     };
-  }, []);
+  }, [playAudioFile]);
 
-  // עדכון פונקציית המעבר דפים והחלפת המלחמה
-  useEffect(() => {
-    const imagesToPreload = [
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/sky.webp`,
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/jeep.png`,
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.png`,
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/bg-building.webp`,
-      `${process.env.PUBLIC_URL}/assets/AtWar/all/buildings.webp`
-    ];
-
-    imagesToPreload.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [currentWarKey]);
-
+  // ניווט בין עמודים ומלחמות
   const handleNextClick = () => {
     onProgress?.(`atWar-${currentWarKey}-page-${currentPage}`);
 
     if (currentPage === 1) {
-      // חרבות ברזל עמוד 1 -> חרבות ברזל עמוד 2
       setCurrentPage(2); 
       setIsVideoPlaying(false); 
     } else if (currentPage === 2 && currentWarKey === 'ironSwords') {
-      // חרבות ברזל עמוד 2 -> יום הכיפורים עמוד 1
       setCurrentWarKey('yomKippur');
       setCurrentPage(1);
-      setNextRequiredId(1); // איפוס סדר הלחיצות למלחמה הבאה
+      setNextRequiredId(1);
       setIsVideoPlaying(false);
     } else {
-      // יום הכיפורים עמוד 2 -> חזרה הביתה
       onGoHome(); 
     }
   };
@@ -263,20 +246,13 @@ function AtWar({ onGoHome, progress, onProgress }) {
   return (
     <div className="page-container at-war-page" style={{ position: 'relative' }}>
       <HomeButton onClick={onGoHome} progress={progress} />
-      <AboutMe/>
-      {/* <img
-        className="welcomePage-logo"
-        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
-        alt="logo"
-      /> */}
-      
-      {/* 🔹 כותרת הדף חזרה להיות שורה אחת רציפה כפי שהייתה במקור */}
+      <AboutMe />
+
       <h1 id="AtWar-title">המכללה בעת מלחמה</h1>
 
-      {/* --- עמוד 1: פרטים כלליים ותמונת וידאו לחיצה --- */}
+      {/* --- עמוד 1: פרטים כלליים ותמונת וידאו --- */}
       {currentPage === 1 && (
         <div className="war-step-container step-one">
-          {/* 🔹 כאן מופעל הפיצול - רק על כותרת המלחמה/מבצע הספציפית מהדאטה */}
           <h2 className="war-name">{renderSplitWarTitle(data.title)}</h2>
           <span className="war-date">{data.date}</span>
           <p className="war-short-text">{data.shortDescription}</p>
@@ -300,14 +276,15 @@ function AtWar({ onGoHome, progress, onProgress }) {
                 key={`custom-p1-${idx}`}
                 src={img.src} 
                 className={img.className} 
-                alt="custom content" 
+                alt="אלמנט מעוצב"
+                loading="lazy"
+                decoding="async"
               />
             ))}
-
         </div>
       )}
 
-      {/* --- עמוד 2: פסקה מורחבת ותמונה אינטראקטיבית עם פופאפים לפי סדר --- */}
+      {/* --- עמוד 2: פסקה מורחבת ותמונה אינטראקטיבית --- */}
       {currentPage === 2 && (
         <div className="war-step-container step-two">
           <h2 className="war-title2"> לחצו על הבניינים כדי לגלות עוד </h2>
@@ -316,7 +293,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
           <div className="interactive-image-container" style={{ position: 'relative' }}>
             <img 
               src={data.bgImage} 
-              alt="img " 
+              alt="בניינים" 
               className="war-interactive-img"
               loading="lazy"
               decoding="async"
@@ -324,64 +301,63 @@ function AtWar({ onGoHome, progress, onProgress }) {
             <img
               className="AtWar-sky"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/sky.webp`}
-              alt="sky"
+              alt="שמיים"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-jeep"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/jeep.png`}
-              alt="jeep"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/jeep.webp`}
+              alt="ג'יפ"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-tank"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/tank.png`}
-              alt="tank"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/tank.webp`}
+              alt="טנק"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-dust"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/dust.png`}
-              alt="dust"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/dust.webp`}
+              alt="אבק"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-solider1"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider1.png`}
-              alt="soldier1"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider1.webp`}
+              alt="חייל 1"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-solider2"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider2.png`}
-              alt="soldier2"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider2.webp`}
+              alt="חייל 2"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-plane1"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.png`}
-              alt="plane1"
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.webp`}
+              alt="מטוס 1"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-plane2"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane2.png`}
-              alt="plane2"
+              alt="מטוס 2"
               loading="lazy"
               decoding="async"
             />
-
             <img
               className="AtWar-bg-building"
               src={`${process.env.PUBLIC_URL}/assets/AtWar/all/bg-building.webp`}
-              alt="bg-building"
+              alt="בניין ברקע"
               loading="lazy"
               decoding="async"
             />
@@ -391,6 +367,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
               <button
                 key={`btn-${popup.id}`}
                 className="building-click-area"
+                aria-label={popup.title}
                 style={{ 
                   left: popup.x, 
                   top: popup.y, 
@@ -415,7 +392,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
               const currentText = isVisited ? '#ffffff' : popup.borderColor;
 
               return (
-                <div key={popup.id} onClick={() => handleBuildingClick(popup.id, popup)} style={{ cursor: 'pointer' }}>
+                <div key={`step-${popup.id}`} onClick={() => handleBuildingClick(popup.id, popup)} style={{ cursor: 'pointer' }}>
                   <StepNumber 
                     number={popup.id} 
                     top={popup.topNum} 
@@ -442,7 +419,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
         />
       )}
 
-      {/* פופ-אפ סרטון */}
+      {/* פופ-אפ סרטון - מרונדר רק כשהנגן פעיל */}
       {isVideoPlaying && (
         <div className="video-modal-overlay" onClick={() => setIsVideoPlaying(false)}>
           <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>

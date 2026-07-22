@@ -91,7 +91,7 @@ function DigitalAssetsStep2() {
         id="DigitalAssets-icon1"
         className={isChestOpen ? 'icons-fade-in' : 'icons-hidden'}
       >
-        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/instagram.png`} alt="Instagram" />
+        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/instagram.webp`} alt="Instagram" />
       </a>
 
       {/* לינקדאין (תוקן הטקסט החלופי מטוויטר ל-LinkedIn) */}
@@ -102,7 +102,7 @@ function DigitalAssetsStep2() {
         id="DigitalAssets-icon2"
         className={isChestOpen ? 'icons-fade-in' : 'icons-hidden'}
       >
-        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/linkedIn.png`} alt="LinkedIn" />
+        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/linkedIn.webp`} alt="LinkedIn" />
       </a>
 
       {/* X (טוויטר לשעבר) */}
@@ -113,7 +113,7 @@ function DigitalAssetsStep2() {
         id="DigitalAssets-icon3"
         className={isChestOpen ? 'icons-fade-in' : 'icons-hidden'}
       >
-        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/xCom.png`} alt="X" />
+        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/xCom.webp`} alt="X" />
       </a>
 
       {/* פייסבוק */}
@@ -124,7 +124,7 @@ function DigitalAssetsStep2() {
         id="DigitalAssets-icon4"
         className={isChestOpen ? 'icons-fade-in' : 'icons-hidden'}
       >
-        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/facebook.png`} alt="Facebook" />
+        <img src={`${process.env.PUBLIC_URL}/assets/OnSocial/facebook.webp`} alt="Facebook" />
       </a>
       
       <p id="DigitalAssetsStep2-text4">

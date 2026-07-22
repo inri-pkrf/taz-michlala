@@ -30,7 +30,7 @@ function ActivityStep4() {
       
       {/* אייקון הנגן - לחיצה עליו משנה את הסטייט ל-true ופותחת את הוידאו */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/Activity/play-icon.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/Activity/play-icon.webp`} 
         alt="סרטון" 
         id="activity-play-icon"
         onClick={() => setIsVideoOpen(true)}
