@@ -352,35 +352,35 @@ function AtWar({ onGoHome, progress, onProgress }) {
             />
             <img
               className="AtWar-tank"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/tank.webp`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/tank.png`}
               alt="טנק"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-dust"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/dust.webp`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/dust.png`}
               alt="אבק"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-solider1"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider1.webp`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider1.png`}
               alt="חייל 1"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-solider2"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider2.webp`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/solider2.png`}
               alt="חייל 2"
               loading="lazy"
               decoding="async"
             />
             <img
               className="AtWar-plane1"
-              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.webp`}
+              src={`${process.env.PUBLIC_URL}/assets/AtWar/all/plane1.png`}
               alt="מטוס 1"
               loading="lazy"
               decoding="async"
