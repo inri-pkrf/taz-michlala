@@ -12,4 +12,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    /* מונע זיהוי כפול של לחיצות קצרות בטלפון */
+  touch-action: manipulation;
 }

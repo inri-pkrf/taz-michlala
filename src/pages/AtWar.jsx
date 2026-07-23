@@ -172,6 +172,8 @@ function AtWar({ onGoHome, progress, onProgress }) {
   const [currentWarKey, setCurrentWarKey] = useState('ironSwords'); 
 
   const pendingSoundRef = useRef(null);
+  const isNavigatingRef = useRef(false); // הגנה בלחיצה כפולה במובייל
+
   const data = warsData[currentWarKey];
 
   // פונקציה להשמעת סאונד מיועלת
@@ -231,7 +233,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
     }
   };
 
-  // שחרור הגבלת אודיו בלחיצה ראשונה של המשתמש
+  // שחרור הגבלת אודיו בלחיצה ראשונה - מותאם למובייל ולמחשב
   useEffect(() => {
     const unlockAudio = () => {
       if (pendingSoundRef.current) {
@@ -243,9 +245,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
       window.removeEventListener('click', unlockAudio);
     };
 
-    window.addEventListener('pointerdown', unlockAudio);
-    window.addEventListener('touchstart', unlockAudio);
-    window.addEventListener('click', unlockAudio);
+    window.addEventListener('pointerdown', unlockAudio, { once: true });
 
     return () => {
       window.removeEventListener('pointerdown', unlockAudio);
@@ -254,20 +254,30 @@ function AtWar({ onGoHome, progress, onProgress }) {
     };
   }, [playAudioFile]);
 
-  // ניווט בין עמודים ומלחמות
+  // ניווט בין עמודים ומלחמות עם הגנה מפני Double Tap בטלפונים
   const handleNextClick = () => {
-    onProgress?.(`atWar-${currentWarKey}-page-${currentPage}`);
+    if (isNavigatingRef.current) return;
+    isNavigatingRef.current = true;
 
-    if (currentPage === 1) {
-      setCurrentPage(2); 
-      setIsVideoPlaying(false); 
-    } else if (currentPage === 2 && currentWarKey === 'ironSwords') {
+    // מאפשר לחיצה חדשה רק כבור 400 מילי-שניות
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 400);
+
+    if (currentWarKey === 'ironSwords' && currentPage === 1) {
+      setCurrentPage(2);
+      setIsVideoPlaying(false);
+    } else if (currentWarKey === 'ironSwords' && currentPage === 2) {
       setCurrentWarKey('yomKippur');
       setCurrentPage(1);
       setNextRequiredId(1);
       setIsVideoPlaying(false);
-    } else {
-      onGoHome(); 
+    } else if (currentWarKey === 'yomKippur' && currentPage === 1) {
+      setCurrentPage(2);
+      setIsVideoPlaying(false);
+    } else if (currentWarKey === 'yomKippur' && currentPage === 2) {
+      onProgress?.('atWar-completed');
+      onGoHome();
     }
   };
 
