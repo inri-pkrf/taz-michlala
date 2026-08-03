@@ -7,7 +7,7 @@ function WelcomePage({ onNavigate }) {
       {/* לוגו עליון */}
       <img
         className="welcomePage-logo"
-        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
+        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.svg`}
         alt="logo"
       />
 
@@ -16,7 +16,7 @@ function WelcomePage({ onNavigate }) {
 
       {/* תת כותרת / הסבר */}
       <p className="welcome-subtitle">
-        ברוכים הבאים לשיעור הדיגיטלי "ת"ז מכללה"!
+        ברוכים הבאים לשיעור הדיגיטלי "ת.ז מכללה"!
         באמצעות לומדה זו תבינו קצת יותר לאן הגעתם...
         מקווים שאתם מתרגשים כמעט כמונו
       </p>

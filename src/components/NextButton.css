@@ -13,5 +13,6 @@
     align-items: center;
     justify-content: center;
     /* מונע זיהוי כפול של לחיצות קצרות בטלפון */
+    direction: rtl;
   touch-action: manipulation;
 }

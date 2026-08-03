@@ -24,7 +24,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
 
       <img
         className={`welcomePage-logo`}
-        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.png`}
+        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/logo.svg`}
         alt="logo"
       />
 
@@ -38,7 +38,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
           onClick={() => handleTagClick(1, 'activity')}
         > 
             <div className="tag-number num-yellow">1</div>
-            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-yellow.png`} alt="Activity" className="tag-image"/>
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-yellow.svg`} alt="Activity" className="tag-image"/>
             <p className="tag-text text-yellow">פעילות</p>
         </div>
 
@@ -48,7 +48,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
           onClick={() => handleTagClick(2, 'digitalAssets')}
         > 
             <div className="tag-number num-green">2</div>
-            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-green.png`} alt="Digital Assets" className="tag-image" />
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-green.svg`} alt="Digital Assets" className="tag-image" />
             <p className="tag-text text-green">נכסים דיגיטליים</p>
         </div>
 
@@ -58,7 +58,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
           onClick={() => handleTagClick(3, 'nationalLibrary')}
         > 
             <div className="tag-number num-blue">3</div>
-            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-blue.png`} alt="National Library" className="tag-image" />
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-blue.svg`} alt="National Library" className="tag-image" />
             <p className="tag-text text-blue">הספרייה הלאומית</p>
         </div>
 
@@ -70,7 +70,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
           onClick={() => handleTagClick(4, 'foreignRelations')}
         > 
             <div className="tag-number num-pink">4</div>
-            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-pink.png`} alt="Foreign Relations" className="tag-image" />
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-pink.svg`} alt="Foreign Relations" className="tag-image" />
             <p className="tag-text text-pink">קשרי חוץ</p>
         </div>
 
@@ -80,7 +80,7 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
           onClick={() => handleTagClick(5, 'atWar')}
         > 
             <div className="tag-number num-orange">5</div>
-            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-orange.png`} alt="At War" className="tag-image" />
+            <img src={`${process.env.PUBLIC_URL}/assets/HomePage/name-tag-orange.svg`} alt="At War" className="tag-image" />
             <p className="tag-text text-orange">בעת מלחמה</p>
         </div>
 
