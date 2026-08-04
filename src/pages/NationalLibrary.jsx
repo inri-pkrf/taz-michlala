@@ -43,7 +43,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       content: " אתר המכללה מרכז בתוכו גם את הספרייה הלאומית לחירום - מאגר ידע להיערכות, התערבות ושיקום. ",
       borderColor: "#FFA1CD",
       topNum: "45vh",  
-      leftNum: "70vw"
+      leftNum: "65vw"
     },
     2: {
       colorId: 'purple',
@@ -51,7 +51,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       content: " הספרייה היא מאגר ידע דיגיטלי מעודכן וכולל כ-1,500 פרטי מידע, חוקים ותקנות, נהלים ותדריכים, תוכניות מענה, מאמרים ומחקרים, סרטים, קישורים ופודקאסטים. ",
       borderColor: "#8B82BD",
       topNum: "50vh",  
-      leftNum: "56vw"
+      leftNum: "54.5vw"
     },
     3: {
       colorId: 'orange', 
@@ -59,7 +59,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       content: " הנגשת הידע ללא מגבלות מתגשם בזכות שיתוף פעולה פורה עם למעלה מ-75 ארגונים מהמגזר הציבורי כמו משרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות, ארגוני חירום והצלה, אקדמיה ומכוני מחקר ופעילות המגזר השלישי. ",
       borderColor: "#DD5C00",
       topNum: "34vh",  
-      leftNum: "45vw"
+      leftNum: "46.5vw"
     },
     4: {
       colorId: 'green',
@@ -86,7 +86,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       ),
       borderColor: "#358047",
       topNum: "43vh",  
-      leftNum: "40vw"
+      leftNum: "43vw"
     },
     5: {
       colorId: 'yellow',
@@ -117,7 +117,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       ),
       borderColor: "#FDAC00",
       topNum: "39vh",  
-      leftNum: "20vw"
+      leftNum: "28vw"
     }
   };
 
@@ -280,14 +280,14 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
       <p id="NationalLibrary-text1">מאגר ידע לאומי לחירום לחיזוק האיתנות של מדינת ישראל</p>
       
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/shelf.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/shelf.svg`} 
         alt="Shelf" 
         id="NationalLibrary-shelf"
       />
 
       {/* הספרים הלחיצים הכוללים כעת את ה-class של האנימציה */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-pink.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-pink.svg`} 
         alt="book" 
         id="NationalLibrary-book-pink"
         className={`pop-element ${animateBook1 ? 'is-visible' : ''}`}
@@ -295,7 +295,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
       />
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-purple.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-purple.svg`} 
         alt="book" 
         id="NationalLibrary-book-purple"
         className={`pop-element ${animateBook2 ? 'is-visible' : ''}`}
@@ -303,7 +303,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
       />
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-orange.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-orange.svg`} 
         alt="book" 
         id="NationalLibrary-book-orange"
         className={`pop-element ${animateBook3 ? 'is-visible' : ''}`}
@@ -311,7 +311,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
       />
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-green.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-green.svg`} 
         alt="book" 
         id="NationalLibrary-book-green"
         className={`pop-element ${animateBook4 ? 'is-visible' : ''}`}
@@ -319,7 +319,7 @@ function NationalLibrary({ onGoHome, progress, onProgress }) {
         style={{ cursor: showInteractiveSteps ? 'pointer' : 'default' }}
       />
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-yellow.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/NationalLibrary/book-yellow.svg`} 
         alt="book" 
         id="NationalLibrary-book-yellow"
         className={`pop-element ${animateBook5 ? 'is-visible' : ''}`}

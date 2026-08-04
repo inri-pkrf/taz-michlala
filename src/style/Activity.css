@@ -2,13 +2,11 @@
     font-family: "Karantina";
     position: absolute;
     
-    /* הגבלת גודל הגופן: מינימום 2.2rem, גודל מועדף 14vmin, מקסימום 4.5rem */
-    font-size: 12vmin;
+    /* הגבלת גודל הגופן: מונע התנפחות יתר בטוטם שגורמת לחפיפות */
+    font-size: clamp(2.2rem, 12vmin, 4.5rem); 
     
-    /* מוריד מעט את הלחץ על האלמנטים שמתחת במסכים ארוכים */
     top: 10vh; 
-    
-    width: 60vw; /* הגדלת הרוחב המותר כדי למנוע שבירת שורות מיותרת בטלפונים צרים */
+    width: 60vw;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
@@ -16,31 +14,30 @@
     line-height: 1.1;
 }
 
-#activity-text1{
+#activity-text1 {
     position: absolute;
-    font-size: 5.5vmin;
+    font-size: clamp(1.2rem, 5.5vmin, 2.5rem);
     width: 80vw;
     top: 15vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     font-weight: 600;
-     direction: rtl;
+    direction: rtl;
 }
 
-
-#activity-text3{
-    position: relative;
-    font-size: 4.5vw;
+#activity-text3 {
+    position: absolute;
+    font-size: clamp(1.1rem, 4.5vw, 2.2rem);
     width: 80vw;
     top: 64vh;
-    /* left: 50%;
-    transform: translateX(-50%); */
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
     direction: rtl;
 }
 
-.activity-king{
+.activity-king {
     position: absolute;
     width: 11vw;
     height: 5vh;
@@ -49,7 +46,7 @@
     z-index: 10;
 }
 
-/* הקונטיינר החדש שעוטף את הכל - מחליף את המיקום המוחלט שהיה על הטקסט */
+/* הקונטיינר שעוטף את הטקסט המרכזי והכפתור */
 .activity-text-container {
     position: absolute;
     top: 30vh;
@@ -61,33 +58,28 @@
     border: 1vmin solid #000641;
     border-radius: 2vh;
     padding: 3vh; 
-    padding-bottom: 9vh; /* משאיר מקום קבוע ויציב לכפתור למטה */
+    padding-bottom: 9vh;
     box-sizing: border-box;
 }
 
-/* הטקסט עצמו - עכשיו הוא זורם בצורה טבעית בתוך הדיב */
 #activity-text2 {
     position: relative;
-    font-size: 4.5vmin;
-    /* התיקון: הטקסט תופס את כל רוחב הדיב הלבן ולא נחנק בתוך 60vw */
+    font-size: clamp(1rem, 4.5vmin, 1.8rem);
     width: 100%;  
     text-align: center;
     direction: rtl;
     margin: 0;
 }
 
-/* הכפתור - נעול לתחתית הדיב ובאמצע שלו */
 #activity-show-image {
     position: absolute;
-    bottom: 0.6vh;        /* מרחק קבוע מתחתית הדיב הלבן */
+    bottom: 0.6vh;
     left: 50%;
-    transform: translateX(-50%); /* ממרכז אותו מושלם אופקית */
+    transform: translateX(-50%);
     
-    /* גודל קבוע ויציב בפיקסלים - שלא ישתנה או יתעוות */
     width: 35vw; 
     height: 5vh;
     
-    /* ממרכז את המילים "צפו בתמונה" בדיוק באמצע של הכפתור */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,26 +88,23 @@
     background-color: #000641;
     border: none;
     border-radius: 1vh;
-    font-size: 5vmin;
+    font-size: clamp(0.9rem, 5vmin, 1.6rem);
     font-weight: bold;
     cursor: pointer;
     margin: 0;
     z-index: 5;
 }
 
-.activity-queen{
+.activity-queen {
     position: absolute;
     width: 15vw;
     height: 4.5vh;
     top: 25.5vh;
     left: 22vw;
     z-index: 10;
-
-
-
 }
 
-.activity-building{
+.activity-building {
     position: absolute;
     width: 30vw;
     height: 12vh;
@@ -124,7 +113,7 @@
     z-index: -1;
 }
 
-.activityPage1-office1{
+.activityPage1-office1 {
     position: absolute;
     width: 37vw;
     height: 12vh;
@@ -133,7 +122,7 @@
     z-index: 1;
 }
 
-.activityPage1-office2{
+.activityPage1-office2 {
     position: absolute;
     width: 34vw;
     height: 15vh;
@@ -142,7 +131,7 @@
     z-index: 2;
 }
 
-.activityPage1-office3{
+.activityPage1-office3 {
     position: absolute;
     width: 47vw;
     height: 15vh;
@@ -151,7 +140,7 @@
     z-index: 3;
 }
 
-.activityPage1-office4{
+.activityPage1-office4 {
     position: absolute;
     width: 42vw;
     height: 15vh;
@@ -162,7 +151,7 @@
 
 #activityStep2-text2 {
     box-sizing: border-box;
-     font-size: 4.5vmin;  
+    font-size: clamp(1rem, 4.5vmin, 2rem);  
     width: 75vw;
     text-align: center;
     direction: rtl;
@@ -178,10 +167,9 @@
     z-index: 2;
 }
 
-/* קונטיינר שיחזיק את הפסקה והעיגול */
 .circle-anim-container {
     display: inline-block;
-    padding: 4vh 4vw; /* מרחק של העיגול מהטקסט */
+    padding: 4vh 4vw;
     text-align: center;
     width: auto;
     max-width: 85vw;
@@ -189,7 +177,6 @@
     box-sizing: border-box;
 }
 
-/* מיקום ה-SVG בדיוק מאחורי הטקסט */
 .circle-svg {
     position: absolute;
     top: 66.2vh;
@@ -197,46 +184,40 @@
     transform: translateX(-50%);
     width: 45vw;
     height: 45vw;
-    z-index: 1; /* מאחורי הטקסט */
-    pointer-events: none; /* שלא יפריע ללחיצות */
+    z-index: 1;
+    pointer-events: none;
 }
 
-/* עיצוב ואנימציית הציור של העיגול */
 .circle-svg ellipse {
     fill: none;
-    stroke: #000641; /* צבע הקו - שיניתי לקהה מעט שיראו טוב */
-    stroke-width: 0.4vw; /* עובי הקו בתוך ה-SVG */
-    
-    /* קסם הציור: מגדירים אורך קו מקסימלי ואז מעלימים אותו */
+    stroke: #000641;
+    stroke-width: 0.4vw;
     stroke-dasharray: 400;
     stroke-dashoffset: 400;
-    
-    /* הפעלת האנימציה */
     animation: drawCircle 3s ease-in-out forwards;
-    animation-delay: 0.5s; /* דיליי קטן להתחלה */
+    animation-delay: 0.5s;
 }
 
-/* הגדרת האנימציה - "משיכת" הקו פנימה כאילו הוא מצויר בלייב */
 @keyframes drawCircle {
     to {
         stroke-dashoffset: 0;
     }
 }
 
-#activity-gif{
+#activity-gif {
     position: absolute;
     height: 30vh;
     width: 75vw;
-    top: 40vh;
+    top: 42vh;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 1.5vh;
     border: 0.4vh solid #000641;
 }
 
-#activityStep3-text1{
+#activityStep3-text1 {
     position: absolute;
-    font-size: 4.5vw;
+    font-size: clamp(1.2rem, 4.5vw, 2.2rem);
     width: 80vw;
     top: 20vh;
     left: 50%;
@@ -246,9 +227,9 @@
     direction: rtl;
 }
 
-#activityStep4-text2{
+#activityStep4-text2 {
     position: absolute;
-    font-size: 3vw;
+    font-size: clamp(1rem, 3vw, 1.8rem);
     width: 60vw;
     top: 30vh;
     left: 50%;
@@ -256,12 +237,11 @@
     text-align: center;
     direction: rtl;
     border-radius: 2.5vh;
-    
 }
 
-#activityStep4-text3{
+#activityStep4-text3 {
     position: absolute;
-    font-size: 4vw;
+    font-size: clamp(1.1rem, 4vw, 2rem);
     width: 83vw;
     top: 54vh;
     left: 50%;
@@ -269,22 +249,22 @@
     font-weight: 600;
     text-align: right;
     direction: rtl;
-    padding: 2vh 2vh; /* מרווח פנימי מעט מוגדל */
-    padding-bottom: 8vh; /* מרווח פנימי בתחתית */
-    border: 0.4vh solid #625214;    
+    padding: 2vh 2vh;
+    padding-bottom: 8vh;
+    border: 0.4vh solid #5C6645;    
     border-radius: 2.5vh;
 }
 
-#activity-soliders{
+#activity-soliders {
     position: absolute;
     width: 49vw;
     height: 11vh;
-    top: 72vh;
+    top: 74vh;
     left: 50%;
     transform: translateX(-50%);
 }
 
-#activity-play-icon{
+#activity-play-icon {
     position: absolute;
     width: 32vw;
     height: 17vh;
@@ -337,11 +317,11 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-#activityStep3-text2{
+#activityStep3-text2 {
     position: absolute;
-    font-size: 5vw;
+    font-size: clamp(1.2rem, 5vw, 2.5rem);
     width: 80vw;
-    top: 70vh;
+    top: 72vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;

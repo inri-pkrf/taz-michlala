@@ -209,19 +209,19 @@ function DigitalAssetsStep1() {
       <div className="interactive-scene">
         
         <img 
-          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/computer.png`} 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/computer.svg`} 
           alt="מחשב" 
           id="DigitalAssets-computer"
         />
         
         <img 
-          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/blob.png`} 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/blob.svg`} 
           alt="bg" 
           id="DigitalAssets-blob"
         />
         
         <img 
-          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic1.png`} 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic1.svg`} 
           alt="bg" 
           id="DigitalAssets-pic1"
           className={`pop-element ${animatePic1 ? 'is-visible' : ''}`}
@@ -230,7 +230,7 @@ function DigitalAssetsStep1() {
         />
         
         <img 
-          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic2.png`} 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic2.svg`} 
           alt="bg" 
           id="DigitalAssets-pic2"
           className={`pop-element ${animatePic2 ? 'is-visible' : ''}`}
@@ -239,7 +239,7 @@ function DigitalAssetsStep1() {
         />
         
         <img 
-          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic3.png`} 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/pic3.svg`} 
           alt="bg" 
           id="DigitalAssets-pic3"
           className={`pop-element ${animatePic3 ? 'is-visible' : ''}`}

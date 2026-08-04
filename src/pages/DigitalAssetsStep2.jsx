@@ -69,7 +69,7 @@ function DigitalAssetsStep2() {
 
       {/* התיבה הסגורה */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/OnSocial/closed-chest.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/OnSocial/closed-chest.svg`} 
         alt="תיבה סגורה" 
         id="DigitalAssets-closed-chest"
         className={isChestOpen ? 'chest-fade-out' : 'chest-rumble'}
@@ -77,7 +77,7 @@ function DigitalAssetsStep2() {
 
       {/* התיבה הפתוחה */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/OnSocial/open-chest.png`} 
+        src={`${process.env.PUBLIC_URL}/assets/OnSocial/open-chest.svg`} 
         alt="תיבה פתוחה" 
         id="DigitalAssets-open-chest"
         className={isChestOpen ? 'chest-fade-in-pop' : 'chest-hidden'}

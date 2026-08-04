@@ -137,10 +137,10 @@ function ActivityStep2() {
       })}
 
       {/* הבניינים اللחיצים */}
-      <img className="activityPage1-office1" src={`${process.env.PUBLIC_URL}/assets/Activity/building-red.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(1)} style={{ cursor: 'pointer' }} />
-      <img className="activityPage1-office2" src={`${process.env.PUBLIC_URL}/assets/Activity/building-grey.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(2)} style={{ cursor: 'pointer' }} />
-      <img className="activityPage1-office3" src={`${process.env.PUBLIC_URL}/assets/Activity/building-yellow.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(3)} style={{ cursor: 'pointer' }} />
-      <img className="activityPage1-office4" src={`${process.env.PUBLIC_URL}/assets/Activity/building-orange.png`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(4)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office1" src={`${process.env.PUBLIC_URL}/assets/Activity/building-red.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(1)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office2" src={`${process.env.PUBLIC_URL}/assets/Activity/building-grey.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(2)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office3" src={`${process.env.PUBLIC_URL}/assets/Activity/building-yellow.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(3)} style={{ cursor: 'pointer' }} />
+      <img className="activityPage1-office4" src={`${process.env.PUBLIC_URL}/assets/Activity/building-orange.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(4)} style={{ cursor: 'pointer' }} />
 
       {/* הוספת התנאי: יוצג ויצטייר רק אחרי שביקרו בכל 4 הבניינים */}
       {/* {nextRequiredId > 4 && (

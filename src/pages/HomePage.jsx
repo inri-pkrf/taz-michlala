@@ -90,11 +90,11 @@ function HomePage({ onNavigate, showQuizAvailable, progress = 1 }) {
 
       {showQuizAvailable && (
         <div style={{ marginTop: '3vh', textAlign: 'center' }}>
-          <img
+          {/* <img
             className={`ToQuiz`}
             src={`${process.env.PUBLIC_URL}/assets/Quiz/hat.png`}
             alt="hat"
-          />
+          /> */}
           <button className="ToQuiz-button" onClick={() => onNavigate('quizIntro')}>לעבור למבחן</button>
         </div>
       )}

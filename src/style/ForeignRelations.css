@@ -18,7 +18,7 @@
 
 #ForeignRelations-text2 {
     position: absolute;
-    width: 60vw;    
+    width: 73vw;    
     top: 23vh;
     left: 50%;  
     transform: translateX(-50%);    
@@ -30,7 +30,7 @@
 /* --- מיכל עטיפת הגלובוס --- */
 .globe-wrapper {
     position: absolute;
-    top: 24vh;
+    top: 28vh;
     left: 50%;
     transform: translateX(-50%);
     cursor: grab;
@@ -48,8 +48,8 @@
 .countries-counter-badge {
     position: absolute;
     top: 3vh;
-    right: -4vw;
-    background-color: #969696; /* תואם למסגרת הכחולה של הטקסט התחתון */
+    right: 7vw;
+    background-color: #626c86; /* תואם למסגרת הכחולה של הטקסט התחתון */
     color: #ffffff;
     padding: 0.7vh 2vw;
     border-radius: 2vh;
@@ -66,8 +66,8 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 56vh;
-    font-size: 3.5vh;
+    top: 55vh;
+    font-size: 4vh;
     margin-top: 0.6vh;
     line-height: 1.4;
     font-family: "karantina";

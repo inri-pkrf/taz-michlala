@@ -43,7 +43,7 @@ const warsData = {
     date: "7.10.2023",
     shortDescription: " עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום. ",
     videoUrl: "https://inri-pkrf.github.io/know-college/assets/media/war.mp4",
-    videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
+    videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.svg`,
     customImages: [
       {
         src: `${process.env.PUBLIC_URL}/assets/AtWar/IronSwords/sords.webp`,
@@ -112,7 +112,7 @@ const warsData = {
     date: "18.2.2026",
     shortDescription: " עם פרוץ המבצע, המכללה המשיכה בפעילויותיה בתנאים מיוחדים. ",
     videoUrl: "https://inri-pkrf.github.io/know-college/assets/media/war.mp4",
-    videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.png`,
+    videoThumbnail: `${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.svg`,
     customImages: [
       {
         src: `${process.env.PUBLIC_URL}/assets/AtWar/LionRoar/lion.webp`,

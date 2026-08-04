@@ -276,9 +276,9 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
           )}
 
           <div className="quiz-result" style={{ zIndex: 2 }}>
-            <h2 className="quiz-question" style={{ textAlign: 'center' }}>
+            <div className="quiz-question" style={{ textAlign: 'center' }}>
               <h3>התוצאה שלך</h3>
-            </h2>
+            </div>
             
             <div className="quiz-score-display" style={{ fontSize: '2rem', margin: '2vh 0', fontWeight: 'bold', color: '#000641', textAlign: 'center' }}>
               {score} / 100

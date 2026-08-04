@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { calculateProgress } from './utils/progress';
 
 // ייבוא כל העמודים והקומפוננטות
 import WelcomePage from './pages/WelcomePage';
@@ -56,7 +57,7 @@ function App() {
     localStorage.setItem('completedProgressActions', JSON.stringify(completedProgressActions));
   }, [completedProgressActions]);
 
-  const progress = quizStarted ? 100 : Math.round((completedProgressActions.length / TOTAL_PROGRESS_STEPS) * 100);
+  const progress = calculateProgress(completedProgressActions, TOTAL_PROGRESS_STEPS);
   
   const incrementProgress = (actionKey) => {
     if (!actionKey) return;

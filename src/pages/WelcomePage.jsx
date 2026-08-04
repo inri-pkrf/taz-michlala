@@ -24,7 +24,7 @@ function WelcomePage({ onNavigate }) {
       {/* תמונת תג השם */}
       <img
         className="welcomePage-nameTag"
-        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/name-tag.png`}
+        src={`${process.env.PUBLIC_URL}/assets/WelcomePage/name-tag.svg`}
         alt="img"
       />
 

@@ -11,9 +11,10 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [visitedIds, setVisitedIds] = useState([]);
 
+  // הקטנה מתונה של גודל הכדור
   const [globeDimensions, setGlobeDimensions] = useState({
-    width: Math.min(window.innerWidth * 0.8, 350),
-    height: Math.min(window.innerHeight * 0.4, 320)
+    width: Math.min(window.innerWidth * 0.85, 380),
+    height: Math.min(window.innerHeight * 0.42, 340)
   });
 
   const countriesData = [
@@ -61,7 +62,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   const handlePinClick = (pin) => {
     setSelectedCountry(pin);
     if (globeEl.current) {
-      globeEl.current.pointOfView({ lat: pin.lat, lng: pin.lng, altitude: 2 }, 800);
+      globeEl.current.pointOfView({ lat: pin.lat, lng: pin.lng, altitude: 1.8 }, 800);
     }
 
     if (!visitedIds.includes(pin.id)) {
@@ -72,15 +73,15 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   useEffect(() => {
     const handleResize = () => {
       setGlobeDimensions({
-        width: Math.min(window.innerWidth * 0.8, 350),
-        height: Math.min(window.innerHeight * 0.4, 320)
+        width: Math.min(window.innerWidth * 0.85, 380),
+        height: Math.min(window.innerHeight * 0.42, 340)
       });
     };
 
     window.addEventListener('resize', handleResize);
 
     if (globeEl.current) {
-      globeEl.current.pointOfView({ lat: 20, lng: 30, altitude: 2.5 });
+      globeEl.current.pointOfView({ lat: 20, lng: 30, altitude: 2.0 });
       
       const controls = globeEl.current.controls?.();
       if (controls) {
@@ -89,7 +90,6 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
       }
     }
 
-    // ניקוי מוחלט של זיכרון ה-WebGL בעת יציאה מהמסך
     return () => {
       window.removeEventListener('resize', handleResize);
       if (globeEl.current && typeof globeEl.current._destructor === 'function') {
@@ -105,9 +105,20 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
 
       <h1 id="activity-title">קשרי חוץ</h1>
       <p id="ForeignRelations-text1">אנחנו לגמרי בינלאומיים!</p>
-      <p id="ForeignRelations-text2">סובבו את הגלובוס ולחצו על המדינות</p>
+      <p id="ForeignRelations-text2">סובבו את הגלובוס וגלו על כמה מהמדינות שהגיעו אלינו</p>
 
-      <div className="globe-wrapper">
+      <div 
+        className="globe-wrapper"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          width: '100%',
+          position: 'relative',
+          margin: '0 auto'
+        }}
+      >
         <div className="countries-counter-badge">
           {visitedCount} / {totalCountries}
         </div>
@@ -119,7 +130,6 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
           backgroundColor="rgba(0,0,0,0)" 
           showAtmosphere={false}
           
-          // תמונה מותאמת ביצועים במקום הקבצים הכבדים של unpkg
           globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg"
           
           labelsData={countriesData} 
@@ -141,7 +151,12 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
 
       <div className={`info-card-container ${selectedCountry ? 'card-show' : ''}`}>
         {selectedCountry && (
-          <p className="meeting-content">{selectedCountry.content}</p>
+          <p 
+            className="meeting-content"
+            style={{ color: selectedCountry.baseColor }}
+          >
+            {selectedCountry.content}
+          </p>
         )}
       </div>
       

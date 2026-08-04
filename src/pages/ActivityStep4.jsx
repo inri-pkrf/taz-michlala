@@ -22,7 +22,7 @@ function ActivityStep4() {
       
       {/* תמונת החיילים ברקע */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/Activity/soliders.webp`} 
+        src={`${process.env.PUBLIC_URL}/assets/Activity/soliders.svg`} 
         alt="חיילים" 
         id="activity-soliders"
         loading="lazy"
@@ -30,7 +30,7 @@ function ActivityStep4() {
       
       {/* אייקון הנגן - לחיצה עליו משנה את הסטייט ל-true ופותחת את הוידאו */}
       <img 
-        src={`${process.env.PUBLIC_URL}/assets/Activity/play-icon.webp`} 
+        src={`${process.env.PUBLIC_URL}/assets/AtWar/all/play-icon.svg`} 
         alt="סרטון" 
         id="activity-play-icon"
         onClick={() => setIsVideoOpen(true)}
