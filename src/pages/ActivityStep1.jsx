@@ -49,14 +49,23 @@ function ActivityStep1() {
           className="image-modal-overlay"
           onClick={() => setIsImageOpen(false)}
         >
-          <div className="image-modal-content">
+          <div 
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()} // מונע סגירה כשלוחצים על התמונה עצמה
+          >
+            <button 
+              className="modal-close-btn"
+              onClick={() => setIsImageOpen(false)}
+            >
+              ✕
+            </button>
             <img 
               src={`${process.env.PUBLIC_URL}/assets/Activity/img1.jpg`} 
               alt="פעילות המכללה" 
               className="modal-img"
             />
             <p className="modal-close-hint">
-              לחצו מקום כלשהו במסך כדי לחזור
+              לחצו במקום כלשהו במסך לסגירה
             </p>
           </div>
         </div>

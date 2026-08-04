@@ -136,25 +136,16 @@ function ActivityStep2() {
         );
       })}
 
-      {/* הבניינים اللחיצים */}
+      {/* הבניינים הבלחיצים */}
       <img className="activityPage1-office1" src={`${process.env.PUBLIC_URL}/assets/Activity/building-red.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(1)} style={{ cursor: 'pointer' }} />
       <img className="activityPage1-office2" src={`${process.env.PUBLIC_URL}/assets/Activity/building-grey.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(2)} style={{ cursor: 'pointer' }} />
       <img className="activityPage1-office3" src={`${process.env.PUBLIC_URL}/assets/Activity/building-yellow.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(3)} style={{ cursor: 'pointer' }} />
       <img className="activityPage1-office4" src={`${process.env.PUBLIC_URL}/assets/Activity/building-orange.svg`} alt="office" onPointerDown={handleInteractionStart} onClick={() => handleBuildingClick(4)} style={{ cursor: 'pointer' }} />
 
-      {/* הוספת התנאי: יוצג ויצטייר רק אחרי שביקרו בכל 4 הבניינים */}
-      {/* {nextRequiredId > 4 && (
-        <div className="circle-anim-container">
-          <svg className="circle-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <ellipse cx="50" cy="50" rx="48" ry="48" />
-          </svg>
-          
-        </div>
-      )} */}
-          <p id="activityStep2-text2">
-            כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם
-          </p>
-        
+      <p id="activityStep2-text2">
+        כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם
+      </p>
+
       {activePopup && (
         <Popup 
           title={activePopup.title}

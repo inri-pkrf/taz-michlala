@@ -16,7 +16,7 @@
     top: 55vh;
     left: 50%;  
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 3;
 }
 
 #NationalLibrary-book-pink{
@@ -24,7 +24,7 @@
     width: 13vw;
     height: 16vh;
     top: 39vh;
-    left: 58.5vw;  
+    left: 62.5vw;  
     z-index: 2;
 }
 
@@ -33,7 +33,7 @@
     width: 7vw;
     height: 18vh;
     top: 37vh;
-    left: 54.5vw;  
+    left: 56.5vw;  
     z-index: 2;
 }
 
@@ -41,7 +41,7 @@
     position: absolute;
     width: 11vw;
     height: 20vh;
-    top: 35vh;
+    top: 35.5vh;
     left: 46.5vw;  
     z-index: 2;
 }
@@ -50,8 +50,8 @@
     position: absolute;
     width: 11vw;
     height: 16vh;
-    top: 39vh;
-    left: 37.5vw;  
+    top: 39.5vh;
+    left: 36.5vw;  
     z-index: 2;
 }
 
@@ -60,7 +60,7 @@
     width: 12vw;
     height: 17vh;
     top: 38vh;
-    left: 28vw;  
+    left: 25vw;  
     z-index: 2;
 }
 

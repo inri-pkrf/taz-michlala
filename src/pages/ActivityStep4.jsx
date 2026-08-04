@@ -16,17 +16,17 @@ function ActivityStep4() {
         עצה שלנו- שימו ❤️ טוב טוב למה שמופיע בסרטון
       </p>
       
+      {/* תמונת החיילים הוכנסה לתוך אלמנט התיבה כדי שתהיה ממוקמת יחסית אליה */}
       <p id="activityStep4-text3">
         בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.
+        
+        <img 
+          src={`${process.env.PUBLIC_URL}/assets/Activity/soliders.svg`} 
+          alt="חיילים" 
+          id="activity-soliders"
+          loading="lazy"
+        />
       </p>
-      
-      {/* תמונת החיילים ברקע */}
-      <img 
-        src={`${process.env.PUBLIC_URL}/assets/Activity/soliders.svg`} 
-        alt="חיילים" 
-        id="activity-soliders"
-        loading="lazy"
-      />
       
       {/* אייקון הנגן - לחיצה עליו משנה את הסטייט ל-true ופותחת את הוידאו */}
       <img 
@@ -38,7 +38,7 @@ function ActivityStep4() {
         loading="lazy"
       />            
 
-      {/* מודאל הוידאו הדינמי (מתלבש על ה-CSS הגלובלי שיצרנו בשלב הקודם) */}
+      {/* מודאל הוידאו הדינמי */}
       {isVideoOpen && (
         <div className="video-modal-overlay" onClick={() => setIsVideoOpen(false)}>
           <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
@@ -46,7 +46,7 @@ function ActivityStep4() {
             <button className="video-modal-close" onClick={() => setIsVideoOpen(false)}>
               &times;
             </button>
-            {/* נגן הוידאו עם קישור ה-mp4 שסיפקת */}
+            {/* נגן הוידאו */}
             <video 
               className="video-player" 
               controls 

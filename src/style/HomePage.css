@@ -113,9 +113,9 @@
     position: absolute;
     display: block;
     height: 4vh;
-    width: 15vw;
+    width: 20vw;
     left: 33.5vw;
-    top: 78vh;
+    top: 82vh;
     z-index: 2;
     margin: auto;
 }

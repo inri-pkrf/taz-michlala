@@ -11,11 +11,17 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [visitedIds, setVisitedIds] = useState([]);
 
-  // הקטנה מתונה של גודל הכדור
-  const [globeDimensions, setGlobeDimensions] = useState({
-    width: Math.min(window.innerWidth * 0.85, 380),
-    height: Math.min(window.innerHeight * 0.42, 340)
-  });
+  // פונקציה לחישוב גודל הכדור באופן פרופורציונלי למסך (מובייל + טוטם)
+  const getCalculatedGlobeSize = () => {
+    const minDimension = Math.min(window.innerWidth, window.innerHeight);
+    const size = Math.min(minDimension * 0.65, window.innerHeight * 0.45);
+    return {
+      width: size,
+      height: size
+    };
+  };
+
+  const [globeDimensions, setGlobeDimensions] = useState(getCalculatedGlobeSize);
 
   const countriesData = [
     {
@@ -58,6 +64,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
 
   const totalCountries = countriesData.length;
   const visitedCount = visitedIds.length;
+  const hasVisitedAll = visitedCount === totalCountries;
 
   const handlePinClick = (pin) => {
     setSelectedCountry(pin);
@@ -72,10 +79,7 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setGlobeDimensions({
-        width: Math.min(window.innerWidth * 0.85, 380),
-        height: Math.min(window.innerHeight * 0.42, 340)
-      });
+      setGlobeDimensions(getCalculatedGlobeSize());
     };
 
     window.addEventListener('resize', handleResize);
@@ -160,13 +164,14 @@ function ForeignRelations({ onGoHome, progress, onProgress }) {
         )}
       </div>
       
-      <p id="ForeignRelations-text3">
+      {/* הטקסט מופיע באנימציה עדינה כשמייצרים את התנאי */}
+      <p id="ForeignRelations-text3" className={hasVisitedAll ? 'visible' : ''}>
         מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום
       </p>
 
       <NextButton 
         onClick={() => { onProgress?.('foreignRelations'); onGoHome(); }} 
-        disabled={visitedCount < totalCountries} 
+        disabled={!hasVisitedAll} 
       />
     </div>
   );

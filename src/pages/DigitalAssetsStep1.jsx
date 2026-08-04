@@ -55,22 +55,22 @@ function DigitalAssetsStep1() {
         </span>
       ),
       borderColor: "#52AECA", 
-      topNum: "35%",
-      leftNum: "82%"
+      topNum: "30%",
+      leftNum: "59%"
     },
     2: {
       title: "מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי",
       content: "המידע הצבאי במרחב המכללה מכיל את ׳אתר שיתוף הידע׳ המסייע לשימור ידע של קורסים, מופעים ומצגות. האתר נגיש לכל מי שברשותו גישה למחשב צבאי, דרך צהלנ״ט כותבים בחיפוש: ׳אתר שיתוף הידע׳. ",
       borderColor: "#52AECA", 
-      topNum: "38.5%",
+      topNum: "34%",
       leftNum: "18%"
     },
     3: {
       title: "פורטל הידע המשותף",
       content: "מאגר מידע מנגיש ומהיר לשיתוף ידע קריטי בזמן אמת בין משרדי הממשלה והרשויות המקומיות.",
       borderColor: "#52AECA", 
-      topNum: "51%",
-      leftNum: "68%"
+      topNum: "45%",
+      leftNum: "64%"
     }
   };
 
@@ -248,7 +248,7 @@ function DigitalAssetsStep1() {
         />
         
         <img 
-          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/light-bomb.png`} 
+          src={`${process.env.PUBLIC_URL}/assets/DigitalAssets/light-bomb.svg`} 
           alt="bg" 
           id="DigitalAssets-light-bomb"
           className={`lamp-element ${animateLamp ? 'is-dropped' : ''}`}

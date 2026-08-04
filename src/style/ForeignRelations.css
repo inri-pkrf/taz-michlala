@@ -8,7 +8,7 @@
 #ForeignRelations-text1 {
     position: absolute;
     width: 60vw;    
-    top: 16vh;
+    top: 14vh;
     left: 50%;  
     transform: translateX(-50%);    
     font-size: 5.5vw;
@@ -18,11 +18,11 @@
 
 #ForeignRelations-text2 {
     position: absolute;
-    width: 73vw;    
-    top: 23vh;
+    width: 65vw;    
+    top: 20vh;
     left: 50%;  
     transform: translateX(-50%);    
-    font-size: 3.5vw;
+    font-size: 4vw;
     text-align: center;
     direction: rtl;
 }
@@ -47,7 +47,7 @@
 /* תגית המספור בפינת הגלובוס */
 .countries-counter-badge {
     position: absolute;
-    top: 3vh;
+    top: 2vh;
     right: 7vw;
     background-color: #626c86; /* תואם למסגרת הכחולה של הטקסט התחתון */
     color: #ffffff;
@@ -57,7 +57,7 @@
     font-weight: bold;
     letter-spacing: 0.3vh;
 
-    border: 1px solid #969696;
+    border: 1px solid #4a5266;
     z-index: 10;
     pointer-events: none; /* מונע מהמונה לחסום גרירה בלחיצה עליו */
 }
@@ -73,7 +73,7 @@
     font-family: "karantina";
     direction: rtl;
     text-align: center;
-    width: 65vw;
+    width: 70vw;
 }
 
 .remaining-text,
@@ -87,15 +87,26 @@
 }
 
 #ForeignRelations-text3 {
-    position: absolute;
-    width: 70vw;    
-    top: 60vh;
-    left: 50%;  
-    transform: translateX(-50%);    
-    font-size: 4.5vw;
-    text-align: center;
-    direction: rtl;
-    padding: 1vh 2vh;
-    border: 0.5vh solid #0b1463;
-    border-radius: 2vh;
+  position: absolute;
+  padding: 1.5vh 2vw;
+  left: 50%;
+  top: 65vh;
+  width: 80vw;
+  text-align: center;
+  direction: rtl;
+  margin: 0;
+  border: 0.3vh solid #a7aac5;
+  border-radius: 2vh;
+
+  /* השינוי היחיד: שימוש ב-translate(-50%, ...) במקום translateY לשמירה על מרכוז אופקי */
+  opacity: 0;
+  transform: translate(-50%, 15px);
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+#ForeignRelations-text3.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
 }
