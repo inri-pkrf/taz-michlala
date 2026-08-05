@@ -13,7 +13,7 @@ const QUESTIONS = [
     choices: [`כ-1,000 פריטים`, `מעל 2000`, `כ-1,500 פריטים`, `כ-1,700 פריטים`], 
     a: 1 
   },
-{ 
+  { 
     q: `מהו 'מעגל ההכשרה השלם'?`, 
     choices: [
       `מעגל הכשרות סגור המיועד למפקדי חטיבות בלבד`, 
@@ -89,6 +89,16 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
     }
   }, [submitted, onQuizCompleted]);
 
+  const exitFullScreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    } else if (document.webkitExitFullscreen) { /* Safari / iOS */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+      document.msExitFullscreen();
+    }
+  };
+
   const playResultSound = (fileName) => {
     const audioRef = fileName === 'halleluja.mp3' ? hallelujahAudio : loserAudio;
     if (!audioRef.current) {
@@ -136,7 +146,6 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
       window.removeEventListener('touchstart', unlockAudio);
       window.removeEventListener('click', unlockAudio);
 
-      // ניקוי אודיו בעת יציאה מרכיב החידון
       if (hallelujahAudio.current) {
         hallelujahAudio.current.pause();
         hallelujahAudio.current = null;
@@ -183,7 +192,6 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
     setClockRotation(0);
   };
 
-  // מופחת ל-18 כוכבים במקום 55 למניעת עומס זיכרון בניידים
   const renderStarRain = () => {
     return Array.from({ length: 18 }).map((_, i) => {
       const randomLeft = Math.random() * 100;
@@ -291,9 +299,25 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
               }
             </p>
             
-            <div className="quiz-result-actions">
+            <div className="quiz-result-actions" style={{ display: 'flex', flexDirection: 'column', gap: '1vh', alignItems: 'center' }}>
               <div role="button" className="quiz-nav-item retry" onClick={handleReset}>
                 נסה שוב
+              </div>
+
+              {/* כפתור יציאה ממסך מלא */}
+              <div 
+                role="button" 
+                className="quiz-nav-item exit-fullscreen" 
+                onClick={exitFullScreen}
+                style={{ marginTop: '0.5rem', cursor: 'pointer' }}
+                id="exit-fullscreen-icon"
+              >
+               <img 
+                src={`${process.env.PUBLIC_URL}/assets/Quiz/minimize.svg`} 
+                alt="יציאה ממסך מלא"
+                onClick={exitFullScreen}
+                
+              />
               </div>
             </div>
           </div>

@@ -57,7 +57,11 @@ function App() {
     localStorage.setItem('completedProgressActions', JSON.stringify(completedProgressActions));
   }, [completedProgressActions]);
 
-  const progress = calculateProgress(completedProgressActions, TOTAL_PROGRESS_STEPS);
+  // אם אנחנו בעמודי הבוחן, ההתקדמות תהיה 100%, אחרת מחושבת לפי הפעולות
+const isQuizPage = currentPage === 'quizIntro' || currentPage === 'quiz';
+const progress = isQuizPage 
+  ? 100 
+  : calculateProgress(completedProgressActions, TOTAL_PROGRESS_STEPS);
   
   const incrementProgress = (actionKey) => {
     if (!actionKey) return;

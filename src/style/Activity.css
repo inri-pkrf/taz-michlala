@@ -17,7 +17,7 @@
 #activity-text1 {
     position: absolute;
     font-size: clamp(1.2rem, 5.5vmin, 2.5rem);
-    width: 80vw;
+    width: 85vw;
     top: 15vh;
     left: 50%;
     transform: translateX(-50%);
@@ -208,7 +208,7 @@
     position: absolute;
     height: 30vh;
     width: 75vw;
-    top: 42vh;
+    top: 45vh;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 1.5vh;
@@ -219,7 +219,7 @@
     position: absolute;
     font-size: clamp(1.2rem, 4.5vw, 2.2rem);
     width: 80vw;
-    top: 20vh;
+    top: 16vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: right;
@@ -230,8 +230,8 @@
 #activityStep4-text2 {
     position: absolute;
     font-size: clamp(1rem, 3vw, 1.8rem);
-    width: 60vw;
-    top: 30vh;
+    width: 80vw;
+    top: 29vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -250,7 +250,7 @@
     text-align: right;
     direction: rtl;
     padding: 2vh 2vh;
-    padding-bottom: 8vh;
+    padding-bottom: 6vh;
     border: 0.4vh solid #5C6645;    
     border-radius: 2.5vh;
 }
@@ -268,7 +268,7 @@
     position: absolute;
     width: 32vw;
     height: 17vh;
-    top: 36vh;
+    top: 38vh;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -277,7 +277,7 @@
     position: absolute;
     font-size: clamp(1.2rem, 5vw, 2.5rem);
     width: 80vw;
-    top: 72vh;
+    top: 74vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;

@@ -36,7 +36,7 @@
     position: absolute;
     width: 53vw;
     height: 22vh;
-    bottom: 47vh;
+    bottom: 46vh;
     left: 50%;  
     transform: translateX(-50%);
     z-index: 2;
@@ -46,7 +46,7 @@
     position: absolute;
     width: 85vw;
     height: 35vh;
-    bottom: 40vh;
+    bottom: 39vh;
     left: 50%;  
     transform: translateX(-50%);
     z-index: 1;
@@ -56,7 +56,7 @@
     position: absolute;
     width: 20vw;
     height: 8vh;
-    top: 29vh;
+    top: 30vh;
     left: 64vw;  
     z-index: 3;
 }
@@ -65,7 +65,7 @@
     position: absolute;
     width: 20vw;
     height: 8vh;
-    top: 35.5vh;
+    top: 36.5vh;
     left: 15vw;  
     z-index: 3;
 }
@@ -74,7 +74,7 @@
     position: absolute;
     width: 16vw;
     height: 10vh;
-    top: 41vh;
+    top: 42vh;
     left: 68vw;  
     z-index: 3;
 }
@@ -83,7 +83,7 @@
     position: absolute;
     font-size: 4vw;
     width: 80vw;
-    top: 20vh;
+    top: 21.5vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -95,7 +95,7 @@
     position: absolute;
     font-size: 4.5vw;
     width: 80vw;
-    top: 54vh;
+    top: 55vh;
     left: 50%;
     transform: translateX(-50%) scale(0.3); 
     text-align: center;
@@ -110,7 +110,7 @@
 #DigitalAssets-light-bomb {
     position: absolute;
     width: 18vw;
-    height: 33vh;
+    height: 38vh;
     top: 49vh;
     left: 12vw;  
     z-index: 0;

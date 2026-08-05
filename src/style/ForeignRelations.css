@@ -66,7 +66,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 55vh;
+    top: 58vh;
     font-size: 4vh;
     margin-top: 0.6vh;
     line-height: 1.4;
@@ -90,7 +90,7 @@
   position: absolute;
   padding: 1.5vh 2vw;
   left: 50%;
-  top: 65vh;
+  top: 68vh;
   width: 80vw;
   text-align: center;
   direction: rtl;
