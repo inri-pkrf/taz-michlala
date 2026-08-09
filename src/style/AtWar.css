@@ -1,251 +1,212 @@
-.video-wrapper{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+/* ==========================================
+   1. הגדרות העמוד והרקע השחור
+   ========================================== */
+.at-war-page {
+    background-color: #000000 !important;
+    min-height: 100vh;
+    position: relative;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
-.video-poster-img{
+/* כותרת העמוד הראשית בראש המסך */
+#AtWar-title {
+    font-family: "Karantina", sans-serif;
     position: absolute;
-    width: 60vw;
-    height: 24vh;
-    top: -28vh;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.war-date{
-    position: absolute;
-    font-size: 5vmin;
-    top: 19vh;
-    left: 50%;  
-    transform: translateX(-50%);
-    color: #253225;
-}
-
-#AtWar-title{
-    font-family: "Karantina";
-    position: absolute;
-    font-size: 14vw;
-    top: 7.5vh;
-    width: 80vw;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #253225;
-}
-
-.war-name{
-    position: absolute;
-    font-size: 5vmin;
-    font-weight: bold;
-    top: 26.5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 40vw;
-    font-weight: 100;
-    padding: 1.5vh 3vh;
-    border: 0.5vh solid #253225;
-    border-radius: 1.5vh;
-    color: #253225;
-    background-color: #FAF8F3;
-    z-index: 2;
+    /* גודל גמיש שמתאים החל ממובייל קטן ועד למסכי מחשב רחבים */
+    font-size: 12vmin;
     
-}
-
-.war-short-text{
-    position: absolute;
-    font-size: 4.5vmin;
-    top: 43vh;
-    left: 50%;
-    transform: translateX(-50%);
+    /* שימוש ב-rem יחד עם vh מונע מהכותרת לברוח במסכים נמוכים או גבוהים מדי */
+    top: max(2rem, 10vh);
+    
+    width: 90vw;
+    max-width: 800px;
     text-align: center;
-    width: 84vw;
-    font-weight: 600;
-    line-height: 1.4;
-    direction: rtl;
-    color: #253225;
-}
-
-
-.video-wrapper{
-    position: absolute;
-    bottom: 15vh;
     left: 50%;
     transform: translateX(-50%);
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.1;
+    z-index: 10;
+    box-sizing: border-box;
 }
 
-.war-title2{
+
+/* ==========================================
+   2. סידור הפופ-אפ והרכיבים בתוכו
+   ========================================== */
+.war-popup-card {
+    background-color: #ffffffea;
+    border-radius: 1.25rem;
+    padding: 1.25rem 0.5rem 0.75rem; /* הקטנת ה-Padding בצדדים (למעלה | צדדים | למטה) */
+    width: 92vw;
+    max-width: 550px;
+    max-height: 65vh;
+    text-align: center;
+    border: 0.5vh solid #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-top: 6vh; /* מפנה מקום לכותרת העליונה */
+    z-index: 5;
+}
+
+/* מיכל התוכן (כותרת + טקסט) */
+.war-step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding: 0.25rem 0.5rem; /* הקטנת Padding צדי למינימום לקבלת מקום נוסף לטקסט */
+    flex-grow: 1;
+}
+
+/* כותרת השלב בפופ-אפ - מוגדלת */
+.war-subtitle {
+    position: static !important; /* דורס את ה-absolute */
+    transform: none !important;
+    font-size: 5.8vmin; /* הוגדל */
+    margin: 0 0 0.75rem 0 !important;
+    color: #2c3e50;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+/* הטקסט בתוך הפופ-אפ - מוגדל */
+.war-short-text {
+    position: static !important; /* דורס את ה-absolute */
+    transform: none !important;
+    font-size: 5.1vmin; /* הוגדל מ-1.05rem */
+    line-height: 1.5;
+    color: #000000;
+    margin: 0 !important;
+    direction: rtl;
+    text-align: right;
+    width: 100%;
+    font-weight: 500;
+}
+
+/* בר החצים והספירה בתחתית הפופ-אפ */
+.war-bottom-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #eee;
+    padding-top: 0.05rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-top: 0.05rem !important;
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.war-nav-btn {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.war-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.war-nav-btn:not(:disabled) {
+    cursor: pointer;
+}
+
+.war-step-indicator {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #777;
+}
+
+/* ==========================================
+   3. שאר האלמנטים של העמוד
+   ========================================== */
+
+#AtWar-title2 {
     position: absolute;
     font-size: 4.5vmin;
-    top: 19vh;
+    top: 16vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     width: 80vw;
-    font-weight: 100;
-    color: #253225;
+    font-weight: 600;
+    color: #fdfffd;
+    direction: rtl;
 }
 
-.war-long-text{
+#AtWar-dir {
     position: absolute;
-    font-size: 4.4vmin;
+    font-size: 3.5vmin;
     top: 25vh;
     left: 50%;
     transform: translateX(-50%);
-    text-align: right;
+    text-align: center;
     width: 80vw;
     font-weight: 100;
-    line-height: 1.4;
-    direction: rtl;
-    color: #253225;
-    padding: 1vh 2vh;
-    border: 0.5vh solid #253225;
-    background-color: #DFE8E1;
-    border-radius: 2vh;
+    color: #fdfffd;
+    direction: rtl; 
 }
 
-.interactive-image-container{
+/* ==========================================
+   עיצוב ייחודי לכפתורים העליונים רק בעמוד זה
+   ========================================== */
+
+
+/* 2. רכיב תצוגת האחוזים / התקדמות */
+.at-war-page .progress-indicator,
+.at-war-page .progress-text,
+.at-war-page [class*="progress"] {
+    background-color: #000000 !important; /* צבע רקע */
+    color: #ffffff !important;            /* צבע טקסט */
+    border: 2px solid #ffffff !important; /* קו מתאר */
+}
+
+/* 3. רכיב אודות (AboutMe) */
+.at-war-page .about-me,
+.at-war-page .about-button,
+.at-war-page [class*="about"] {
+    background-color: #000000 !important; /* צבע רקע */
+    color: #ffffff !important;            /* צבע טקסט */
+    border: 2px solid #ffffff !important; /* קו מתאר */
+}
+
+/* במידה והטקסט/אייקונים בתוך הרכיבים מגיעים מ-SVG או אלמנטים פנימיים */
+.at-war-page .home-button *,
+.at-war-page .about-me * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+
+/* תמונת הרקע צמודה לתחתית העמוד ומאחורי הפופ-אפ */
+.bomb {
     position: absolute;
-    top: 58vh;
-    left: 6%;
-    width: 80vw;
-    height: 40vh;
-}
-
-.war-interactive-img{
-    position: absolute;
-    width: 80vw;
-    height: 20vh;
-    left: -5%;
-    z-index: 2;
-}
-
-.AtWar-sky{
-    position: absolute;
-    top: -4vh;
-    left: -12.5vw;
-    width: 95vw;
-    height: 8vh;
-   z-index: 1;
-}
-
-.AtWar-jeep{
-    position: absolute;
-    top: 19vh;
-    left: -12vw;
-    width: 23vw;
-    height: 4.5vh;
-    z-index: 3;
-
-    animation: driveInJeep 1.5s ease-out forwards;
-}
-
-.AtWar-tank{
-    position: absolute;
-    top: 18vh;
-    left: 34vw;
-    width: 35vw;
-    height: 6vh;
-    z-index: 2;
-
-}
-
-.AtWar-dust{
-    position: absolute;
-    top: 21vh;
-    right: -3vw;
-    width: 35vw;
-    height: 3vh;
-    z-index: 2;
-}
-
-.AtWar-plane1{
-    position: absolute;
-    left: -15vw;
-    width: 35vw;
-    height: 17vh;
-    z-index: 2;
-
-    animation: flyInPlane 1.8s ease-out forwards;
-}
-
-.AtWar-plane2{
-    position: absolute;
-    top: -1vh;
-    left: -11vw;
-    width: 15vw;
-    height: 3vh;
-    z-index: 2;
-}
-
-.AtWar-solider1{
-    position: absolute;
-    top: 16vh;
-    left: 70vw;
-    width: 7vw;
-    height: 5vh;
-    z-index: 3;
-}
-
-.AtWar-solider2{
-    position: absolute;
-    top: 17vh;
-    left: 14vw;
-    width: 5vw;
-    height: 6vh;
-    z-index: 3;
-}
-
-.AtWar-bg-building{
-    position: absolute;
-    top: 12vh;  
-    right: -3vw;
-    width: 12vw;
-    height: 6vh;
-    z-index: -1;
-}
-
-/* אנימציה לג'יפ - מגיע משמאל הרחק מחוץ למסך ועוצר במיקום המקורי */
-@keyframes driveInJeep {
-    from {
-        
-        left: -40vw; /* מתחיל רחוק משמאל מחוץ למסך */
-    }
-    to {
-        left: -12vw; /* עוצר בדיוק במיקום שהגדרת לו */
-    }
-}
-
-/* אנימציה למטוס - מגיע משמאל מחוץ למסך ועוצר במיקום המקורי */
-@keyframes flyInPlane {
-    from {
-        top: -26vh;
-        left: -50vw; /* מתחיל מחוץ למסך */
-    }
-    to {
-        top: -18vh;
-        left: -15vw; /* עוצר בדיוק במיקום שהגדרת לו */
-    }
-}
-
-.IronSwords-sords{
-    position: absolute;
-    width: 48vw;
-    height: 22vh;
+    bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
-    top: 22.5vh;
-    z-index: 1;
-}
-
-.LionRoar-lion{
-        position: absolute;
-    width: 55vw;
-    height: 18vh;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 22.5vh;
-    z-index: 1;
+    transform: translateX(-50%); /* מרכgroup את התמונה אופקית */
+    width: 100%;                  /* או גודל ספציפי לבחירתך, למשל: width: 300px; או width: 100vw; */
+    max-width: 100vw;
+    height: auto;
+    z-index: 1;                   /* מציב אותה ברקע (מתחת ל-popup-card שלו יש z-index: 5) */
+    pointer-events: none;         /* מונע מגע עליה כדי שתוכל ללחוץ על אלמנטים מאחוריה אם צריך */
 }

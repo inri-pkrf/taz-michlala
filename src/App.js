@@ -2,84 +2,62 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { calculateProgress } from './utils/progress';
 
-// ייבוא כל העמודים והקומפוננטות
+// ייבוא העמודים
 import WelcomePage from './pages/WelcomePage';
 import HomePage from './pages/HomePage';
-import Activity from './pages/Activity'; // נושא 1
-import DigitalAssets from './pages/DigitalAssets'; // נושא 2 (משולב עם OnSocial)
-import NationalLibrary from './pages/NationalLibrary'; // נושא 3
-import ForeignRelations from './pages/ForeignRelations'; // נושא 4
-import AtWar from './pages/AtWar'; // נושא 5
+import Activity from './pages/Activity';
+import DigitalAssets from './pages/DigitalAssets';
+import NationalLibrary from './pages/NationalLibrary';
+import ForeignRelations from './pages/ForeignRelations';
+import AtWar from './pages/AtWar';
 import QuizIntro from './pages/QuizIntro';
 import Quiz from './pages/Quiz';
 
 function App() {
-  // המצב (State) שקובע איזה עמוד מוצג כרגע
   const [currentPage, setCurrentPage] = useState('welcome');
-  const TOTAL_PROGRESS_STEPS = 13;
   
-  // אתחול מהמאגר המקומי (localStorage)
-  const [completedProgressActions, setCompletedProgressActions] = useState(() => {
-    const saved = localStorage.getItem('completedProgressActions');
-    return saved ? JSON.parse(saved) : [];
-  });
-  
+  // 1. קבעי כאן את הסכום הכולל של כל בלוקים/כפתורי ה"המשך" בכל הלומדה
+  // למשל: אם יש 5 נושאים ובכל נושא יש 4 שקפים = 20 שלבים בסך הכל
+  const TOTAL_PROGRESS_STEPS = 12; 
+
+  const [completedProgressActions, setCompletedProgressActions] = useState([]);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
-  
-  // חלקיק חדש: סטייט לשמירת השם הפרטי של המשתמש מהמבחן
   const [userFirstName, setUserFirstName] = useState('');
-
-  // סטייט חדש: שומר כמה נושאים פתוחים כרגע למשתמש (מתחיל ב-1)
-  // **אל תשמור ב-localStorage** - זה עדכן בכל סשן
   const [unlockedTopicCount, setUnlockedTopicCount] = useState(1);
-
-  // סטייט חדש: מעקב אחרי הנושאים שסיימו בסשן הנוכחי (לא מhashStorage)
   const [currentSessionCompletedTopics, setCurrentSessionCompletedTopics] = useState(new Set());
-
-  // עקוב אחרי העמוד הקודם כדי לדעת אם משתמשת עזבה נושא
   const [previousPage, setPreviousPage] = useState('welcome');
 
-  // בדוק אם משתמשת חוזרת לעמוד הבית מנושא - אם כן, סמן את הנושא כמסיים
   useEffect(() => {
     const topicPages = ['activity', 'digitalAssets', 'nationalLibrary', 'foreignRelations', 'atWar'];
-    
-    // אם משתמשת הייתה בנושא וכרגע היא בעמוד הבית, סמן את הנושא כמסיים
     if (topicPages.includes(previousPage) && currentPage === 'home') {
       setCurrentSessionCompletedTopics((prev) => new Set([...prev, previousPage]));
     }
-    
     setPreviousPage(currentPage);
   }, [currentPage, previousPage]);
 
-  // שמירה של completedProgressActions ל-localStorage כשהוא משתנה
-  useEffect(() => {
-    localStorage.setItem('completedProgressActions', JSON.stringify(completedProgressActions));
-  }, [completedProgressActions]);
+  // חישוב אחוז ההתקדמות
+  const isQuizPage = currentPage === 'quizIntro' || currentPage === 'quiz';
+  const progress = isQuizPage 
+    ? 100 
+    : calculateProgress(completedProgressActions, TOTAL_PROGRESS_STEPS);
 
-  // אם אנחנו בעמודי הבוחן, ההתקדמות תהיה 100%, אחרת מחושבת לפי הפעולות
-const isQuizPage = currentPage === 'quizIntro' || currentPage === 'quiz';
-const progress = isQuizPage 
-  ? 100 
-  : calculateProgress(completedProgressActions, TOTAL_PROGRESS_STEPS);
-  
+  // פונקציית הוספת התקדמות לפי מזהה שלב (actionKey)
   const incrementProgress = (actionKey) => {
     if (!actionKey) return;
     setCompletedProgressActions((prev) => {
+      // אם השלב הזה כבר בוצע בעבר, אל תעלה אחוזים שוב
       if (prev.includes(actionKey)) return prev;
       return [...prev, actionKey];
     });
   };
 
-  // פונקציית ניווט חכמה שמנהלת את פתיחת הנושאים לפי סדר הכניסה
   const handleNavigate = (route) => {
-    // אם הנתיב הוא לבוחן, פשוט עבור לשם
     if (route === 'quizIntro') {
       setCurrentPage('quizIntro');
       return;
     }
 
-    // מיפוי של ה-Route למספר הנושא
     const routeToNumber = {
       'activity': 1,
       'digitalAssets': 2,
@@ -89,26 +67,17 @@ const progress = isQuizPage
     };
 
     const clickedTopicNum = routeToNumber[route];
+    if (clickedTopicNum && clickedTopicNum > unlockedTopicCount) return;
 
-    // בדיקה: רק תן לגשת לנושא אם הוא בתוך המגבלה
-    if (clickedTopicNum && clickedTopicNum > unlockedTopicCount) {
-      // נושא זה לא זמין עדיין
-      return;
-    }
-
-    // אם המשתמש נכנס לנושא שהוא הכי מתקדם שלו כרגע, נפתח לו את הנושא הבא בתור
     if (clickedTopicNum && clickedTopicNum === unlockedTopicCount) {
-      setUnlockedTopicCount((prev) => Math.min(prev + 1, 5)); // מעלה את מספר הנושאים הפתוחים (מקסימום 5)
+      setUnlockedTopicCount((prev) => Math.min(prev + 1, 5));
     }
 
-    // מעבר לעמוד המבוקש
     setCurrentPage(route);
   };
 
-  // פונקציה שמחליטה איזו קומפוננטה לרנדר על המסך
   const renderPage = () => {
     const requiredTopics = ['activity','digitalAssets','nationalLibrary','foreignRelations','atWar'];
-    // בדיקה אם כל הנושאים הושלמו בסשן הנוכחי (לא רק מ-localStorage)
     const showQuizAvailable = requiredTopics.every(t => currentSessionCompletedTopics.has(t));
 
     switch (currentPage) {
@@ -118,9 +87,9 @@ const progress = isQuizPage
       case 'home':
         return (
           <HomePage 
-            onNavigate={handleNavigate} // שימוש בפונקציית הניווט החכמה שלנו
+            onNavigate={handleNavigate} 
             showQuizAvailable={showQuizAvailable} 
-            progress={unlockedTopicCount} // העברת הנושאים הפתוחים כ-Prop
+            progress={unlockedTopicCount} 
           />
         );
         
@@ -146,7 +115,6 @@ const progress = isQuizPage
               setUserFirstName(name); 
               setQuizCompleted(false);
               setQuizStarted(true);
-              setCompletedProgressActions((prev) => prev.includes('quiz') ? prev : [...prev, 'quiz']);
               setCurrentPage('quiz'); 
             }} 
             onCancel={() => {
@@ -159,7 +127,7 @@ const progress = isQuizPage
               setQuizStarted(false);
               setCurrentPage('home');
             }}
-            progress={progress}
+            progress={100}
             isHomeEnabled={quizCompleted}
           />
         );
@@ -172,7 +140,7 @@ const progress = isQuizPage
               setQuizCompleted(false);
               setCurrentPage('home');
             }}
-            progress={progress}
+            progress={100}
             isHomeEnabled={quizCompleted}
             onQuizCompleted={setQuizCompleted}
           />
