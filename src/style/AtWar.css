@@ -12,18 +12,15 @@
     justify-content: center;
     padding: 1rem;
     box-sizing: border-box;
+    touch-action: pan-y;
 }
 
-/* כותרת העמוד הראשית בראש המסך */
+/* כותרות העמוד העליונות */
 #AtWar-title {
     font-family: "Karantina", sans-serif;
     position: absolute;
-    /* גודל גמיש שמתאים החל ממובייל קטן ועד למסכי מחשב רחבים */
-    font-size: 12vmin;
-    
-    /* שימוש ב-rem יחד עם vh מונע מהכותרת לברוח במסכים נמוכים או גבוהים מדי */
-    top: max(2rem, 10vh);
-    
+    font-size: clamp(2.7rem, 6vw, 4.5rem);
+    top: 9vh;
     width: 90vw;
     max-width: 800px;
     text-align: center;
@@ -36,62 +33,116 @@
     box-sizing: border-box;
 }
 
+#AtWar-title2 {
+    position: absolute;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    top: max(6.5rem, 12vh);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 85vw;
+    max-width: 700px;
+    font-weight: 600;
+    color: #fdfffd;
+    direction: rtl;
+    z-index: 10;
+}
+
+#AtWar-dir {
+    position: absolute;
+    font-size: clamp(0.85rem, 2vw, 1.2rem);
+    top: max(10.5rem, 18vh);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 85vw;
+    max-width: 700px;
+    font-weight: 300;
+    color: #fdfffd;
+    direction: rtl;
+    z-index: 10;
+}
 
 /* ==========================================
-   2. סידור הפופ-אפ והרכיבים בתוכו
+   2. סידור הפופ-אפ (ללא גלילה, מותאם לטוטם)
    ========================================== */
 .war-popup-card {
     background-color: #ffffffea;
     border-radius: 1.25rem;
-    padding: 1.25rem 0.5rem 0.75rem; /* הקטנת ה-Padding בצדדים (למעלה | צדדים | למטה) */
-    width: 92vw;
-    max-width: 550px;
-    max-height: 65vh;
+    padding: 1.2rem 1rem 0.8rem;
+    width: 88vw;
+    max-width: 580px;
+    height: auto;
+    max-height: 62vh;
     text-align: center;
-    border: 0.5vh solid #ffffff;
+    border: 4px solid #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    margin-top: 6vh; /* מפנה מקום לכותרת העליונה */
+    margin-top: 10vh;
     z-index: 5;
+    touch-action: pan-y;
+    user-select: none;
+    overflow: hidden;
 }
 
-/* מיכל התוכן (כותרת + טקסט) */
+/* מיכל התוכן (כותרת + טקסט + נגן וידאו) */
 .war-step-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    overflow-y: auto;
-    padding: 0.25rem 0.5rem; /* הקטנת Padding צדי למינימום לקבלת מקום נוסף לטקסט */
+    justify-content: center;
+    overflow: hidden !important;
+    padding: 0.25rem;
     flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* כותרת השלב בפופ-אפ - מוגדלת */
+/* כותרת השלב בפופ-אפ */
 .war-subtitle {
-    position: static !important; /* דורס את ה-absolute */
+    position: static !important;
     transform: none !important;
-    font-size: 5.8vmin; /* הוגדל */
-    margin: 0 0 0.75rem 0 !important;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    margin: 0 0 0.5rem 0 !important;
     color: #2c3e50;
     font-weight: bold;
     text-align: center;
     width: 100%;
+    line-height: 1.2;
 }
 
-/* הטקסט בתוך הפופ-אפ - מוגדל */
+/* הטקסט בתוך הפופ-אפ */
 .war-short-text {
-    position: static !important; /* דורס את ה-absolute */
+    position: static !important;
     transform: none !important;
-    font-size: 5.1vmin; /* הוגדל מ-1.05rem */
-    line-height: 1.5;
+    font-size: clamp(0.9rem, 2.2vw, 1.25rem);
+    line-height: 1.45;
     color: #000000;
     margin: 0 !important;
     direction: rtl;
-    text-align: right;
+    text-align: center;
     width: 100%;
     font-weight: 500;
+}
+
+/* מעטפת הסרטון המוטמע */
+.war-video-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.war-embedded-video {
+    width: 100%;
+    max-width: 420px;
+    max-height: 32vh;
+    border-radius: 0.8rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    outline: none;
+    background-color: #000000;
 }
 
 /* בר החצים והספירה בתחתית הפופ-אפ */
@@ -99,11 +150,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #eee;
-    padding-top: 0.05rem;
+    border-top: 1px solid #ddd;
+    padding-top: 0.4rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    margin-top: 0.05rem !important;
+    margin-top: 0.4rem !important;
     flex-shrink: 0;
     width: 100%;
     box-sizing: border-box;
@@ -113,9 +164,9 @@
     background: #f0f0f0;
     border: none;
     border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.2rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,86 +183,46 @@
 }
 
 .war-step-indicator {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: bold;
-    color: #777;
+    color: #555;
 }
 
 /* ==========================================
-   3. שאר האלמנטים של העמוד
+   3. עיצוב כפתורים נוספים ותמונת הרקע
    ========================================== */
-
-#AtWar-title2 {
-    position: absolute;
-    font-size: 4.5vmin;
-    top: 16vh;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 80vw;
-    font-weight: 600;
-    color: #fdfffd;
-    direction: rtl;
-}
-
-#AtWar-dir {
-    position: absolute;
-    font-size: 3.5vmin;
-    top: 25vh;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 80vw;
-    font-weight: 100;
-    color: #fdfffd;
-    direction: rtl; 
-}
-
-/* ==========================================
-   עיצוב ייחודי לכפתורים העליונים רק בעמוד זה
-   ========================================== */
-
-
-/* 2. רכיב תצוגת האחוזים / התקדמות */
 .at-war-page .progress-indicator,
 .at-war-page .progress-text,
 .at-war-page [class*="progress"] {
-    background-color: #000000 !important; /* צבע רקע */
-    color: #ffffff !important;            /* צבע טקסט */
-    border: 2px solid #ffffff !important; /* קו מתאר */
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
 }
 
-/* 3. רכיב אודות (AboutMe) */
 .at-war-page .about-me,
 .at-war-page .about-button,
 .at-war-page [class*="about"] {
-    background-color: #000000 !important; /* צבע רקע */
-    color: #ffffff !important;            /* צבע טקסט */
-    border: 2px solid #ffffff !important; /* קו מתאר */
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
 }
 
-/* במידה והטקסט/אייקונים בתוך הרכיבים מגיעים מ-SVG או אלמנטים פנימיים */
 .at-war-page .home-button *,
 .at-war-page .about-me * {
     color: #ffffff !important;
     fill: #ffffff !important;
 }
 
-
-/* תמונת הרקע צמודה לתחתית העמוד ומאחורי הפופ-אפ */
+/* תמונת הרקע בתחתית */
 .bomb {
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%); /* מרכgroup את התמונה אופקית */
-    width: 100%;                  /* או גודל ספציפי לבחירתך, למשל: width: 300px; או width: 100vw; */
-    max-width: 100vw;
+    left: 0;
+    width: 100vw;
     height: auto;
-    z-index: 1;                   /* מציב אותה ברקע (מתחת ל-popup-card שלו יש z-index: 5) */
-    pointer-events: none;         /* מונע מגע עליה כדי שתוכל ללחוץ על אלמנטים מאחוריה אם צריך */
-}
-
-.war-popup-card {
-    touch-action: pan-y; /* מאפשר לגולל את הטקסט למעלה/למטה אך שומר על סוואיפ אופקית יציב */
-    user-select: none;   /* מונע סימון כחול מעצבן של טקסט בזמן החלקה */
+    max-height: 40vh;
+    object-fit: cover;
+    object-position: bottom center;
+    z-index: 1;
+    pointer-events: none;
 }

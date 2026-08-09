@@ -28,12 +28,24 @@ const stepsData = [
     id: 'ironSwords_visit',
     text: `לצד שתי המשימות הלאומיות, המכללה המשיכה להכשיר בחירום קורסים לבעלי תפקידים שהיו נחוצים בשטח, הנגשנו תוכן מקצועי ומתוקף לבעלי התפקידים ברשויות, ביצענו 'זמן יקר' במפקדות, הפצנו תוכן דיגיטלי לצוותי הצח"י ומנהלי המכלולים, ערכנו אבחון לקריית שמונה לסיוע בהתמודדות הרשות עם אתגרי הפינוי ופיצול הרשות ועוד פעולות רבות כחלק מהמאמץ המלחמתי בעורף.`
   },
+  {
+    id: 'ironSwords_video',
+    videoElement: (
+      <video
+        src="https://inri-pkrf.github.io/know-college/assets/media/war.mp4" // עדכני לנתיב/קישור הסרטון המבוקש
+        controls
+        controlsList="nodownload"
+        playsInline
+        className="war-embedded-video"
+      />
+    )
+  }
 ];
 
 function AtWar({ onGoHome, progress, onProgress }) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-  // שמירת נקודות ההתחלה ב-X וב-Y
+  // שמירת נקודות ההתחלה ב-X וב-Y עבור מחוות נגיעה (Swipe)
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
 
@@ -60,13 +72,11 @@ function AtWar({ onGoHome, progress, onProgress }) {
     onGoHome();
   };
 
-  // תחילת הנגיעה במיכל או בפופ-אפ
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   };
 
-  // סיום הנגיעה וחישוב מחווה
   const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
     const touchEndY = e.changedTouches[0].clientY;
@@ -74,11 +84,7 @@ function AtWar({ onGoHome, progress, onProgress }) {
     const deltaX = touchStartX.current - touchEndX;
     const deltaY = touchStartY.current - touchEndY;
 
-    // בודקים שההחלקה היא אופקית בעיקרה ולא גלילה אנכית של הטקסט
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
-      // בעברית (RTL):
-      // החלקה שמאלה (deltaX > 0) -> מעבר לשלב הבא
-      // החלקה ימינה (deltaX < 0) -> מעבר לשלב הקודם
       if (deltaX > 0) {
         goToNextStep();
       } else {
@@ -98,7 +104,6 @@ function AtWar({ onGoHome, progress, onProgress }) {
       </p>
       <p id="AtWar-dir">ניתן לדפדף בין העמודים כדי לגלות עוד</p>
 
-      {/* חיבור אירועי הטאץ' ישירות לפופ-אפ המרכזי */}
       <div 
         className="war-popup-card"
         onTouchStart={handleTouchStart}
@@ -108,7 +113,17 @@ function AtWar({ onGoHome, progress, onProgress }) {
           {currentStep.subTitle && (
             <h2 className="war-subtitle">{currentStep.subTitle}</h2>
           )}
-          <p className="war-short-text">{currentStep.text}</p>
+          
+          {currentStep.text && (
+            <p className="war-short-text">{currentStep.text}</p>
+          )}
+
+          {/* הצגת הסרטון במידה וקיים בשלב הנוכחי */}
+          {currentStep.videoElement && (
+            <div className="war-video-wrapper">
+              {currentStep.videoElement}
+            </div>
+          )}
         </div>
 
         <div className="war-bottom-navigation">
