@@ -7,22 +7,38 @@ import AboutMe from '../components/AboutMe';
 const stepsData = [
   {
     id: 'ironSwords_main',
+    // פופ-אפ 1: חרבות ברז
     text: "עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום. במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס\"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע\"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל\"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית."
   },
   {
     id: 'ironSwords_marsal',
     subTitle: 'מרס"ל',
+    // פופ-אפ 2: חרבות ברזל, שאגת הארי, עם כלביא
+    icons: [
+      { src: `${process.env.PUBLIC_URL}/assets/AtWar/all/haravot-barzel.svg`, alt: 'חרבות ברזל' },
+      { src: `${process.env.PUBLIC_URL}/assets/AtWar/all/Ari-1.svg`, alt: 'שאגת הארי' },
+      { src: `${process.env.PUBLIC_URL}/assets/AtWar/all/am-kelavie.svg`, alt: 'עם כלביא' }
+    ],
     text: 'במהלך הפעלת המרס"ל מאוקטובר 2023 עד פברואר 2024, טיפלו במרס"ל בלמעלה מ-700 פניות שעלו מהמחוזות בתחומים שונים כמו אספקת מנות מזון, חיתולים, מטרנה, מתנדבים, שינוע תרופות ועוד משימות ייחודיות וערכיות, שלא ניתן להן כל מענה ממקורות אחרים.'
   },
   {
     id: 'ironSwords_yanai',
     subTitle: 'משל"ט ינאי',
+    // פופ-אפ 3: חרבות ברזל
+    icons: [
+      { src: `${process.env.PUBLIC_URL}/assets/AtWar/all/haravot-barzel.svg`, alt: 'חרבות ברזל' }
+    ],
     text: 'אפשר לומר שחוץ מראש הממשלה כולם הגיעו לבקר - מהנשיא ורעייתו, הרמטכ"ל, שרים, מנכ"לי משרדי ממשלה, אלופי המטכ"ל ועוד. המשל"ט ניהל, ריכז ותכלל את תמונת המצב של המפונים בבתי המלון עם למעלה מרבע מיליון ישראלים שיצאו מביתם, 97 יישובים מתפנים ו-456 מלונות בשיא.'
   },
   {
     id: 'ironSwords_emergency',
     subTitle: "מרכז למידה מבצעית",
-    text: `להכניס טקסט`
+    // פופ-אפ 4: עם כלביא ושאגת הארי
+    icons: [
+      { src: `${process.env.PUBLIC_URL}/assets/AtWar/all/am-kelavie.svg`, alt: 'עם כלביא' },
+      { src: `${process.env.PUBLIC_URL}/assets/AtWar/all/Ari-1.svg`, alt: 'שאגת הארי' }
+    ],
+    text: `מרכז הלמידה המבצעית של פיקוד העורף, מופעל במכללה בשעת חירום. המרכז מוביל את תהליכי התחקור והפקת הלקחים בפיקוד. בזמן מלחמה עולים למרכז פערים מהשטח בזמן אמת, ובתהליך למידה מקצועי מופקים לקחים ותכנים לדרגי הפיקוד והשליטה בשטח, כדי להשפיע ולקדם למידה מיטבית תחת אש.`
   },
   {
     id: 'ironSwords_visit',
@@ -32,7 +48,7 @@ const stepsData = [
     id: 'ironSwords_video',
     videoElement: (
       <video
-        src="https://inri-pkrf.github.io/know-college/assets/media/war.mp4" // עדכני לנתיב/קישור הסרטון המבוקש
+        src="https://inri-pkrf.github.io/know-college/assets/media/war.mp4"
         controls
         controlsList="nodownload"
         playsInline
@@ -45,7 +61,6 @@ const stepsData = [
 function AtWar({ onGoHome, progress, onProgress }) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-  // שמירת נקודות ההתחלה ב-X וב-Y עבור מחוות נגיעה (Swipe)
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
 
@@ -98,63 +113,83 @@ function AtWar({ onGoHome, progress, onProgress }) {
       <HomeButton onClick={onGoHome} progress={progress} />
       <AboutMe />
 
-      <h1 id="AtWar-title">המכללה בעת מלחמה</h1>
-      <p id="AtWar-title2">
-        עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום.
-      </p>
-      <p id="AtWar-dir">ניתן לדפדף בין העמודים כדי לגלות עוד</p>
-
-      <div 
-        className="war-popup-card"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="war-step-container">
-          {currentStep.subTitle && (
-            <h2 className="war-subtitle">{currentStep.subTitle}</h2>
-          )}
-          
-          {currentStep.text && (
-            <p className="war-short-text">{currentStep.text}</p>
-          )}
-
-          {/* הצגת הסרטון במידה וקיים בשלב הנוכחי */}
-          {currentStep.videoElement && (
-            <div className="war-video-wrapper">
-              {currentStep.videoElement}
-            </div>
-          )}
+      <div className="atwar-content-wrapper">
+        <div className="atwar-header-container">
+          <h1 id="AtWar-title">המכללה בעת מלחמה</h1>
+          <p id="AtWar-title2">
+            עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום.
+          </p>
+          <p id="AtWar-dir">ניתן לדפדף בין העמודים כדי לגלות עוד</p>
         </div>
 
-        <div className="war-bottom-navigation">
-          <button 
-            onClick={goToNextStep} 
-            disabled={currentStepIndex === stepsData.length - 1}
-            aria-label="הבא"
-            className="war-nav-btn"
-          >
-            ⬅
-          </button>
+        <div 
+          className="war-popup-card"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="war-step-container">
+            {/* 1. האייקונים - מופיעים ראשונים (מעל הכותרת) */}
+            {currentStep.icons && currentStep.icons.length > 0 && (
+              <div className="war-icons-container">
+                {currentStep.icons.map((icon, index) => (
+                  <img
+                    key={index}
+                    src={icon.src}
+                    alt={icon.alt}
+                    className="war-operation-icon"
+                  />
+                ))}
+              </div>
+            )}
 
-          <span className="war-step-indicator">
-            {currentStepIndex + 1} / {stepsData.length}
-          </span>
+            {/* 2. הכותרת */}
+            {currentStep.subTitle && (
+              <h2 className="war-subtitle">{currentStep.subTitle}</h2>
+            )}
+            
+            {/* 3. הטקסט */}
+            {currentStep.text && (
+              <p className="war-short-text">{currentStep.text}</p>
+            )}
 
-          <button 
-            onClick={goToPrevStep} 
-            disabled={currentStepIndex === 0}
-            aria-label="הקודם"
-            className="war-nav-btn"
-          >
-            ➡
-          </button>
+            {/* 4. הוידאו (אם קיים) */}
+            {currentStep.videoElement && (
+              <div className="war-video-wrapper">
+                {currentStep.videoElement}
+              </div>
+            )}
+          </div>
+
+          <div className="war-bottom-navigation">
+            <button 
+              onClick={goToNextStep} 
+              disabled={currentStepIndex === stepsData.length - 1}
+              aria-label="הבא"
+              className="war-nav-btn"
+            >
+              ⬅
+            </button>
+
+            <span className="war-step-indicator">
+              {currentStepIndex + 1} / {stepsData.length}
+            </span>
+
+            <button 
+              onClick={goToPrevStep} 
+              disabled={currentStepIndex === 0}
+              aria-label="הקודם"
+              className="war-nav-btn"
+            >
+              ➡
+            </button>
+          </div>
         </div>
       </div>
 
       <img
         className="bomb"
         src={`${process.env.PUBLIC_URL}/assets/AtWar/all/bomb.svg`}
-        alt="img"
+        alt="background graphic"
       />
 
       <NextButton onClick={handleExitPage} />

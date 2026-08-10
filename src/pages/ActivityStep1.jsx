@@ -9,7 +9,7 @@ function ActivityStep1() {
       {/* אלמנטים דקורטיביים ברקע */}
       <img
         className="activity-queen"
-        src={`${process.env.PUBLIC_URL}/assets/Activity/crown-queen.png`}
+        src={`${process.env.PUBLIC_URL}/assets/Activity/crown-queen.svg`}
         alt="queen"
       />
 

@@ -28,9 +28,9 @@
 
 #activity-text3 {
     position: absolute;
-    font-size: clamp(1.1rem, 4.5vw, 2.2rem);
+    font-size: 4.5vmin;
     width: 80vw;
-    top: 64vh;
+    top: 70vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -229,9 +229,9 @@
 
 #activityStep4-text2 {
     position: absolute;
-    font-size: clamp(1rem, 3vw, 1.8rem);
+    font-size: 4vmin;
     width: 80vw;
-    top: 29vh;
+    top: 32vh;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
