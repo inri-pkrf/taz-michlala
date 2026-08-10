@@ -77,13 +77,13 @@
 }
 
 /* ==========================================
-   2. הפופ-אפ המרכזי
+   2. הפופ-אפ המרכזי (מסכים רגילים)
    ========================================== */
 .at-war-page .war-popup-card {
-    position: relative !important; /* הגדרה קריטית כדי לנעול את האייקונים יחסית לפופ-אפ */
+    position: relative !important;
     background-color: rgba(255, 255, 255, 0.95) !important;
     border-radius: 1.5rem !important;
-    padding: 2.8rem 1rem 0.8rem !important; /* padding עליון (2.8rem) משריין מקום לאייקונים הקבועים */
+    padding: 2.8rem 1rem 0.8rem !important;
     width: 85vw !important;
     max-width: 580px !important;
     height: 48vh !important;
@@ -96,6 +96,11 @@
     box-sizing: border-box !important;
     margin: 0 !important;
     overflow: hidden !important;
+}
+
+/* הפחתת רווח עליון ספציפית בפופ-אפ 5 */
+.at-war-page .war-popup-card.step-ironSwords_visit {
+    padding-top: 1.2rem !important;
 }
 
 .at-war-page .war-step-container {
@@ -122,7 +127,7 @@
 .at-war-page .war-short-text {
     position: static !important;
     transform: none !important;
-    font-size: 5vmin !important;
+    font-size: 4.5vmin !important; /* הוקטן מ-5vmin כדי למנוע גלישה */
     line-height: 1.45 !important;
     color: #000000 !important;
     margin: 0 !important;
@@ -150,6 +155,7 @@
     object-fit: contain !important;
 }
 
+/* ניווט תחתון */
 .at-war-page .war-bottom-navigation {
     display: flex !important;
     align-items: center !important;
@@ -171,6 +177,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    cursor: pointer !important;
 }
 
 .at-war-page .war-step-indicator {
@@ -180,7 +187,7 @@
 }
 
 /* ==========================================
-   3. תמונת רקע תחתונה מלאה ללא חיתוכים
+   3. תמונת רקע תחתונה
    ========================================== */
 .at-war-page .bomb {
     position: absolute !important;
@@ -198,11 +205,11 @@
 }
 
 /* ==========================================
-   4. מיקום ועיצוב קבוע לאייקונים העליונים
+   4. מיקום האייקונים
    ========================================== */
 .at-war-page .war-icons-container {
     position: absolute !important;
-    top: 0.6rem !important; /* מרחק מוחלט וקבוע מראש הפופ-אפ */
+    top: 0.6rem !important;
     left: 0 !important;
     right: 0 !important;
     display: flex !important;
@@ -210,7 +217,7 @@
     align-items: center !important;
     gap: 0.5rem !important;
     width: 100% !important;
-    height: 2rem !important; /* גובה קבוע שמונע תזוזה אנכית */
+    height: 2rem !important;
     margin: 0 !important;
     z-index: 10 !important;
 }
@@ -218,8 +225,66 @@
 .at-war-page .war-operation-icon {
     width: 8vmin !important;
     height: 8vmin !important;
-    max-width: 30px !important; /* הגבלת גודל מקסימלי לאייקון נקי */
+    max-width: 30px !important;
     max-height: 30px !important;
     object-fit: contain !important;
     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2)) !important;
+}
+
+/* ==========================================
+   5. התאמות למסכי טוטם (Portrait / Totem Display)
+   ========================================== */
+@media screen and (min-height: 900px) and (orientation: portrait), (min-width: 1080px) and (orientation: portrait) {
+
+    .atwar-content-wrapper {
+        padding-top: 5vh !important;
+    }
+
+    .at-war-page .war-popup-card {
+        height: 52vh !important;
+        max-height: 900px !important;
+        width: 88vw !important;
+        max-width: 900px !important;
+        padding: 4.5rem 2rem 1.5rem !important;
+    }
+
+    .at-war-page .war-popup-card.step-ironSwords_visit {
+        padding-top: 2rem !important;
+    }
+
+    .at-war-page .war-short-text {
+        font-size: 2.2rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .at-war-page .war-subtitle {
+        font-size: 2.5rem !important;
+        margin-bottom: 1.2rem !important;
+    }
+
+    .at-war-page .war-icons-container {
+        top: 1.2rem !important;
+        height: 3.5rem !important;
+    }
+
+    .at-war-page .war-operation-icon {
+        max-width: 55px !important;
+        max-height: 55px !important;
+    }
+
+    /* הגדלת אלמנטי הניווט עבור מסך מגע בגודל טוטם */
+    .at-war-page .war-bottom-navigation {
+        padding-top: 1.2rem !important;
+        margin-top: 1rem !important;
+    }
+
+    .at-war-page .war-nav-btn {
+        width: 4.5rem !important;
+        height: 4.5rem !important;
+        font-size: 2.2rem !important;
+    }
+
+    .at-war-page .war-step-indicator {
+        font-size: 1.8rem !important;
+    }
 }
