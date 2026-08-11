@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import HomeButton from '../components/HomeButtons';
+import AboutMe from '../components/AboutMe';
 import '../style/Quiz.css';
 
 const QUESTIONS = [
@@ -217,6 +218,7 @@ function Quiz({ onGoHome, userName = "משתמש/ת", progress, isHomeEnabled = 
   return (
     <div className="page-container quiz-page" style={{ position: 'relative' }}>
       <HomeButton onClick={onGoHome} progress={progress} disabled={!isHomeEnabled} />
+       <AboutMe/>
       {!submitted ? (
         <div className="quiz-form" style={{ zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           

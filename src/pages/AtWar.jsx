@@ -7,7 +7,7 @@ import AboutMe from '../components/AboutMe';
 const stepsData = [
   {
     id: 'ironSwords_main',
-    // פופ-אפ 1: חרבות ברז
+    // פופ-אפ 1: חרבות ברזל
     text: "עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום. במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס\"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע\"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל\"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית."
   },
   {
@@ -100,10 +100,11 @@ function AtWar({ onGoHome, progress, onProgress }) {
     const deltaY = touchStartY.current - touchEndY;
 
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      // הכיוונים ההפוכים:
       if (deltaX > 0) {
-        goToNextStep();
+        goToPrevStep(); // החלקה שמאלה מחזירה אחורה
       } else {
-        goToPrevStep();
+        goToNextStep(); // החלקה ימינה מקדמת קדימה
       }
     }
   };

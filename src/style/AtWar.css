@@ -127,7 +127,7 @@
 .at-war-page .war-short-text {
     position: static !important;
     transform: none !important;
-    font-size: 4.5vmin !important; /* הוקטן מ-5vmin כדי למנוע גלישה */
+    font-size: 2vmax !important; /* הוקטן מ-5vmin כדי למנוע גלישה */
     line-height: 1.45 !important;
     color: #000000 !important;
     margin: 0 !important;
@@ -195,7 +195,7 @@
     left: 0 !important;
     width: 100vw !important;
     height: auto !important;
-    max-height: 35vh !important;
+    max-height: 45vh !important;
     z-index: 1 !important;
     pointer-events: none !important;
     background: transparent !important;
@@ -234,7 +234,7 @@
 /* ==========================================
    5. התאמות למסכי טוטם (Portrait / Totem Display)
    ========================================== */
-@media screen and (min-height: 900px) and (orientation: portrait), (min-width: 1080px) and (orientation: portrait) {
+@media screen and (min-height: 800px) and (orientation: portrait), (min-width: 1080px) and (orientation: portrait) {
 
     .atwar-content-wrapper {
         padding-top: 5vh !important;
