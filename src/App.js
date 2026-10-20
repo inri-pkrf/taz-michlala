@@ -28,6 +28,47 @@ function App() {
   const [currentSessionCompletedTopics, setCurrentSessionCompletedTopics] = useState(new Set());
   const [previousPage, setPreviousPage] = useState('welcome');
 
+  const [isFullScreen, setIsFullScreen] = useState(
+    !!(document.fullscreenElement || document.webkitFullscreenElement)
+  );
+
+  // מעקב אחרי מצב מסך מלא (גם כשיוצאים ממנו עם Esc או מכפתור אחר)
+  useEffect(() => {
+    const syncFullScreenState = () => {
+      setIsFullScreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', syncFullScreenState);
+    document.addEventListener('webkitfullscreenchange', syncFullScreenState);
+    return () => {
+      document.removeEventListener('fullscreenchange', syncFullScreenState);
+      document.removeEventListener('webkitfullscreenchange', syncFullScreenState);
+    };
+  }, []);
+
+  // מעבר בין מסך מלא לחלון רגיל
+  const toggleFullScreen = () => {
+    const docEl = document.documentElement;
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.webkitExitFullscreen) { /* Safari / iOS */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    } else if (docEl.requestFullscreen) {
+      docEl.requestFullscreen().catch(() => {});
+    } else if (docEl.webkitRequestFullscreen) { /* Safari / iOS */
+      docEl.webkitRequestFullscreen();
+    } else if (docEl.msRequestFullscreen) { /* IE11 */
+      docEl.msRequestFullscreen();
+    }
+  };
+
+  // בעמודים עם כפתור הבית והאחוזים (פינה ימנית עליונה) הכפתור נשאר משמאלם ולא מעליהם
+  const pagesWithHomeButtons = ['activity', 'digitalAssets', 'nationalLibrary', 'foreignRelations', 'atWar', 'quizIntro', 'quiz'];
+  const fullScreenButtonRight = pagesWithHomeButtons.includes(currentPage) ? '14vh' : '2vh';
+
   useEffect(() => {
     const topicPages = ['activity', 'digitalAssets', 'nationalLibrary', 'foreignRelations', 'atWar'];
     if (topicPages.includes(previousPage) && currentPage === 'home') {
@@ -154,6 +195,60 @@ function App() {
   return (
     <div className="app-container">
       {renderPage()}
+
+      {/* כפתור מעבר בין מסך מלא לחלון רגיל */}
+      <button
+        type="button"
+        onClick={toggleFullScreen}
+        aria-label={isFullScreen ? 'יציאה ממסך מלא' : 'מעבר למסך מלא'}
+        style={{
+          position: 'fixed',
+          top: '2vh',
+          right: fullScreenButtonRight,
+          width: '5vh',
+          height: '5vh',
+          padding: 0,
+          borderRadius: '50%',
+          backgroundColor: '#ffffff',
+          border: '0.4vh solid #000641',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          outline: 'none',
+          zIndex: 1000,
+        }}
+      >
+        <svg
+          width="55%"
+          height="55%"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000641"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          {isFullScreen ? (
+            // אייקון הקטנה
+            <>
+              <polyline points="4 14 10 14 10 20" />
+              <polyline points="20 10 14 10 14 4" />
+              <line x1="14" y1="10" x2="21" y2="3" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+            </>
+          ) : (
+            // אייקון הגדלה
+            <>
+              <polyline points="15 3 21 3 21 9" />
+              <polyline points="9 21 3 21 3 15" />
+              <line x1="21" y1="3" x2="14" y2="10" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+            </>
+          )}
+        </svg>
+      </button>
     </div>
   );
 }
